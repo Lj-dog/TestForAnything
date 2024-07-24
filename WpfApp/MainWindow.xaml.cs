@@ -83,4 +83,9 @@ namespace WpfApp
         public int Age { get; set; }
     }
 
+     public class NumericUpDown
+    {
+        public string Name { get; set; } = "afd";
+        public int Age { get; set; } = 2;
+    }
 }

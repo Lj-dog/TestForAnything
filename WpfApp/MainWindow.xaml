@@ -162,7 +162,35 @@
                 </Setter.Value>
             </Setter>
         </Style>
-      
+
+        <Style TargetType="{x:Type local:NumericUpDown}">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:NumericUpDown}">
+                        <Grid Margin="3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="1" BorderBrush="Gray" 
+                  Margin="2" Grid.RowSpan="2" 
+                  VerticalAlignment="Center" HorizontalAlignment="Stretch">
+
+                                <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}" 
+                       Width="60" TextAlignment="Right" Padding="5"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>

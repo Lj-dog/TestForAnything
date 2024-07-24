@@ -14,7 +14,7 @@
             <Button
                 Width="120"
                 Height="50"
-                Content="Btn1" />
+                Content="Btn1" Click="Button_Click" />
             <Button
                 Width="120"
                 Height="50"
