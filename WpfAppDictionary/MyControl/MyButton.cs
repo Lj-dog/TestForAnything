@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace WpfAppDictionary.MyControl
 {
-  public  class MyButton : Button
+  public  class MyButton : System.Windows.Controls.Button
     {
         public CornerRadius MyButtonCornerRadius
         {

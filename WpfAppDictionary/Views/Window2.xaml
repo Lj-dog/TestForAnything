@@ -11,37 +11,7 @@
     Height="450"
     mc:Ignorable="d">
     <Window.Resources>
-        <Style x:Key="btn1" TargetType="{x:Type My:MyButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type My:MyButton}">
-                        <Border
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="BlueViolet"
-                            BorderThickness="3"
-                            CornerRadius="{TemplateBinding MyButtonCornerRadius}">
-                            <Viewbox>
-                                <StackPanel>
-                                    <TextBlock Text="{TemplateBinding Content}" />
-                                    <CheckBox Content="改写模板里的CheckBox" />
-                                </StackPanel>
-                            </Viewbox>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="btn2" TargetType="{x:Type My:MyButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type My:MyButton}">
-                        <Border BorderThickness="3" Background="red" CornerRadius="{TemplateBinding MyButtonCornerRadius}">
-                            <ContentPresenter />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+      
     </Window.Resources>
     <Grid>
         <StackPanel>
