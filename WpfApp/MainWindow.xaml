@@ -8,7 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+
     Loaded="Window_Loaded"
     mc:Ignorable="d">
 
@@ -163,33 +163,7 @@
             </Setter>
         </Style>
 
-        <Style TargetType="{x:Type local:NumericUpDown}">
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type local:NumericUpDown}">
-                        <Grid Margin="3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Border BorderThickness="1" BorderBrush="Gray" 
-                  Margin="2" Grid.RowSpan="2" 
-                  VerticalAlignment="Center" HorizontalAlignment="Stretch">
-
-                                <TextBlock Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Value}" 
-                       Width="60" TextAlignment="Right" Padding="5"/>
-                            </Border>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+   
 
     </Window.Resources>
     <Grid>
@@ -219,32 +193,6 @@
             </ListBox>
         </Grid>
     </Grid>
-    <!--  1  -->
-    <!--<Grid>
-        <StackPanel Margin="5" Button.Click="ButtonClick">
-
-            <Button>button1</Button>
-            <Button>button2</Button>
-            <Button>button3</Button>
-
-
-        </StackPanel>
-        <Grid/>-->
-    <!--  2  -->
-    <!--<Grid>
-        <ListBox  ItemsSource="{Binding Students}">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:Student}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="姓名：" FontSize="10"/>
-                        <TextBlock Text="{Binding Name}" Margin="5,0,0,0" FontSize="10"/>
-                        <TextBlock Text="年龄："  FontSize="20"/>
-                        <TextBlock Text="{Binding Age}" Margin="5,0,0,0"  FontSize="20"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        </Grid>-->
+ 
 
 </Window>
