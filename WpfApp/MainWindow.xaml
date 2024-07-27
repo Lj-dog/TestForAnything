@@ -8,7 +8,7 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    d:DataContext="{d:DesignInstance Type=local:MainWindow}"
+
     Loaded="Window_Loaded"
     mc:Ignorable="d">
 
@@ -162,7 +162,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
-      
+
+   
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -191,32 +193,6 @@
             </ListBox>
         </Grid>
     </Grid>
-    <!--  1  -->
-    <!--<Grid>
-        <StackPanel Margin="5" Button.Click="ButtonClick">
-
-            <Button>button1</Button>
-            <Button>button2</Button>
-            <Button>button3</Button>
-
-
-        </StackPanel>
-        <Grid/>-->
-    <!--  2  -->
-    <!--<Grid>
-        <ListBox  ItemsSource="{Binding Students}">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type local:Student}">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="姓名：" FontSize="10"/>
-                        <TextBlock Text="{Binding Name}" Margin="5,0,0,0" FontSize="10"/>
-                        <TextBlock Text="年龄："  FontSize="20"/>
-                        <TextBlock Text="{Binding Age}" Margin="5,0,0,0"  FontSize="20"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-
-        </Grid>-->
+ 
 
 </Window>
