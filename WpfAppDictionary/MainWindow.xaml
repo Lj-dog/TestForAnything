@@ -5,34 +5,45 @@
     xmlns:My="clr-namespace:WpfAppDictionary.MyControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:WpfAppDictionary"
+    xmlns:m="clr-namespace:WpfAppDictionary.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mv="clr-namespace:WpfAppDictionary.ViewModels"
     Title="MainWindow"
     Width="800"
     Height="450"
+    d:DataContext="{d:DesignInstance {x:Type mv:MainViewModel}}"
     mc:Ignorable="d">
-    <Grid>
-        <StackPanel>
-            <Button
-                Width="120"
-                Height="50"
-                Click="Button_Click"
-                Content="Btn1" />
-            <Button
-                Width="120"
-                Height="50"
-                Content="Btn2" />
-            <Button
-                Width="120"
-                Height="50"
-                Content="Btn3" />
-            <My:MyTextbox
-                Width="120"
-                Height="50"
-                Background="LightYellow"
-                BorderBrush="Blue"
-                BorderThickness="5"
-                MyTextBoxCornerRadius="5"
-                Style="{StaticResource textbox}" />
-        </StackPanel>
-    </Grid>
+    <Window.Resources />
+    <Viewbox>
+        <Grid Height=" auto">
+            <StackPanel>
+                <Viewbox>
+                    <Button
+                        Width="150"
+                        Height="80"
+                        Click="Button_Click"
+                        Content="{Binding Student}" />
+                </Viewbox>
+                <Viewbox>
+                    <Button
+                        Width="150"
+                        Height="80"
+                        Content="{Binding Teacher}" />
+                </Viewbox>
+                <Button
+                    Width="120"
+                    Height="50"
+                    Content="Btn3" />
+                <My:MyTextbox
+                    Width="120"
+                    Height="50"
+                    Background="LightYellow"
+                    BorderBrush="Blue"
+                    BorderThickness="5"
+                    MyTextBoxCornerRadius="5"
+                    Style="{StaticResource textbox}" />
+                <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Cards}" />
+            </StackPanel>
+        </Grid>
+    </Viewbox>
 </Window>

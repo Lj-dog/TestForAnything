@@ -41,12 +41,71 @@
                 Width="100"
                 Height="30"
                 Margin="5"
-                Content="开启" Click="Button_Click" />
+                Click="Button_Click"
+                Content="开启" />
             <Button
                 Width="100"
                 Height="30"
                 Margin="5"
                 Content="关闭" />
         </StackPanel>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox
+                Grid.Row="0"
+                Margin="5"
+                Header="接受">
+                <TextBox />
+            </GroupBox>
+            <GroupBox Grid.Row="1" Margin="5">
+                <GroupBox.Header>
+                    <Label>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="发送" />
+                            <Path
+                                Width="15"
+                                Height="15"
+                                Margin="5,0"
+                                Data="{DynamicResource HelpInfo}"
+                                Fill="Black"
+                                Stretch="Uniform"
+                                ToolTipService.InitialShowDelay="5">
+                                <Path.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="Github Picture" />
+                                        <Image
+                                            Width="50"
+                                            Height="50"
+                                            Margin="5,0">
+                                            <Image.Source>
+                                                <BitmapImage UriSource="./Pic/GitHub.jfif" />
+                                            </Image.Source>
+                                        </Image>
+                                        <TextBlock Text="Help Icon" />
+                                        <Path
+                                            Width="50"
+                                            Height="50"
+                                            Margin="5,0"
+                                            Data="{DynamicResource HelpInfo}"
+                                            Fill="Black"
+                                            Stretch="UniformToFill" />
+                                    </StackPanel>
+                                </Path.ToolTip>
+                            </Path>
+                        </StackPanel>
+                    </Label>
+
+
+
+                </GroupBox.Header>
+                <TextBox />
+            </GroupBox>
+
+
+        </Grid>
     </Grid>
 </Window>
