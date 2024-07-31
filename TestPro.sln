@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPServerWpfApp", "TCPServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPClientWpfApp", "TCPClientWpfApp\TCPClientWpfApp.csproj", "{3F1EC705-5A1F-4C32-82AE-7B1FF0925B38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppDictionary", "WpfAppDictionary\WpfAppDictionary.csproj", "{AE8357EE-09F4-44C2-891B-C8292623F2FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDictionary", "WpfAppDictionary\WpfAppDictionary.csproj", "{AE8357EE-09F4-44C2-891B-C8292623F2FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbusTest", "NModbusTest\NModbusTest.csproj", "{A5FA8467-81FF-4A7E-9F20-236D361EB864}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_LINQ", "ConsoleApp_LINQ\ConsoleApp_LINQ.csproj", "{89B30FF9-23A5-43C6-BACF-531E5D6930E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{AE8357EE-09F4-44C2-891B-C8292623F2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE8357EE-09F4-44C2-891B-C8292623F2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE8357EE-09F4-44C2-891B-C8292623F2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5FA8467-81FF-4A7E-9F20-236D361EB864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5FA8467-81FF-4A7E-9F20-236D361EB864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5FA8467-81FF-4A7E-9F20-236D361EB864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5FA8467-81FF-4A7E-9F20-236D361EB864}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
