@@ -8,10 +8,10 @@ namespace WpfAppDictionary.Models
 {
     internal class Card
     {
-        //public override string ToString()
-        //{
-        //    return $"{MPValue},{Name},...";
-        //}
+        public override string ToString()
+        {
+            return $"{MPValue},{Name},...";
+        }
 
         public Card(MP mp, string name, string skill, Priority priority, string victoryStr)
         {

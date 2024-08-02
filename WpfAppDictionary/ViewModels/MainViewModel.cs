@@ -1,9 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfAppDictionary.Models;
 
 namespace WpfAppDictionary.ViewModels
@@ -22,6 +17,10 @@ namespace WpfAppDictionary.ViewModels
         [ObservableProperty]
         private Teacher _teacher;
 
+        //public Teacher Teacher { get; set; }
+
+        //public Student Student { get; set; }
+
         public MainViewModel()
         {
             Teacher = new Teacher() { Sex = Sex.MALE, Salary = 4000, Age = 40 };
@@ -35,11 +34,11 @@ namespace WpfAppDictionary.ViewModels
 
             People = new List<Person>()
             {
-                new Teacher(){Age=30,Salary=3000, Sex=Sex.FEMALE},
-
-                new Student(){Age=10,Id=23,Sex=Sex.FEMALE},
                   new Teacher(){Age=30,Salary=5000, Sex=Sex.MALE},
                  new Student(){Age=20,Id=43,Sex=Sex.MALE},
+
+                new Teacher(){Age=30,Salary=3000, Sex=Sex.FEMALE},
+                new Student(){Age=10,Id=23,Sex=Sex.FEMALE},
             };
         }
     }

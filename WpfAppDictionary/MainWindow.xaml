@@ -19,14 +19,14 @@
             <StackPanel>
                 <Viewbox>
                     <Button
-                        Width="150"
+                        Width="250"
                         Height="80"
                         Click="Button_Click"
                         Content="{Binding Student}" />
                 </Viewbox>
                 <Viewbox>
                     <Button
-                        Width="150"
+                        Width="250"
                         Height="80"
                         Content="{Binding Teacher}" />
                 </Viewbox>
@@ -42,7 +42,7 @@
                     BorderThickness="5"
                     MyTextBoxCornerRadius="5"
                     Style="{StaticResource textbox}" />
-                <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding Cards}" />
+                <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding People}" />
             </StackPanel>
         </Grid>
     </Viewbox>
