@@ -1,8 +1,10 @@
-﻿namespace ConsoleApp
+﻿using System.Text.Json;
+
+namespace ConsoleApp
 {
     //抽象类里使用虚方法
 
-    #region MyRegion
+    #region 抽象类里使用虚方法
 
     internal abstract class People
     {
@@ -35,7 +37,36 @@
         }
     }
 
-    #endregion MyRegion
+    #endregion 抽象类里使用虚方法
+
+    #region JSON
+
+    internal class School
+    {
+        public List<Grade> Grades { get; set; }
+
+        public string SchoolName { get; set; }
+
+        public int SchoolAge { get; set; }
+
+        public Dictionary<string, int> GradePeopleNum { get; set; }
+    }
+
+    internal class Grade
+    {
+        public int ClassNum { get; set; }
+
+        public string GradeName { get; set; }
+
+        private List<Class> ClassList { get; set; }
+    }
+
+    internal class Class
+    {
+        public int Students { get; set; }
+    }
+
+    #endregion JSON
 
     internal class Program
     {
@@ -62,8 +93,30 @@
             //Console.WriteLine($"{(short)ush}");
 
             //(5) 显示调用拥有不定参数和默认参数的函数
-            TestParams(bools: [true, false]);
-            TestParams(2, bools: [false, true]);
+            //TestParams(bools: [true, false]);
+            //TestParams(2, bools: [false, true]);
+
+            //(6) JSON XML序列化/反序列化
+
+            School school = new School()
+            {
+                SchoolAge = 10,
+                SchoolName = "NAN",
+                GradePeopleNum = new Dictionary<string, int>()
+                {
+                    {"Freshman",8 },
+                    {"Sophomore",4 },
+                    {"Junior",8 },
+                    {"Senior",4 },
+                },
+                Grades = new List<Grade>()
+                {
+                    new Grade(){GradeName="Freshman",ClassNum=1},
+                    new Grade(){GradeName="Sophomore",ClassNum=2},
+                    new Grade(){GradeName="Junior",ClassNum=3},
+                    new Grade(){GradeName="Senior",ClassNum=4},
+                }
+            };
         }
 
         //(1)函数形参跳过默认参数给定
