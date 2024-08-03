@@ -39,10 +39,18 @@ namespace ConsoleApp
 
     #endregion 抽象类里使用虚方法
 
-    #region JSON
+    #region JSON XAML
+
+    internal enum Level
+    {
+        LEVELONE,
+        LEVELTWO,
+        LEVELTHREE,
+    }
 
     internal class School
     {
+        public Level level;
         public List<Grade> Grades { get; set; }
 
         public string SchoolName { get; set; }
@@ -58,7 +66,7 @@ namespace ConsoleApp
 
         public string GradeName { get; set; }
 
-        private List<Class> ClassList { get; set; }
+        public List<Class> ClassList { get; set; }
     }
 
     internal class Class
@@ -66,11 +74,11 @@ namespace ConsoleApp
         public int Students { get; set; }
     }
 
-    #endregion JSON
+    #endregion JSON XAML
 
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //Console.WriteLine("Hello, World!");\
 
@@ -100,6 +108,7 @@ namespace ConsoleApp
 
             School school = new School()
             {
+                level = Level.LEVELONE,
                 SchoolAge = 10,
                 SchoolName = "NAN",
                 GradePeopleNum = new Dictionary<string, int>()
@@ -111,12 +120,65 @@ namespace ConsoleApp
                 },
                 Grades = new List<Grade>()
                 {
-                    new Grade(){GradeName="Freshman",ClassNum=1},
-                    new Grade(){GradeName="Sophomore",ClassNum=2},
-                    new Grade(){GradeName="Junior",ClassNum=3},
-                    new Grade(){GradeName="Senior",ClassNum=4},
+                    new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
+                     new Class(){Students = 1},
+                     new Class(){Students = 2},
+                     new Class(){Students = 3},
+                    } },
+                    new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
+                     new Class(){Students = 5},
+                     new Class(){Students = 5},
+                     new Class(){Students = 5},
+                    }},
+                    new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
+                     new Class(){Students = 6},
+                     new Class(){Students = 6},
+                     new Class(){Students = 6},
+                    }},
+                    new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
+                     new Class(){Students = 9},
+                     new Class(){Students = 9},
+                     new Class(){Students = 9},
+                    }},
                 }
             };
+            //JSON
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            //同步方法
+            string jsonstr = JsonSerializer.Serialize(school);
+            //string fileName = "School.json";
+            //File.WriteAllText(fileName, jsonstr);
+            //Console.WriteLine(File.ReadAllText(fileName));
+            //异步方法
+            //string fileNameAsync = "SchoolAsync.json";
+            //FileStream createStream = File.Create(fileNameAsync);
+            ////await using FileStream createStream = File.Create(fileNameAsync);
+            //await JsonSerializer.SerializeAsync(createStream, school, options);
+            ////await JsonSerializer.SerializeAsync(createStream, school);
+
+            //createStream.Close();
+            //Console.WriteLine(File.ReadAllText(fileNameAsync));
+
+            //反序列化
+            //同步方法
+            //School? schoolDeserialize = JsonSerializer.Deserialize<School>(jsonstr);
+            //if (schoolDeserialize != null)
+            //{
+            //    Console.WriteLine($"Level:{schoolDeserialize.level}");
+            //    Console.WriteLine($"Age:{schoolDeserialize.SchoolAge}");
+            //    Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
+            //}
+            //异步方法
+            string fileNameAsync = "SchoolAsync.json";
+            string jsonString = File.ReadAllText(fileNameAsync);
+            School? schoolDeserialize = JsonSerializer.Deserialize<School>(jsonstr);
+            if (schoolDeserialize != null)
+            {
+                Console.WriteLine($"Level:{schoolDeserialize.level}");
+                Console.WriteLine($"Age:{schoolDeserialize.SchoolAge}");
+                Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
+            }
         }
 
         //(1)函数形参跳过默认参数给定
