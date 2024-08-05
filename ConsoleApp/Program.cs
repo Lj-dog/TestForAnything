@@ -1,4 +1,6 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Xml.Serialization;
 
 namespace ConsoleApp
 {
@@ -41,26 +43,38 @@ namespace ConsoleApp
 
     #region JSON XAML
 
-    internal enum Level
+    public enum Level
     {
         LEVELONE,
         LEVELTWO,
         LEVELTHREE,
     }
 
-    internal class School
+    public class School
     {
+        //[JsonInclude]
+        //[JsonPropertyOrder(-1)]
+        //[JsonPropertyName("SchoolLevel")]
+        //[JsonConverter(typeof(JsonStringEnumConverter))]
+        [XmlAttribute("SchoolLevel")]
         public Level level;
+
+        //[JsonPropertyOrder(1)]
+        [XmlElement(Order = 2)]
         public List<Grade> Grades { get; set; }
 
+        //[JsonPropertyOrder(1)]
+        [XmlElement("Name", Order = 1)]
         public string SchoolName { get; set; }
 
+        //[JsonPropertyOrder(0)]
+        [XmlElement(Order = 0)]
         public int SchoolAge { get; set; }
 
-        public Dictionary<string, int> GradePeopleNum { get; set; }
+        //public Dictionary<string, int> GradePeopleNum { get; set; }
     }
 
-    internal class Grade
+    public class Grade
     {
         public int ClassNum { get; set; }
 
@@ -69,7 +83,7 @@ namespace ConsoleApp
         public List<Class> ClassList { get; set; }
     }
 
-    internal class Class
+    public class Class
     {
         public int Students { get; set; }
     }
@@ -111,13 +125,13 @@ namespace ConsoleApp
                 level = Level.LEVELONE,
                 SchoolAge = 10,
                 SchoolName = "NAN",
-                GradePeopleNum = new Dictionary<string, int>()
-                {
-                    {"Freshman",8 },
-                    {"Sophomore",4 },
-                    {"Junior",8 },
-                    {"Senior",4 },
-                },
+                //GradePeopleNum = new Dictionary<string, int>()
+                //{
+                //    {"Freshman",8 },
+                //    {"Sophomore",4 },
+                //    {"Junior",8 },
+                //    {"Senior",4 },
+                //},
                 Grades = new List<Grade>()
                 {
                     new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
@@ -144,9 +158,9 @@ namespace ConsoleApp
             };
             //JSON
 
-            var options = new JsonSerializerOptions { WriteIndented = true };
+            //var options = new JsonSerializerOptions { WriteIndented = true };
             //同步方法
-            string jsonstr = JsonSerializer.Serialize(school);
+            //string jsonstr = JsonSerializer.Serialize(school);
             //string fileName = "School.json";
             //File.WriteAllText(fileName, jsonstr);
             //Console.WriteLine(File.ReadAllText(fileName));
@@ -170,15 +184,35 @@ namespace ConsoleApp
             //    Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
             //}
             //异步方法
-            string fileNameAsync = "SchoolAsync.json";
-            string jsonString = File.ReadAllText(fileNameAsync);
-            School? schoolDeserialize = JsonSerializer.Deserialize<School>(jsonstr);
-            if (schoolDeserialize != null)
-            {
-                Console.WriteLine($"Level:{schoolDeserialize.level}");
-                Console.WriteLine($"Age:{schoolDeserialize.SchoolAge}");
-                Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
-            }
+            //string fileNameAsync = "SchoolAsync.json";
+            //string jsonString = File.ReadAllText(fileNameAsync);
+            //School? schoolDeserialize = JsonSerializer.Deserialize<School>(jsonstr);
+            //if (schoolDeserialize != null)
+            //{
+            //    Console.WriteLine($"Level:{schoolDeserialize.level}");
+            //    Console.WriteLine($"Age:{schoolDeserialize.SchoolAge}");
+            //    Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
+            //}
+
+            #region XML
+
+            //XML 命名空间
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("books", "http");
+
+            //XML序列化
+            //字符流
+            XmlSerializer xml = new XmlSerializer(typeof(School));
+            using StringWriter sw = new StringWriter();
+            xml.Serialize(sw, school, ns);
+            Console.WriteLine(sw.ToString());
+
+            //写入文件流
+            string path = "SchoolXML.xml";
+            using FileStream fileStream = new(path, FileMode.OpenOrCreate);
+            xml.Serialize(fileStream, school, ns);
+
+            #endregion XML
         }
 
         //(1)函数形参跳过默认参数给定

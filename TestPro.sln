@@ -15,7 +15,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDictionary", "WpfAppD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbusTest", "NModbusTest\NModbusTest.csproj", "{A5FA8467-81FF-4A7E-9F20-236D361EB864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp_LINQ", "ConsoleApp_LINQ\ConsoleApp_LINQ.csproj", "{89B30FF9-23A5-43C6-BACF-531E5D6930E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_LINQ", "ConsoleApp_LINQ\ConsoleApp_LINQ.csproj", "{89B30FF9-23A5-43C6-BACF-531E5D6930E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLite", "SQLite", "{9F9F8BDE-7A9F-448D-8E64-D675DF6FA2EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForSQLite", "ForSQLite\ForSQLite.csproj", "{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppForSQLite", "WpfAppForSQLite\WpfAppForSQLite.csproj", "{0E08722F-5916-4BB4-9500-CD53C7F43F4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppTemp", "ConsoleAppTemp\ConsoleAppTemp.csproj", "{6E2342B9-9C23-4577-A723-A5A333ACC67B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,9 +59,25 @@ Global
 		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89B30FF9-23A5-43C6-BACF-531E5D6930E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E08722F-5916-4BB4-9500-CD53C7F43F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E08722F-5916-4BB4-9500-CD53C7F43F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E08722F-5916-4BB4-9500-CD53C7F43F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E08722F-5916-4BB4-9500-CD53C7F43F4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E2342B9-9C23-4577-A723-A5A333ACC67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E2342B9-9C23-4577-A723-A5A333ACC67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E2342B9-9C23-4577-A723-A5A333ACC67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E2342B9-9C23-4577-A723-A5A333ACC67B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D3EE8D1F-DF8F-401B-B7F7-88F557E26FEE} = {9F9F8BDE-7A9F-448D-8E64-D675DF6FA2EF}
+		{0E08722F-5916-4BB4-9500-CD53C7F43F4D} = {9F9F8BDE-7A9F-448D-8E64-D675DF6FA2EF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FA8D600-C956-4E76-ABE5-CA6C1830D064}
