@@ -1,87 +1,37 @@
-﻿namespace ConsoleAppTemp
+﻿using FreeSql.DataAnnotations;
+using System;
+using System.Reflection;
+
+using FreeSql;
+
+namespace ConsoleAppTemp
 {
-    using FreeSql.DataAnnotations;
-    using System;
-    using System.Reflection;
-
-    using FreeSql;
-
-    public class Blog
-    {
-        [Column(IsIdentity = true, IsPrimary = true)]
-        public int BlogId { get; set; }
-
-        [Column(IsIgnore = true)]
-        public string Url { get; set; }
-
-        public int Rating { get; set; }
-    }
-
-    public class WithBlog
-
-    {
-        public string asdf { get; set; }
-
-        public DateTime? Date { get; set; }
-
-        [Column(MapType = typeof(Blog))]
-        public Blog Blog { get; set; }
-    }
-
-    public class Blo
-    {
-        [Column(IsIdentity = true, IsPrimary = true)]
-        public int BlogId { get; set; }
-
-        public string Url { get; set; }
-        public int Rating { get; set; }
-    }
-
     internal class Program
     {
-        private static IFreeSql fsql
-
-              = new FreeSql.FreeSqlBuilder()
-        .UseConnectionString(FreeSql.DataType.Sqlite, "Data Source=./db/33.db")
-        .UseAutoSyncStructure(true) //自动同步实体结构到数据库
-        .Build(); //请务必定义成 Singleton 单例模式
-
         private static void Main(string[] args)
         {
-            //try
-            //{
-            //    fsql = new FreeSql.FreeSqlBuilder().UseConnectionString(FreeSql.DataType.Sqlite, "Data Source=./sf/787.db")
-            //                  .UseAutoSyncStructure(false) //自动同步实体结构到数据库
-            //                      .Build(); //请务必定义成 Singleton 单例模式
-            //}
-            //catch (Exception)
-            //{
-            //    throw new ArgumentException("路径下不存在该数据库");
-            //}
-            var blog = new Blog
+            string output1 = string.Join(" ", TakeWhilePositive(new int[] { 2, 3, 4, 5, -1, 3, 4 }));
+            Console.WriteLine(output1);
+            // Output: 2 3 4 5
+            string output2 = string.Join(" ", TakeWhilePositive(new int[] { 9, 8, 7 }));
+
+            Console.WriteLine(output2);
+            // Output: 9 8 7
+        }
+
+        private static IEnumerable<int> TakeWhilePositive(IEnumerable<int> numbers)
+        {
+            foreach (int n in numbers)
             {
-                BlogId = 1,
-                //Url = "",
-                Rating = 1,
-            };
-            var blo = new Blo
-            {
-                BlogId = 2,
-                //Url = "",
-                Rating = 2,
-            };
-            var wblog = new WithBlog
-            {
-                asdf = "sdf",
-                Blog = blog,
-                Date = DateTime.Now,
-            };
-            var row = fsql.Insert(wblog)
-            .ExecuteAffrows();
-            //        int affrows = fsql.Select<Blog>()
-            //.Limit(10)
-            //.InsertInto(null, a => new Blo { BlogId = 2, Rating = 2 });
-            Console.WriteLine($"{row}");
+                if (n > 0)
+                {
+                    yield return n;
+                }
+                else
+                {
+                    yield break;
+                }
+            }
         }
     }
 }

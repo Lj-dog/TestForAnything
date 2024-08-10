@@ -8,9 +8,7 @@ namespace ForSQLite
     {
         private static IFreeSql fsql;
 
-        private Type dbTabletype;
-
-        public SQLiteHelper(string dbFilePath, bool isAutoAddTableOrFile/*, Type dbTabletype*/)
+        public SQLiteHelper(string dbFilePath, bool isAutoAddTableOrFile)
         {
             //this.dbTabletype = dbTabletype;
             try
@@ -25,17 +23,13 @@ namespace ForSQLite
             }
         }
 
-        public int LoadToDB(object dbData)
+        public int LoadToDB<T>(IEnumerable<T> dbData) where T : class
         {
-            //if (dbData.GetType()!= dbTabletype)
-            //{
-            //    return false;
-            //}
             try
             {
                 var row = fsql.Insert(dbData)
-                                .ExecuteAffrows();
-                return row;
+                                .ExecuteIdentity();
+                return (int)row;
             }
             catch (Exception)
             {

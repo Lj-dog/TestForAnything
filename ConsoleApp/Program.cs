@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Security.Cryptography;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 
@@ -96,10 +97,16 @@ namespace ConsoleApp
         {
             //Console.WriteLine("Hello, World!");\
 
+            #region 1
+
             //(1)
             //Print(0, num3: 5);
 
+            #endregion 1
+
             //(2)
+
+            #region 3
 
             //(3)异步方法
             //int a;
@@ -109,53 +116,65 @@ namespace ConsoleApp
             //int a = await Sum(1, 4);
             //Console.WriteLine(a);
 
+            #endregion 3
+
+            #region 4
+
             //(4) ushrot shrot转换(不丢失任何数据)
             //short sh = -2;
             //ushort ush = (ushort)sh;
             //Console.WriteLine($"{(short)ush}");
 
+            #endregion 4
+
+            #region 5
+
             //(5) 显示调用拥有不定参数和默认参数的函数
             //TestParams(bools: [true, false]);
             //TestParams(2, bools: [false, true]);
 
+            #endregion 5
+
+            #region 6
+
             //(6) JSON XML序列化/反序列化
 
-            School school = new School()
-            {
-                level = Level.LEVELONE,
-                SchoolAge = 10,
-                SchoolName = "NAN",
-                //GradePeopleNum = new Dictionary<string, int>()
-                //{
-                //    {"Freshman",8 },
-                //    {"Sophomore",4 },
-                //    {"Junior",8 },
-                //    {"Senior",4 },
-                //},
-                Grades = new List<Grade>()
-                {
-                    new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
-                     new Class(){Students = 1},
-                     new Class(){Students = 2},
-                     new Class(){Students = 3},
-                    } },
-                    new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
-                     new Class(){Students = 5},
-                     new Class(){Students = 5},
-                     new Class(){Students = 5},
-                    }},
-                    new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
-                     new Class(){Students = 6},
-                     new Class(){Students = 6},
-                     new Class(){Students = 6},
-                    }},
-                    new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
-                     new Class(){Students = 9},
-                     new Class(){Students = 9},
-                     new Class(){Students = 9},
-                    }},
-                }
-            };
+            //School school = new School()
+            //{
+            //    level = Level.LEVELONE,
+            //    SchoolAge = 10,
+            //    SchoolName = "NAN",
+            //    //GradePeopleNum = new Dictionary<string, int>()
+            //    //{
+            //    //    {"Freshman",8 },
+            //    //    {"Sophomore",4 },
+            //    //    {"Junior",8 },
+            //    //    {"Senior",4 },
+            //    //},
+            //    Grades = new List<Grade>()
+            //    {
+            //        new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
+            //         new Class(){Students = 1},
+            //         new Class(){Students = 2},
+            //         new Class(){Students = 3},
+            //        } },
+            //        new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
+            //         new Class(){Students = 5},
+            //         new Class(){Students = 5},
+            //         new Class(){Students = 5},
+            //        }},
+            //        new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
+            //         new Class(){Students = 6},
+            //         new Class(){Students = 6},
+            //         new Class(){Students = 6},
+            //        }},
+            //        new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
+            //         new Class(){Students = 9},
+            //         new Class(){Students = 9},
+            //         new Class(){Students = 9},
+            //        }},
+            //    }
+            //};
             //JSON
 
             //var options = new JsonSerializerOptions { WriteIndented = true };
@@ -196,23 +215,64 @@ namespace ConsoleApp
 
             #region XML
 
-            //XML 命名空间
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("books", "http");
+            ////XML 命名空间
+            //XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            //ns.Add("books", "http");
 
-            //XML序列化
-            //字符流
-            XmlSerializer xml = new XmlSerializer(typeof(School));
-            using StringWriter sw = new StringWriter();
-            xml.Serialize(sw, school, ns);
-            Console.WriteLine(sw.ToString());
+            ////XML序列化
+            ////字符流
+            //XmlSerializer xml = new XmlSerializer(typeof(School));
+            //using StringWriter sw = new StringWriter();
+            //xml.Serialize(sw, school, ns);
+            //Console.WriteLine(sw.ToString());
 
-            //写入文件流
-            string path = "SchoolXML.xml";
-            using FileStream fileStream = new(path, FileMode.OpenOrCreate);
-            xml.Serialize(fileStream, school, ns);
+            ////写入文件流
+            //string path = "SchoolXML.xml";
+            //using FileStream fileStream = new(path, FileMode.OpenOrCreate);
+            //xml.Serialize(fileStream, school, ns);
 
             #endregion XML
+
+            #endregion 6
+
+            #region 7
+
+            //7 DateTime 转符合文件格式的字符串
+            //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+
+            #endregion 7
+
+            #region 8
+
+            Dictionary<string, string> StrToREG = new Dictionary<string, string>();
+            StrToREG.Add("Inital", "DRILL_FEED_MODBUS_WRITE_INITIAL");
+            StrToREG.Add("InitalCompleted", "DRILL_FEED_MODBUS_WRITE_INITIAL_COMPLETE");
+            StrToREG.Add("Reset", "DRILL_FEED_MODBUS_WRITE_RESET");
+            StrToREG.Add("ResetCompleted", "DRILL_FEED_MODBUS_WRITE_RESET_COMPLETE");
+            StrToREG.Add("TCPOnlineDirll_1", "DRILL_FEED_MODBUS_WRITE_DEV_CLIENT_ONLINE_1");
+            StrToREG.Add("TCPOnlineDirll_2", "DRILL_FEED_MODBUS_WRITE_DEV_CLIENT_ONLINE_2");
+            StrToREG.Add("DirllPanelType_1", "MODBUS_WRITE_PANEL_TYPE_DEV_1");
+            StrToREG.Add("DirllPanelType_2", "MODBUS_WRITE_PANEL_TYPE_DEV_2");
+            StrToREG.Add("SendVirtualID", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_ID");
+            StrToREG.Add("SendPanelType", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_TYPE");
+            StrToREG.Add("PanelStartIN", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_START");
+            StrToREG.Add("ArriveDrill_1", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_REQUEST_1");
+            StrToREG.Add("ArriveDrill_2", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_REQUEST_2");
+            StrToREG.Add("VirIDDrill_1", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_1");
+            StrToREG.Add("VirIDDrill_2", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_2");
+
+            StrToREG.Add("PanelOutDrill_1", "DRILL_FEED_MODBUS_READ_PANEL_OUT_1");
+            StrToREG.Add("PanelOutDrill_2", "DRILL_FEED_MODBUS_READ_PANEL_OUT_2");
+
+            StrToREG.Add("PanelOutToWhere_1", "DRILL_FEED_MODBUS_WRITE_PANEL_OUT_ID_1");
+            StrToREG.Add("PanelOutToWhere_2", "DRILL_FEED_MODBUS_WRITE_PANEL_OUT_ID_2");
+            var DirllList = StrToREG.Keys.Where(key => key.StartsWith("DirllPanelType_"));
+            foreach (var item in DirllList)
+            {
+                Console.WriteLine($"{item}");
+            }
+
+            #endregion 8
         }
 
         //(1)函数形参跳过默认参数给定
