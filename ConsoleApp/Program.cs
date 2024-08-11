@@ -244,6 +244,7 @@ namespace ConsoleApp
 
             #region 8
 
+            //LINQ 惰性处理特性
             Dictionary<string, string> StrToREG = new Dictionary<string, string>();
             StrToREG.Add("Inital", "DRILL_FEED_MODBUS_WRITE_INITIAL");
             StrToREG.Add("InitalCompleted", "DRILL_FEED_MODBUS_WRITE_INITIAL_COMPLETE");
@@ -273,6 +274,12 @@ namespace ConsoleApp
             }
 
             #endregion 8
+
+            #region 9
+
+            //Git 临时分支提交
+
+            #endregion 9
         }
 
         //(1)函数形参跳过默认参数给定
