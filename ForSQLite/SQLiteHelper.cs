@@ -1,6 +1,7 @@
 ﻿using FreeSql.DataAnnotations;
 using System;
 using FreeSql;
+using ForSQLite.Models;
 
 namespace ForSQLite
 {
@@ -23,11 +24,25 @@ namespace ForSQLite
             }
         }
 
-        public int LoadToDB<T>(IEnumerable<T> dbData) where T : class
+        //public int LoadToDB<T>(IEnumerable<T> dbData) where T : class
+        //{
+        //    try
+        //    {
+        //        var row = fsql.Insert(dbData)
+        //                        .ExecuteIdentity();
+        //        return (int)row;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return -1;
+        //    }
+        //}
+
+        public int LoadToDB(People dbData)
         {
             try
             {
-                var row = fsql.Insert(dbData)
+                var row = fsql.Insert<People>(dbData)
                                 .ExecuteIdentity();
                 return (int)row;
             }

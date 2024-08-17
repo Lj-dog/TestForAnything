@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Pic\GitHub.jfif" />
     <Resource Include="Pic\Icon.svg" />
   </ItemGroup>

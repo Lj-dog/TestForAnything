@@ -15,10 +15,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel
-            Grid.Row="0"
-            FlowDirection="LeftToRight"
-            Orientation="Horizontal">
+        <DockPanel Grid.Row="0" LastChildFill="False">
             <Label
                 Margin="5"
                 VerticalAlignment="Center"
@@ -38,17 +35,28 @@
                 Height="30"
                 Margin="5" />
             <Button
+                x:Name="OpenService"
                 Width="100"
                 Height="30"
                 Margin="5"
-                Click="Button_Click"
+                Click="OpenService_Click"
                 Content="开启" />
             <Button
+                x:Name="CloseService"
                 Width="100"
                 Height="30"
                 Margin="5"
+                Click="CloseService_Click"
                 Content="关闭" />
-        </StackPanel>
+
+            <ComboBox
+                x:Name="clientListCombox"
+                Width="100"
+                Height="30"
+                Margin="5"
+                DockPanel.Dock="Right"
+                ItemsSource="{Binding clientList.Keys}" />
+        </DockPanel>
 
         <Grid Grid.Row="1" HorizontalAlignment="Stretch">
             <Grid.RowDefinitions>
@@ -98,14 +106,9 @@
                             </Path>
                         </StackPanel>
                     </Label>
-
-
-
                 </GroupBox.Header>
-                <TextBox />
+                <TextBox x:Name="txb_scr_dir" KeyDown="txb_scr_dir_KeyDown" />
             </GroupBox>
-
-
         </Grid>
     </Grid>
 </Window>

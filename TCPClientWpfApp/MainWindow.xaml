@@ -47,7 +47,7 @@
         </GroupBox>
         <GroupBox Margin="85,261,151,29" Header="ReceiveMessage">
             <Grid>
-                <TextBox Text="TextBox" TextWrapping="Wrap" />
+                <TextBox x:Name="RevText" Text="TextBox" TextWrapping="Wrap" />
             </Grid>
         </GroupBox>
         <Button

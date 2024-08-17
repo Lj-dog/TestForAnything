@@ -3,6 +3,9 @@ using System;
 using System.Reflection;
 
 using FreeSql;
+using System.Drawing;
+using System.Globalization;
+using System.Collections;
 
 namespace ConsoleAppTemp
 {
@@ -10,28 +13,38 @@ namespace ConsoleAppTemp
     {
         private static void Main(string[] args)
         {
-            string output1 = string.Join(" ", TakeWhilePositive(new int[] { 2, 3, 4, 5, -1, 3, 4 }));
-            Console.WriteLine(output1);
-            // Output: 2 3 4 5
-            string output2 = string.Join(" ", TakeWhilePositive(new int[] { 9, 8, 7 }));
+            var numbers = ProduceEvenNumbers(5);
+            Console.WriteLine("Caller: about to iterate.");
+            foreach (int i in numbers)
+            {
+                Console.WriteLine($"Caller: {i}");
+            }
 
-            Console.WriteLine(output2);
-            // Output: 9 8 7
+            // Output:
+            // Caller: about to iterate.
+            // Iterator: start.
+            // Iterator: about to yield 0
+            // Caller: 0
+            // Iterator: yielded 0
+            // Iterator: about to yield 2
+            // Caller: 2
+            // Iterator: yielded 2
+            // Iterator: about to yield 4
+            // Caller: 4
+            // Iterator: yielded 4
+            // Iterator: end.
         }
 
-        private static IEnumerable<int> TakeWhilePositive(IEnumerable<int> numbers)
+        private static IEnumerable<int> ProduceEvenNumbers(int upto)
         {
-            foreach (int n in numbers)
+            Console.WriteLine("Iterator: start.");
+            for (int i = 0; i <= upto; i += 2)
             {
-                if (n > 0)
-                {
-                    yield return n;
-                }
-                else
-                {
-                    yield break;
-                }
+                Console.WriteLine($"Iterator: about to yield {i}");
+                yield return i;
+                Console.WriteLine($"Iterator: yielded {i}");
             }
+            Console.WriteLine("Iterator: end.");
         }
     }
 }
