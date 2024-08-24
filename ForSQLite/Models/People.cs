@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ForSQLite.Models
 {
-    public abstract class People
+    public class People
     {
         [Column(IsPrimary = true, IsIdentity = true)]
         public int Guid { get; set; }
@@ -17,5 +17,7 @@ namespace ForSQLite.Models
         public uint Age { get; set; }
 
         public uint PhoneNum { get; set; }
+
+        public DateTime DataInputTime { get; set; } = DateTime.Now;
     }
 }

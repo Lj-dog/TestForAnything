@@ -49,5 +49,9 @@ namespace TCPServerWpfApp
         {
             listener.Stop();
         }
+
+        private void TCPServerWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }
