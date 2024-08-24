@@ -13,25 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-
 namespace WpfApp
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window,INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-       public ObservableCollection<Student> Students { get { return students; } set { students = value; RaisePropertyChangeed(nameof(Students)); } }
+        public ObservableCollection<Student> Students
+        { get { return students; } set { students = value; RaisePropertyChangeed(nameof(Students)); } }
 
         public void RaisePropertyChangeed(string propertyName)
         {
-            if(null != this.PropertyChanged)
+            if (null != this.PropertyChanged)
             {
                 this.PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        ObservableCollection<Student> students;
+        private ObservableCollection<Student> students;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -83,7 +84,7 @@ namespace WpfApp
         public int Age { get; set; }
     }
 
-     public class NumericUpDown
+    public class NumericUpDown
     {
         public string Name { get; set; } = "afd";
         public int Age { get; set; } = 2;

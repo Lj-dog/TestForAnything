@@ -8,10 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfAppDictionary.ViewModels;
-using WpfAppDictionary.Views;
 
-namespace WpfAppDictionary
+namespace NModbusTest
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -21,13 +19,14 @@ namespace WpfAppDictionary
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Connect_Click(object sender, RoutedEventArgs e)
         {
-            Window2 window2 = new Window2();
-            window2.Show();
+        }
+
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

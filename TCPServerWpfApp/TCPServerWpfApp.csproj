@@ -9,7 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <None Remove="Pic\GitHub.jfif" />
+    <None Remove="Pic\Icon.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pic\GitHub.jfif" />
+    <Resource Include="Pic\Icon.svg" />
   </ItemGroup>
 
 </Project>

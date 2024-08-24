@@ -8,17 +8,14 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d">
+    mc:Ignorable="d" Loaded="TCPServerWindow_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel
-            Grid.Row="0"
-            FlowDirection="LeftToRight"
-            Orientation="Horizontal">
+        <DockPanel Grid.Row="0" LastChildFill="False">
             <Label
                 Margin="5"
                 VerticalAlignment="Center"
@@ -27,7 +24,8 @@
                 x:Name="txtIP"
                 Width="120"
                 Height="30"
-                Margin="5" />
+                Margin="5"
+                Text="127.0.0.1" />
             <Label
                 Margin="5"
                 VerticalAlignment="Center"
@@ -36,17 +34,83 @@
                 x:Name="txtPort"
                 Width="120"
                 Height="30"
-                Margin="5" />
+                Margin="5"
+                Text="8080" />
             <Button
+                x:Name="OpenService"
                 Width="100"
                 Height="30"
                 Margin="5"
-                Content="开启" Click="Button_Click" />
+                Click="OpenService_Click"
+                Content="开启" />
             <Button
+                x:Name="CloseService"
                 Width="100"
                 Height="30"
                 Margin="5"
+                Click="CloseService_Click"
                 Content="关闭" />
-        </StackPanel>
+
+            <ComboBox
+                x:Name="clientListCombox"
+                Width="100"
+                Height="30"
+                Margin="5"
+                DockPanel.Dock="Right"
+                ItemsSource="{Binding clientList.Keys}" />
+        </DockPanel>
+
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GroupBox
+                Grid.Row="0"
+                Margin="5"
+                Header="接受">
+                <TextBox />
+            </GroupBox>
+            <GroupBox Grid.Row="1" Margin="5">
+                <GroupBox.Header>
+                    <Label>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="发送" />
+                            <Path
+                                Width="15"
+                                Height="15"
+                                Margin="5,0"
+                                Data="{DynamicResource HelpInfo}"
+                                Fill="Black"
+                                Stretch="Uniform"
+                                ToolTipService.InitialShowDelay="5">
+                                <Path.ToolTip>
+                                    <StackPanel>
+                                        <TextBlock Text="Github Picture" />
+                                        <Image
+                                            Width="50"
+                                            Height="50"
+                                            Margin="5,0">
+                                            <Image.Source>
+                                                <BitmapImage UriSource="./Pic/GitHub.jfif" />
+                                            </Image.Source>
+                                        </Image>
+                                        <TextBlock Text="Help Icon" />
+                                        <Path
+                                            Width="50"
+                                            Height="50"
+                                            Margin="5,0"
+                                            Data="{DynamicResource HelpInfo}"
+                                            Fill="Black"
+                                            Stretch="UniformToFill" />
+                                    </StackPanel>
+                                </Path.ToolTip>
+                            </Path>
+                        </StackPanel>
+                    </Label>
+                </GroupBox.Header>
+                <TextBox x:Name="txb_scr_dir" KeyDown="txb_scr_dir_KeyDown" />
+            </GroupBox>
+        </Grid>
     </Grid>
 </Window>

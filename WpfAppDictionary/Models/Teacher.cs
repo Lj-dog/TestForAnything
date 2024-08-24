@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TCPServerWpfApp.Models
+namespace WpfAppDictionary.Models
 {
-    internal class MainModel
+    internal class Teacher : Person
     {
+        public int Salary { get; set; }
     }
 }

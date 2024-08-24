@@ -19,48 +19,39 @@ namespace TCPServerWpfApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Socket> clientScokeList = new List<Socket>();
+        public static Dictionary<string, string> ClientList { get; set; } = new() { { "sf", "asdf" }, { "123", "asdf" }, };
+        public Dictionary<string, Task> ClientTask;
+        private TcpListener listener;
+
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void txb_scr_dir_KeyDown(object sender, KeyEventArgs e)
         {
-            ////创建Socket
-            //Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-
-            //IPEndPoint iPEndPoint = new IPEndPoint(IPAddress.Parse(this.txtIP.Text), int.Parse(this.txtPort.Text));
-
-            //socket.Bind(iPEndPoint);
-            //socket.Listen(10);
-
-            //ThreadPool.QueueUserWorkItem(new WaitCallback(AcceptClientConnect), socket);
+            if (e.Key == Key.Enter)
+            {
+                MessageBox.Show("textboxEnter");
+            }
         }
 
-      /// <summary>
-        /// 线程池线程执行的接受客户端连接方法
-        /// </summary>
-        /// <param name="obj">传入的Socket</param>
-         private void AcceptClientConnect(object obj)
-         {
-             //转换Socket
-             var serverSocket = obj as Socket;
+        private void OpenService_Click(object sender, RoutedEventArgs e)
+        {
+            IPAddress ip = IPAddress.Parse(this.txtIP.Text);
+            int port = int.Parse(this.txtPort.Text);
+            listener = new(ip, port);
+            listener.Start();
+        }
 
-            //AppendTxtLogText("服务端开始接收客户端连接！");
+        private void CloseService_Click(object sender, RoutedEventArgs e)
+        {
+            listener.Stop();
+        }
 
-            //不断接受客户端的连接
-            // while (true)
-            //{
-            //    5、创建一个负责通信的Socket
-            //    Socket proxSocket = serverSocket.Accept();
-            //    AppendTxtLogText(string.Format("客户端：{0}连接上了！", proxSocket.RemoteEndPoint.ToString()));
-            //    将连接的Socket存入集合
-            //     clientScoketLis.Add(proxSocket);
-            //    6、不断接收客户端发送来的消息
-            //     ThreadPool.QueueUserWorkItem(new WaitCallback(ReceiveClientMsg), proxSocket);
-            //}
-
+        private void TCPServerWindow_Loaded(object sender, RoutedEventArgs e)
+        {
         }
     }
 }
