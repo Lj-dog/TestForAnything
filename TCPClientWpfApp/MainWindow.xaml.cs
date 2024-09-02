@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TCPClientWpfApp.ViewModels;
 
 namespace TCPClientWpfApp
 {
@@ -26,8 +27,7 @@ namespace TCPClientWpfApp
         public MainWindow()
         {
             InitializeComponent();
-            CTSource = new CancellationTokenSource();
-            token = CTSource.Token;
+            this.DataContext = new MainViewModel();
         }
 
         private void Connect_Click(object sender, RoutedEventArgs e)
@@ -41,18 +41,28 @@ namespace TCPClientWpfApp
                     TcpClient.Connect(this.IPTextBox.Text, port);
                     networkStream = TcpClient.GetStream();
                 }
+                CTSource = new CancellationTokenSource();
+                token = CTSource.Token;
+
                 Task.Run(() =>
                 {
-                    while (true)
+                    try
                     {
-                        token.ThrowIfCancellationRequested();
-                        byte[] buffer = new byte[1024];
-                        int len = networkStream.Read(buffer, 0, buffer.Length);
-                        var message = Encoding.ASCII.GetString(buffer, 0, len);
-                        Application.Current.Dispatcher.Invoke(new Action(() =>
+                        while (true)
                         {
-                            this.RevText.Text += message + "\n";
-                        }));
+                            token.ThrowIfCancellationRequested();
+                            byte[] buffer = new byte[1024];
+                            int len = networkStream.Read(buffer, 0, buffer.Length);
+                            var message = Encoding.ASCII.GetString(buffer, 0, len);
+                            Application.Current.Dispatcher.Invoke(new Action(() =>
+                            {
+                                this.RevText.Text += message + "\n";
+                            }));
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show(" Error!!!");
                     }
                 }, token);
             }
