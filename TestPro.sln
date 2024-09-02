@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{25A2C4BE-EC15-4A66-BECA-9E6E8EEDE43B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppVisualHelper", "WpfApp\WpfAppVisualHelper.csproj", "{A1094831-FE97-44FE-A2DC-F9D997EA35D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csproj", "{A1094831-FE97-44FE-A2DC-F9D997EA35D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPServerWpfApp", "TCPServerWpfApp\TCPServerWpfApp.csproj", "{0BC8EA45-3C22-448C-8B76-C6D383D2805F}"
 EndProject
@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp_DI", "ConsoleApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppSwitchWindow_ect", "WpfAppSwitchWindow_ect\WpfAppSwitchWindow_ect.csproj", "{D60EBC78-1349-4F84-88F7-25B2ECA5BE91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppMVVMTest", "WpfAppMVVMTest\WpfAppMVVMTest.csproj", "{FC47D744-7362-4775-806F-4AC4E32E7BAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppMVVMTest", "WpfAppMVVMTest\WpfAppMVVMTest.csproj", "{FC47D744-7362-4775-806F-4AC4E32E7BAA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDataGridMvvmTest", "WPF_DataGridMVVMTest\WpfAppDataGridMvvmTest.csproj", "{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +91,10 @@ Global
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
