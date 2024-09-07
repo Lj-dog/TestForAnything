@@ -135,7 +135,7 @@ namespace ConsoleApp
 
             #endregion 5
 
-            #region 6
+            #region 6 JSON XML序列化/反序列化
 
             //(6) JSON XML序列化/反序列化
 
@@ -175,6 +175,9 @@ namespace ConsoleApp
             //        }},
             //    }
             //};
+
+            #region JSON
+
             //JSON
 
             //var options = new JsonSerializerOptions { WriteIndented = true };
@@ -213,6 +216,8 @@ namespace ConsoleApp
             //    Console.WriteLine($"Name:{schoolDeserialize.SchoolName}");
             //}
 
+            #endregion JSON
+
             #region XML
 
             ////XML 命名空间
@@ -233,7 +238,7 @@ namespace ConsoleApp
 
             #endregion XML
 
-            #endregion 6
+            #endregion 6 JSON XML序列化/反序列化
 
             #region 7
 
@@ -245,33 +250,33 @@ namespace ConsoleApp
             #region 8
 
             //LINQ 惰性处理特性
-            Dictionary<string, string> StrToREG = new Dictionary<string, string>();
-            StrToREG.Add("Inital", "DRILL_FEED_MODBUS_WRITE_INITIAL");
-            StrToREG.Add("InitalCompleted", "DRILL_FEED_MODBUS_WRITE_INITIAL_COMPLETE");
-            StrToREG.Add("Reset", "DRILL_FEED_MODBUS_WRITE_RESET");
-            StrToREG.Add("ResetCompleted", "DRILL_FEED_MODBUS_WRITE_RESET_COMPLETE");
-            StrToREG.Add("TCPOnlineDirll_1", "DRILL_FEED_MODBUS_WRITE_DEV_CLIENT_ONLINE_1");
-            StrToREG.Add("TCPOnlineDirll_2", "DRILL_FEED_MODBUS_WRITE_DEV_CLIENT_ONLINE_2");
-            StrToREG.Add("DirllPanelType_1", "MODBUS_WRITE_PANEL_TYPE_DEV_1");
-            StrToREG.Add("DirllPanelType_2", "MODBUS_WRITE_PANEL_TYPE_DEV_2");
-            StrToREG.Add("SendVirtualID", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_ID");
-            StrToREG.Add("SendPanelType", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_TYPE");
-            StrToREG.Add("PanelStartIN", "DRILL_FEED_MODBUS_WRITE_PANEL_IN_START");
-            StrToREG.Add("ArriveDrill_1", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_REQUEST_1");
-            StrToREG.Add("ArriveDrill_2", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_REQUEST_2");
-            StrToREG.Add("VirIDDrill_1", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_1");
-            StrToREG.Add("VirIDDrill_2", "DRILL_FEED_MODBUS_READ_DEV_VIRTUAL_ID_2");
+            //Dictionary<string, string> StrToREG = new Dictionary<string, string>();
+            //StrToREG.Add("Inital", "1");
+            //StrToREG.Add("InitalCompleted", "2");
+            //StrToREG.Add("Reset", "3");
+            //StrToREG.Add("ResetCompleted", "3");
+            //StrToREG.Add("TCPOnline_1", "4");
+            //StrToREG.Add("TCPOnline_2", "5");
+            //StrToREG.Add("DirType_1", "6");
+            //StrToREG.Add("DirType_2", "7");
+            //StrToREG.Add("SendID", "8");
+            //StrToREG.Add("SendType", "9");
+            //StrToREG.Add("StartIN", "2");
+            //StrToREG.Add("Arrive_1", "2");
+            //StrToREG.Add("Arrive_2", "3");
+            //StrToREG.Add("VirID_1", "3");
+            //StrToREG.Add("VirID_2", "5");
 
-            StrToREG.Add("PanelOutDrill_1", "DRILL_FEED_MODBUS_READ_PANEL_OUT_1");
-            StrToREG.Add("PanelOutDrill_2", "DRILL_FEED_MODBUS_READ_PANEL_OUT_2");
+            //StrToREG.Add("OutDr_1", "5");
+            //StrToREG.Add("OutDr_2", "5");
 
-            StrToREG.Add("PanelOutToWhere_1", "DRILL_FEED_MODBUS_WRITE_PANEL_OUT_ID_1");
-            StrToREG.Add("PanelOutToWhere_2", "DRILL_FEED_MODBUS_WRITE_PANEL_OUT_ID_2");
-            var DirllList = StrToREG.Keys.Where(key => key.StartsWith("DirllPanelType_"));
-            foreach (var item in DirllList)
-            {
-                Console.WriteLine($"{item}");
-            }
+            //StrToREG.Add("Pan_1", "3");
+            //StrToREG.Add("Pan_2", "2");
+            //var DirllList = StrToREG.Keys.Where(key => key.StartsWith("DirType_"));
+            //foreach (var item in DirllList)
+            //{
+            //    Console.WriteLine($"{item}");
+            //}
 
             #endregion 8
 
