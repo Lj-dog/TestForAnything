@@ -1,6 +1,9 @@
 ﻿using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Text.Unicode;
 using System.Xml.Serialization;
 
 namespace ConsoleApp
@@ -139,42 +142,42 @@ namespace ConsoleApp
 
             //(6) JSON XML序列化/反序列化
 
-            //School school = new School()
-            //{
-            //    level = Level.LEVELONE,
-            //    SchoolAge = 10,
-            //    SchoolName = "NAN",
-            //    //GradePeopleNum = new Dictionary<string, int>()
-            //    //{
-            //    //    {"Freshman",8 },
-            //    //    {"Sophomore",4 },
-            //    //    {"Junior",8 },
-            //    //    {"Senior",4 },
-            //    //},
-            //    Grades = new List<Grade>()
-            //    {
-            //        new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
-            //         new Class(){Students = 1},
-            //         new Class(){Students = 2},
-            //         new Class(){Students = 3},
-            //        } },
-            //        new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
-            //         new Class(){Students = 5},
-            //         new Class(){Students = 5},
-            //         new Class(){Students = 5},
-            //        }},
-            //        new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
-            //         new Class(){Students = 6},
-            //         new Class(){Students = 6},
-            //         new Class(){Students = 6},
-            //        }},
-            //        new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
-            //         new Class(){Students = 9},
-            //         new Class(){Students = 9},
-            //         new Class(){Students = 9},
-            //        }},
-            //    }
-            //};
+            School school = new School()
+            {
+                level = Level.LEVELONE,
+                SchoolAge = 10,
+                SchoolName = "NAN",
+                //GradePeopleNum = new Dictionary<string, int>()
+                //{
+                //    {"Freshman",8 },
+                //    {"Sophomore",4 },
+                //    {"Junior",8 },
+                //    {"Senior",4 },
+                //},
+                Grades = new List<Grade>()
+                {
+                    new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
+                     new Class(){Students = 1},
+                     new Class(){Students = 2},
+                     new Class(){Students = 3},
+                    } },
+                    new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
+                     new Class(){Students = 5},
+                     new Class(){Students = 5},
+                     new Class(){Students = 5},
+                    }},
+                    new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
+                     new Class(){Students = 6},
+                     new Class(){Students = 6},
+                     new Class(){Students = 6},
+                    }},
+                    new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
+                     new Class(){Students = 9},
+                     new Class(){Students = 9},
+                     new Class(){Students = 9},
+                    }},
+                }
+            };
 
             #region JSON
 
@@ -221,12 +224,13 @@ namespace ConsoleApp
             #region XML
 
             ////XML 命名空间
-            //XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            //ns.Add("books", "http");
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("books", "http");
 
             ////XML序列化
+            XmlSerializer xml = new XmlSerializer(typeof(School));
             ////字符流
-            //XmlSerializer xml = new XmlSerializer(typeof(School));
+
             //using StringWriter sw = new StringWriter();
             //xml.Serialize(sw, school, ns);
             //Console.WriteLine(sw.ToString());
@@ -235,6 +239,28 @@ namespace ConsoleApp
             //string path = "SchoolXML.xml";
             //using FileStream fileStream = new(path, FileMode.OpenOrCreate);
             //xml.Serialize(fileStream, school, ns);
+
+            //XML反序列化
+            //字节流
+            //using StringReader stringReader = new StringReader(sw.ToString());
+            //School xmlSchool = (School)xml.Deserialize(stringReader);
+            //Console.WriteLine($"{xmlSchool.SchoolName}");
+            //Console.WriteLine($"{xmlSchool.SchoolAge}");
+            //Console.WriteLine($"{xmlSchool.level}");
+            //Console.WriteLine($"{xmlSchool.Grades}");
+
+            //文件流
+            string path = "SchoolXML.xml";
+            using FileStream fileStream = new(path, FileMode.Open);
+            using StreamReader streamReader = new(fileStream, Encoding.UTF8);
+            School xmlSchoolFile = (School)xml.Deserialize(streamReader);
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("Read XML File");
+
+            Console.WriteLine($"{xmlSchoolFile.SchoolName}");
+            Console.WriteLine($"{xmlSchoolFile.SchoolAge}");
+            Console.WriteLine($"{xmlSchoolFile.level}");
+            Console.WriteLine($"{xmlSchoolFile.Grades}");
 
             #endregion XML
 
