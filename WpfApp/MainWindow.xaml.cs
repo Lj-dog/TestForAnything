@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Drawing;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+
 
 namespace WpfApp
 {
@@ -75,6 +77,30 @@ namespace WpfApp
             DependencyObject level2 = VisualTreeHelper.GetParent(level1);
             DependencyObject level3 = VisualTreeHelper.GetParent(level2);
             MessageBox.Show(level1.GetType().ToString());
+        }
+
+        /// <summary>
+        /// 生成图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PicCreateClick(object sender, RoutedEventArgs e)
+        {
+            // 初始化 Bitmap 类对象
+            Bitmap bitmap = new Bitmap(1000, 1000, System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+            // 创建图形类实例
+            Graphics graphics = Graphics.FromImage(bitmap);
+
+            // 创建画笔并指定其颜色
+            Brush brush = new SolidBrush(Color.FromKnownColor(KnownColor.MediumVioletRed));
+
+            // 绘制矩形
+            graphics.FillRectangle(brush, 100, 100, 800, 600);
+
+            // 保存输出绘图
+            bitmap.Save("Fill-Rectangle.png");
+
         }
     }
 

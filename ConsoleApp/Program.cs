@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using System.Xml.Serialization;
+using System.Drawing;
 
 namespace ConsoleApp
 {
@@ -100,16 +101,20 @@ namespace ConsoleApp
         {
             //Console.WriteLine("Hello, World!");\
 
-            #region 1
+            #region 1 -函数形参跳过默认参数给定
 
             //(1)
-            //Print(0, num3: 5);
+            Print(0, num3: 5);
 
             #endregion 1
 
-            //(2)
+            #region 2 -委托解耦调用
 
-            #region 3
+            //(2) 
+
+            #endregion
+
+            #region 3 -异步方法
 
             //(3)异步方法
             //int a;
@@ -121,7 +126,7 @@ namespace ConsoleApp
 
             #endregion 3
 
-            #region 4
+            #region 4 -ushrot shrot转换(不丢失任何数据)
 
             //(4) ushrot shrot转换(不丢失任何数据)
             //short sh = -2;
@@ -130,7 +135,7 @@ namespace ConsoleApp
 
             #endregion 4
 
-            #region 5
+            #region 5 -显示调用拥有不定参数和默认参数的函数
 
             //(5) 显示调用拥有不定参数和默认参数的函数
             //TestParams(bools: [true, false]);
@@ -142,42 +147,42 @@ namespace ConsoleApp
 
             //(6) JSON XML序列化/反序列化
 
-            School school = new School()
-            {
-                level = Level.LEVELTWO,
-                SchoolAge = 20,
-                SchoolName = "NAN",
-                //GradePeopleNum = new Dictionary<string, int>()
-                //{
-                //    {"Freshman",8 },
-                //    {"Sophomore",4 },
-                //    {"Junior",8 },
-                //    {"Senior",4 },
-                //},
-                Grades = new List<Grade>()
-                {
-                    new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
-                     new Class(){Students = 1},
-                     new Class(){Students = 2},
-                     new Class(){Students = 3},
-                    } },
-                    new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
-                     new Class(){Students = 5},
-                     new Class(){Students = 5},
-                     new Class(){Students = 5},
-                    }},
-                    new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
-                     new Class(){Students = 6},
-                     new Class(){Students = 6},
-                     new Class(){Students = 6},
-                    }},
-                    new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
-                     new Class(){Students = 9},
-                     new Class(){Students = 9},
-                     new Class(){Students = 9},
-                    }},
-                }
-            };
+            //School school = new School()
+            //{
+            //    level = Level.LEVELTWO,
+            //    SchoolAge = 20,
+            //    SchoolName = "NAN",
+            //    //GradePeopleNum = new Dictionary<string, int>()
+            //    //{
+            //    //    {"Freshman",8 },
+            //    //    {"Sophomore",4 },
+            //    //    {"Junior",8 },
+            //    //    {"Senior",4 },
+            //    //},
+            //    Grades = new List<Grade>()
+            //    {
+            //        new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
+            //         new Class(){Students = 1},
+            //         new Class(){Students = 2},
+            //         new Class(){Students = 3},
+            //        } },
+            //        new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
+            //         new Class(){Students = 5},
+            //         new Class(){Students = 5},
+            //         new Class(){Students = 5},
+            //        }},
+            //        new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
+            //         new Class(){Students = 6},
+            //         new Class(){Students = 6},
+            //         new Class(){Students = 6},
+            //        }},
+            //        new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
+            //         new Class(){Students = 9},
+            //         new Class(){Students = 9},
+            //         new Class(){Students = 9},
+            //        }},
+            //    }
+            //};
 
             #region JSON
 
@@ -223,83 +228,78 @@ namespace ConsoleApp
 
             #region XML
 
-            ////XML 命名空间
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("books", "http");
+            //////XML 命名空间
+            //XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            //ns.Add("books", "http");
 
-            ////XML序列化
-            //XmlSerializer xml1 = new XmlSerializer(school.GetType());
-            XmlSerializer xml = new XmlSerializer(typeof(School));
-            ////字符流
+            //////XML序列化
+            ////XmlSerializer xml1 = new XmlSerializer(school.GetType());
+            //XmlSerializer xml = new XmlSerializer(typeof(School));
+            //////字符流
 
-            //using StringWriter sw = new StringWriter();
-            //xml.Serialize(sw, school, ns);
-            //Console.WriteLine(sw.ToString());
+            ////using StringWriter sw = new StringWriter();
+            ////xml.Serialize(sw, school, ns);
+            ////Console.WriteLine(sw.ToString());
 
-            ////写入文件流
-            string path = "SchoolXML.xml";
-            using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
-            xml.Serialize(fileStream, school, ns);
-
-            //XML反序列化
-            //字节流
-            //using StringReader stringReader = new StringReader(sw.ToString());
-            //School xmlSchool = (School)xml.Deserialize(stringReader);
-            //Console.WriteLine($"{xmlSchool.SchoolName}");
-            //Console.WriteLine($"{xmlSchool.SchoolAge}");
-            //Console.WriteLine($"{xmlSchool.level}");
-            //Console.WriteLine($"{xmlSchool.Grades}");
-
-            //文件流
+            //////写入文件流
             //string path = "SchoolXML.xml";
-            //using FileStream fileStream = new(path, FileMode.Open);
-            //using StreamReader streamReader = new(fileStream, Encoding.UTF8);
-            //School xmlSchoolFile = (School)xml.Deserialize(streamReader);
-            //Console.WriteLine("------------------------------");
-            //Console.WriteLine("Read XML File");
+            //using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
+            //xml.Serialize(fileStream, school, ns);
 
-            //Console.WriteLine($"{xmlSchoolFile.SchoolName}");
-            //Console.WriteLine($"{xmlSchoolFile.SchoolAge}");
-            //Console.WriteLine($"{xmlSchoolFile.level}");
-            //Console.WriteLine($"{xmlSchoolFile.Grades}");
+            ////XML反序列化
+            ////字节流
+            ////using StringReader stringReader = new StringReader(sw.ToString());
+            ////School xmlSchool = (School)xml.Deserialize(stringReader);
+            ////Console.WriteLine($"{xmlSchool.SchoolName}");
+            ////Console.WriteLine($"{xmlSchool.SchoolAge}");
+            ////Console.WriteLine($"{xmlSchool.level}");
+            ////Console.WriteLine($"{xmlSchool.Grades}");
+
+            ////文件流
+            ////string path = "SchoolXML.xml";
+            ////using FileStream fileStream = new(path, FileMode.Open);
+            ////using StreamReader streamReader = new(fileStream, Encoding.UTF8);
+            ////School xmlSchoolFile = (School)xml.Deserialize(streamReader);
+            ////Console.WriteLine("------------------------------");
+            ////Console.WriteLine("Read XML File");
+
+            ////Console.WriteLine($"{xmlSchoolFile.SchoolName}");
+            ////Console.WriteLine($"{xmlSchoolFile.SchoolAge}");
+            ////Console.WriteLine($"{xmlSchoolFile.level}");
+            ////Console.WriteLine($"{xmlSchoolFile.Grades}");
 
             #endregion XML
 
             #endregion 6 JSON XML序列化/反序列化
 
-            #region 7
+            #region 7 -DateTime 转符合文件格式的字符串
 
             //7 DateTime 转符合文件格式的字符串
             //Console.WriteLine(DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
 
             #endregion 7
 
-            #region 8
+            #region 8 -LINQ 惰性处理特性
 
             //LINQ 惰性处理特性
-            //Dictionary<string, string> StrToREG = new Dictionary<string, string>();
-            //StrToREG.Add("Inital", "1");
-            //StrToREG.Add("InitalCompleted", "2");
-            //StrToREG.Add("Reset", "3");
-            //StrToREG.Add("ResetCompleted", "3");
-            //StrToREG.Add("TCPOnline_1", "4");
-            //StrToREG.Add("TCPOnline_2", "5");
-            //StrToREG.Add("DirType_1", "6");
-            //StrToREG.Add("DirType_2", "7");
-            //StrToREG.Add("SendID", "8");
-            //StrToREG.Add("SendType", "9");
-            //StrToREG.Add("StartIN", "2");
-            //StrToREG.Add("Arrive_1", "2");
-            //StrToREG.Add("Arrive_2", "3");
-            //StrToREG.Add("VirID_1", "3");
-            //StrToREG.Add("VirID_2", "5");
+            //Dictionary<string, string> Strs = new Dictionary<string, string>();
+            //Strs.Add("Ini", "1");
+            //Strs.Add("Inied", "2");
+            //Strs.Add("Re", "3");
+            //Strs.Add("Reed", "3");
+            //Strs.Add("TC_1", "4");
+            //Strs.Add("TC_2", "5");
+            //Strs.Add("Dir_1", "6");
+            //Strs.Add("Dir_2", "7");
+            //Strs.Add("SendI", "8");
+            //Strs.Add("Sen", "9");
+            //Strs.Add("Sta", "2");
+            //Strs.Add("Arr_1", "2");
+            //Strs.Add("Arr_2", "3");
+            //Strs.Add("Vir_1", "3");
+            //Strs.Add("Vir_2", "5");
 
-            //StrToREG.Add("OutDr_1", "5");
-            //StrToREG.Add("OutDr_2", "5");
-
-            //StrToREG.Add("Pan_1", "3");
-            //StrToREG.Add("Pan_2", "2");
-            //var DirllList = StrToREG.Keys.Where(key => key.StartsWith("DirType_"));
+            //var DirllList = Strs.Keys.Where(key => key.StartsWith("Dir_"));
             //foreach (var item in DirllList)
             //{
             //    Console.WriteLine($"{item}");
