@@ -144,8 +144,8 @@ namespace ConsoleApp
 
             School school = new School()
             {
-                level = Level.LEVELONE,
-                SchoolAge = 10,
+                level = Level.LEVELTWO,
+                SchoolAge = 20,
                 SchoolName = "NAN",
                 //GradePeopleNum = new Dictionary<string, int>()
                 //{
@@ -228,6 +228,7 @@ namespace ConsoleApp
             ns.Add("books", "http");
 
             ////XML序列化
+            //XmlSerializer xml1 = new XmlSerializer(school.GetType());
             XmlSerializer xml = new XmlSerializer(typeof(School));
             ////字符流
 
@@ -236,9 +237,9 @@ namespace ConsoleApp
             //Console.WriteLine(sw.ToString());
 
             ////写入文件流
-            //string path = "SchoolXML.xml";
-            //using FileStream fileStream = new(path, FileMode.OpenOrCreate);
-            //xml.Serialize(fileStream, school, ns);
+            string path = "SchoolXML.xml";
+            using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
+            xml.Serialize(fileStream, school, ns);
 
             //XML反序列化
             //字节流
@@ -250,17 +251,17 @@ namespace ConsoleApp
             //Console.WriteLine($"{xmlSchool.Grades}");
 
             //文件流
-            string path = "SchoolXML.xml";
-            using FileStream fileStream = new(path, FileMode.Open);
-            using StreamReader streamReader = new(fileStream, Encoding.UTF8);
-            School xmlSchoolFile = (School)xml.Deserialize(streamReader);
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("Read XML File");
+            //string path = "SchoolXML.xml";
+            //using FileStream fileStream = new(path, FileMode.Open);
+            //using StreamReader streamReader = new(fileStream, Encoding.UTF8);
+            //School xmlSchoolFile = (School)xml.Deserialize(streamReader);
+            //Console.WriteLine("------------------------------");
+            //Console.WriteLine("Read XML File");
 
-            Console.WriteLine($"{xmlSchoolFile.SchoolName}");
-            Console.WriteLine($"{xmlSchoolFile.SchoolAge}");
-            Console.WriteLine($"{xmlSchoolFile.level}");
-            Console.WriteLine($"{xmlSchoolFile.Grades}");
+            //Console.WriteLine($"{xmlSchoolFile.SchoolName}");
+            //Console.WriteLine($"{xmlSchoolFile.SchoolAge}");
+            //Console.WriteLine($"{xmlSchoolFile.level}");
+            //Console.WriteLine($"{xmlSchoolFile.Grades}");
 
             #endregion XML
 
