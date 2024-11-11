@@ -14,7 +14,6 @@
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition />
                     <ColumnDefinition />
-
                 </Grid.ColumnDefinitions>
                 <TextBlock
                     x:Name="txtName"
@@ -37,9 +36,8 @@
                 </StackPanel>
             </Grid>
         </Border>
-
     </DataTemplate>
-    <DataTemplate x:Key="female"  DataType="{x:Type m:People}">
+    <DataTemplate x:Key="female" DataType="{x:Type m:People}">
         <Border
             x:Name="border"
             Padding="5"
@@ -77,24 +75,26 @@
 
     </DataTemplate>
 
-    <DataTemplate x:Key="lgbtqia_plus"  DataType="{x:Type m:People}">
+    <DataTemplate x:Key="lgbtqia_plus" DataType="{x:Type m:People}">
         <Border
-      x:Name="border"
-      Padding="5"
-      BorderBrush="Blue"
-      BorderThickness="5"
-      CornerRadius="5">
+            x:Name="border"
+            Padding="5"
+            BorderBrush="Blue"
+            BorderThickness="5"
+            CornerRadius="5">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="80" />
                     <ColumnDefinition />
                     <ColumnDefinition />
-
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="txtName"        
-          VerticalAlignment="Center"
-          FontSize="18"
-          FontWeight="Black" Foreground="Black" Text="{Binding }" />
+                <TextBlock
+                    x:Name="txtName"
+                    VerticalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="Black"
+                    Foreground="Black"
+                    Text="{Binding}" />
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="{Binding Name}" />
                     <TextBlock Text="{Binding Gender}" />
@@ -104,23 +104,24 @@
                     <Path Stroke="Black" StrokeThickness="2">
                         <Path.Fill>
                             <LinearGradientBrush StartPoint="0.5,0" EndPoint=".5,1">
-                                <GradientStop Color="Red" Offset="0"/>
-                                <GradientStop Color="Orange" Offset="0.17"/>
-                                <GradientStop Color="Yellow" Offset="0.33"/>
-                                <GradientStop Color="Green" Offset="0.5"/>
-                                <GradientStop Color="Blue" Offset="0.67"/>
-                                <GradientStop Color="Indigo" Offset="0.83"/>
-                                <GradientStop Color="Violet" Offset="1"/>
-
+                                <GradientStop Offset="0" Color="Red" />
+                                <GradientStop Offset="0.17" Color="Orange" />
+                                <GradientStop Offset="0.33" Color="Yellow" />
+                                <GradientStop Offset="0.5" Color="Green" />
+                                <GradientStop Offset="0.67" Color="Blue" />
+                                <GradientStop Offset="0.83" Color="Indigo" />
+                                <GradientStop Offset="1" Color="Violet" />
                             </LinearGradientBrush>
                         </Path.Fill>
                         <Path.Data>
-                            <EllipseGeometry Center="20,25" RadiusX="20" RadiusY="20"/>
+                            <EllipseGeometry
+                                Center="20,25"
+                                RadiusX="20"
+                                RadiusY="20" />
                         </Path.Data>
                     </Path>
                 </StackPanel>
             </Grid>
         </Border>
-
     </DataTemplate>
 </ResourceDictionary>

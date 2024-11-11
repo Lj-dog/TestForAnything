@@ -22,7 +22,6 @@
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="{Binding Gender}" />
                     <TextBlock Text="{Binding Age}" />
-
                 </StackPanel>
             </Grid>
         </Border>

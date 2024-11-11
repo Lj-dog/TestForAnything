@@ -11,7 +11,6 @@
                 <ResourceDictionary Source="Dictionary/DataTemplate.xaml" />
                 <ResourceDictionary Source="Dictionary/CreatureTemplate.xaml" />
                 <ResourceDictionary Source="Dictionary/PeopleTemplate.xaml" />
-
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
