@@ -24,15 +24,15 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock Margin="5,0" Text="Name:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.Name}" />
 
                     <TextBlock Margin="5,0" Text="ID:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.ID}" />
                     <TextBlock Margin="5,0" Text="Age:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.Age}" />
 
                     <TextBlock Margin="5,0" Text="BirthDay:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.BirthDay}" />
 
 
 
@@ -42,10 +42,10 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock Margin="5,0" Text="Address:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.Address}" />
 
                     <TextBlock Margin="5,0" Text="Description:" />
-                    <TextBox Width="100" Text="{Binding}" />
+                    <TextBox Width="100" Text="{Binding People.Description}" />
                 </StackPanel>
                 <StackPanel
                     Height="20"
@@ -69,10 +69,8 @@
                     <Button
                         Width="auto"
                         Margin="5,0"
-                        Command="{Binding BtnAddCommand}"  Content="Enable Description Edit">
-                      
-                   
-                    </Button>
+                        Command="{Binding BtnAddCommand}"
+                        Content="Enable Description Edit" />
                     <Button
                         Width="auto"
                         Margin="5,0"

@@ -9,9 +9,13 @@ using WpfAppMVVMTest.Models;
 
 namespace WpfAppMVVMTest.ViewModels
 {
-    class DataGridVM : ObservableObject
+  partial  class DataGridVM : ObservableObject
     {
-        public ObservableCollection<People> Peoples { get; set; }
+
+        [ObservableProperty]
+        private People people;
+
+        public ObservableCollection<People> Peoples {  get; set; }
         public DataGridVM()
         {
             

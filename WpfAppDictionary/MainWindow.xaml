@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:My="clr-namespace:WpfAppDictionary.MyControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dict="clr-namespace:WpfAppTemplate.Dictionary"
     xmlns:local="clr-namespace:WpfAppDictionary"
     xmlns:m="clr-namespace:WpfAppDictionary.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -13,7 +14,13 @@
     Height="450"
     d:DataContext="{d:DesignInstance {x:Type mv:MainViewModel}}"
     mc:Ignorable="d">
-    <Window.Resources />
+    <Window.Resources>
+        <dict:PeopleSelector
+            x:Key="selector"
+            Female="{StaticResource female}"
+            LGBTQIA_Puls="{StaticResource lgbtqia_plus}"
+            Male="{StaticResource male}" />
+    </Window.Resources>
     <Viewbox>
         <Grid Height=" auto">
             <StackPanel>
@@ -30,10 +37,15 @@
                         Height="80"
                         Content="{Binding Teacher}" />
                 </Viewbox>
-                <Button
-                    Width="120"
-                    Height="50"
-                    Content="Btn3" />
+                <Button Width="120" Height="50">
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="red" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button>
                 <My:MyTextbox
                     Width="120"
                     Height="50"
@@ -42,7 +54,10 @@
                     BorderThickness="5"
                     MyTextBoxCornerRadius="5"
                     Style="{StaticResource textbox}" />
-                <ListBox HorizontalContentAlignment="Stretch" ItemsSource="{Binding People}" />
+                <ListBox
+                    HorizontalContentAlignment="Stretch"
+                    ItemTemplateSelector="{StaticResource selector}"
+                    ItemsSource="{Binding Creature}" />
             </StackPanel>
         </Grid>
     </Viewbox>

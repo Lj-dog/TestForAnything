@@ -12,9 +12,6 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-
-
-
         <ControlTemplate x:Key="rect" TargetType="{x:Type CheckBox}">
             <StackPanel>
                 <Rectangle
@@ -26,18 +23,14 @@
                     <Rectangle.Fill>
                         <SolidColorBrush Color="White" />
                     </Rectangle.Fill>
-
                 </Rectangle>
                 <ContentPresenter />
             </StackPanel>
 
         </ControlTemplate>
-
-
-
-
-
     </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -83,10 +76,14 @@
         </Grid>
 
         <Grid Grid.Row="2">
+            <!--#region NewRegion-->
             <StackPanel>
-                <Button Content="生成" Click="PicCreateClick" />
+                <StackPanel>
+                    <Button Click="PicCreateClick" Content="生成" />
+                </StackPanel>
+                <Image x:Name="UserImage" />
             </StackPanel>
-            <Image x:Name="UserImage"/>
+            <!--#endregion-->
         </Grid>
     </Grid>
 

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPServerWpfApp", "TCPServe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCPClientWpfApp", "TCPClientWpfApp\TCPClientWpfApp.csproj", "{3F1EC705-5A1F-4C32-82AE-7B1FF0925B38}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDictionary", "WpfAppDictionary\WpfAppDictionary.csproj", "{AE8357EE-09F4-44C2-891B-C8292623F2FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppTemplate", "WpfAppDictionary\WpfAppTemplate.csproj", "{AE8357EE-09F4-44C2-891B-C8292623F2FC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbusTest", "NModbusTest\NModbusTest.csproj", "{A5FA8467-81FF-4A7E-9F20-236D361EB864}"
 EndProject

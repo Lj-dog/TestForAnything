@@ -1,11 +1,11 @@
-﻿using System.Security.Cryptography;
+﻿using System.Drawing;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using System.Xml.Serialization;
-using System.Drawing;
 
 namespace ConsoleApp
 {
@@ -104,13 +104,13 @@ namespace ConsoleApp
             #region 1 -函数形参跳过默认参数给定
 
             //(1)
-            Print(0, num3: 5);
+            //Print(0, num3: 5);
 
             #endregion 1
 
             #region 2 -委托解耦调用
 
-            //(2) 
+            //(2)
 
             #endregion
 
@@ -147,42 +147,66 @@ namespace ConsoleApp
 
             //(6) JSON XML序列化/反序列化
 
-            //School school = new School()
-            //{
-            //    level = Level.LEVELTWO,
-            //    SchoolAge = 20,
-            //    SchoolName = "NAN",
-            //    //GradePeopleNum = new Dictionary<string, int>()
-            //    //{
-            //    //    {"Freshman",8 },
-            //    //    {"Sophomore",4 },
-            //    //    {"Junior",8 },
-            //    //    {"Senior",4 },
-            //    //},
-            //    Grades = new List<Grade>()
-            //    {
-            //        new Grade(){GradeName="Freshman",ClassNum=1,ClassList= new List<Class>(){
-            //         new Class(){Students = 1},
-            //         new Class(){Students = 2},
-            //         new Class(){Students = 3},
-            //        } },
-            //        new Grade(){GradeName="Sophomore",ClassNum=2,ClassList= new List<Class>(){
-            //         new Class(){Students = 5},
-            //         new Class(){Students = 5},
-            //         new Class(){Students = 5},
-            //        }},
-            //        new Grade(){GradeName="Junior",ClassNum=3,ClassList= new List<Class>(){
-            //         new Class(){Students = 6},
-            //         new Class(){Students = 6},
-            //         new Class(){Students = 6},
-            //        }},
-            //        new Grade(){GradeName="Senior",ClassNum=4,ClassList= new List<Class>(){
-            //         new Class(){Students = 9},
-            //         new Class(){Students = 9},
-            //         new Class(){Students = 9},
-            //        }},
-            //    }
-            //};
+            School school = new School()
+            {
+                level = Level.LEVELTWO,
+                SchoolAge = 20,
+                SchoolName = "NANA",
+                //GradePeopleNum = new Dictionary<string, int>()
+                //{
+                //    {"Freshman",8 },
+                //    {"Sophomore",4 },
+                //    {"Junior",8 },
+                //    {"Senior",4 },
+                //},
+                Grades = new List<Grade>()
+                {
+                    new Grade()
+                    {
+                        GradeName = "Freshman",
+                        ClassNum = 1,
+                        ClassList = new List<Class>()
+                        {
+                            new Class() { Students = 1 },
+                            new Class() { Students = 2 },
+                            new Class() { Students = 3 },
+                        },
+                    },
+                    new Grade()
+                    {
+                        GradeName = "Sophomore",
+                        ClassNum = 2,
+                        ClassList = new List<Class>()
+                        {
+                            new Class() { Students = 5 },
+                            new Class() { Students = 5 },
+                            new Class() { Students = 5 },
+                        },
+                    },
+                    new Grade()
+                    {
+                        GradeName = "Junior",
+                        ClassNum = 3,
+                        ClassList = new List<Class>()
+                        {
+                            new Class() { Students = 6 },
+                            new Class() { Students = 6 },
+                            new Class() { Students = 6 },
+                        },
+                    },
+                    new Grade()
+                    {
+                        GradeName = "Senior",
+                        ClassNum = 4,
+                        ClassList = new List<Class>()
+                        {
+                            new Class() { Students = 9 },
+                            new Class() { Students = 9 },
+                            new Class() { Students = 9 },
+                        },
+                    },
+                },
+            };
 
             #region JSON
 
@@ -229,12 +253,12 @@ namespace ConsoleApp
             #region XML
 
             //////XML 命名空间
-            //XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            //ns.Add("books", "http");
+            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            ns.Add("books", "http");
 
             //////XML序列化
-            ////XmlSerializer xml1 = new XmlSerializer(school.GetType());
-            //XmlSerializer xml = new XmlSerializer(typeof(School));
+            //XmlSerializer xml1 = new XmlSerializer(school.GetType());
+            XmlSerializer xml = new XmlSerializer(typeof(School));
             //////字符流
 
             ////using StringWriter sw = new StringWriter();
@@ -242,9 +266,11 @@ namespace ConsoleApp
             ////Console.WriteLine(sw.ToString());
 
             //////写入文件流
-            //string path = "SchoolXML.xml";
-            //using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
-            //xml.Serialize(fileStream, school, ns);
+            string path = "SchoolXML.xml";
+            //using FileStream fileStream = new(path, FileMode.OpenOrCreate);
+
+            using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
+            xml.Serialize(fileStream, school, ns);
 
             ////XML反序列化
             ////字节流
@@ -307,11 +333,31 @@ namespace ConsoleApp
 
             #endregion 8
 
-            #region 9
+            #region 9 Git 临时分支提交
 
             //Git 临时分支提交
 
             #endregion 9
+
+            #region 10 避免添加相同地址的内容
+
+
+            #endregion
+
+            #region 11 Ctrl K S 快速添加外层嵌套
+
+
+            if (true)
+            {
+                Console.WriteLine("11");
+                Console.WriteLine("11");
+
+                Console.WriteLine("11");
+                Console.WriteLine("11"); 
+            }
+
+
+            #endregion
         }
 
         //(1)函数形参跳过默认参数给定
@@ -329,7 +375,6 @@ namespace ConsoleApp
 
         //(5) 显示调用拥有不定参数和默认参数的函数
         public static void TestParams(int a = 1, params bool[] bools)
-
         {
             Console.WriteLine($"{a}");
             foreach (var b in bools)
@@ -338,6 +383,40 @@ namespace ConsoleApp
             }
         }
     }
+
+    #region 10 避免添加相同地址的内容
+    class A
+    {
+        public static List<B> Bs = new();
+
+        public B b;
+
+        public A(int a)
+        {
+            B btemp = new(a);
+
+            if (Bs.Contains(btemp)) //在list里找与B里的所有或特定成员相等。
+            {
+                //b=相等的成员
+            }
+            else
+            {
+                Bs.Add(btemp);
+            }
+        }
+    }
+
+    class B
+    {
+        public int c;
+
+        public B(int cc)
+        {
+            c = cc;
+        }
+    }
+
+    #endregion
 
     //(2) 委托解耦调用
 
