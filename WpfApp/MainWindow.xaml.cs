@@ -311,6 +311,27 @@ namespace WpfApp
             //// 显示在 Image 控件上
             this.UserImage.Source = bitmap;
         }
+
+
+        /// <summary>
+        /// 使用Thread
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ThreadClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// 使用Task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TaskClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class Student

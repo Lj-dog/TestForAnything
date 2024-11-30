@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -252,25 +254,25 @@ namespace ConsoleApp
 
             #region XML
 
-            //////XML 命名空间
+            ////XML 命名空间
             XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
             ns.Add("books", "http");
 
-            //////XML序列化
-            //XmlSerializer xml1 = new XmlSerializer(school.GetType());
+            ////XML序列化
+            XmlSerializer xml1 = new XmlSerializer(school.GetType());
             XmlSerializer xml = new XmlSerializer(typeof(School));
-            //////字符流
+            ////字符流
 
-            ////using StringWriter sw = new StringWriter();
-            ////xml.Serialize(sw, school, ns);
-            ////Console.WriteLine(sw.ToString());
+            using StringWriter sw = new StringWriter();
+            xml.Serialize(sw, school, ns);
+            Console.WriteLine(sw.ToString());
 
             //////写入文件流
-            string path = "SchoolXML.xml";
+            //string path = "SchoolXML.xml";
             //using FileStream fileStream = new(path, FileMode.OpenOrCreate);
 
-            using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
-            xml.Serialize(fileStream, school, ns);
+            //using FileStream fileStream = new(path, FileMode.OpenOrCreate | FileMode.Truncate);
+            //xml.Serialize(fileStream, school, ns);
 
             ////XML反序列化
             ////字节流
@@ -347,16 +349,36 @@ namespace ConsoleApp
             #region 11 Ctrl K S 快速添加外层嵌套
 
 
-            if (true)
-            {
-                Console.WriteLine("11");
-                Console.WriteLine("11");
+            //if (true)
+            //{
+            //    Console.WriteLine("11");
+            //    Console.WriteLine("11");
 
-                Console.WriteLine("11");
-                Console.WriteLine("11"); 
-            }
+            //    Console.WriteLine("11");
+            //    Console.WriteLine("11");
+            //}
+
+            #endregion
+
+            #region 12 反射与特性
+            //var reflect = new ForReflect()
+            //{
+            //    ID = 123,
+            //    Name = "Tom",
+            //    Value = 1.0,
+            //};
+
+            //Console.WriteLine(ReflectOutput(reflect));
+
+            //ReflectTest(typeof(Methods));
+            #endregion
 
 
+
+            #region 13 Lambda
+            //int Method(int o) => o==42 ? 100 : 0;
+
+            //Console.WriteLine($"{Method(42)}");
             #endregion
         }
 
@@ -382,7 +404,138 @@ namespace ConsoleApp
                 Console.WriteLine($"{b}");
             }
         }
+
+        #region 12 反射与特性
+
+        public static string ReflectOutput(object obj)
+        {
+            /*  JsonIgnoreAttribute
+                             .Where(o =>{
+                   var ores = o.GetCustomAttribute<JsonIgnoreAttribute>();
+                    if (ores!=null)
+                        return false;
+                    else
+                        return true;
+            })
+             */
+            var res = obj.GetType()
+                .GetProperties()
+                .Where(o =>
+                {
+                    var ores = o.GetCustomAttribute<IsShowAttribute>();
+                    if (ores != null)
+                        return ores.IsShow;
+                    else
+                        return true;
+                })
+                .Select(o => new { key = o.Name, value = o.GetValue(obj) });
+            return string.Join(Environment.NewLine, res);
+        }
+
+        public static bool ReflectTest(Type type)
+        {
+            var constructorinfos = type.GetConstructors();
+            if (constructorinfos.Length == 0)
+                return false;
+            foreach (var constructor in constructorinfos)
+            {
+                object? obj;
+                var con_Attribute = constructor.GetCustomAttribute<TestMethodAttribute>();
+                if (con_Attribute == null)
+                    continue;
+                else
+                {
+                    try
+                    {
+                        obj = Activator.CreateInstance(type, con_Attribute.Parameters);
+                        if (obj == null)
+                            return false;
+                    }
+                    catch (Exception)
+                    {
+                        return false;
+                    }
+                }
+                var methods = type.GetMethods();
+                foreach (var method in methods)
+                {
+                    var method_Attribute = method.GetCustomAttribute<TestMethodAttribute>();
+                    if (method_Attribute is not null)
+                        method.Invoke(obj, method_Attribute.Parameters);
+                }
+            }
+
+            return false;
+        }
+
+        #endregion
     }
+
+    #region 12 反射与特性
+    [AttributeUsage(AttributeTargets.Property)] //限制属性
+    class IsShowAttribute : Attribute
+    {
+        public int key { get; set; }
+        public bool IsShow { get; set; }
+
+        public IsShowAttribute(bool b)
+        {
+            IsShow = b;
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor)]
+    class TestMethodAttribute : Attribute
+    {
+        public object[]? Parameters { get; set; }
+
+        public TestMethodAttribute(object[]? objects)
+        {
+            Parameters = objects;
+        }
+    }
+
+    class ForReflect
+    {
+        //[JsonIgnore]
+        [IsShow(true, key = 2)]
+        public int ID { get; set; }
+
+        public string Name { get; set; }
+
+        [IsShow(false)]
+        public double Value { get; set; }
+    }
+
+    class Methods
+    {
+        private double priData;
+
+        [TestMethodAttribute([3.0])]
+        public Methods(double @double)
+        {
+            this.priData = @double;
+        }
+
+        [TestMethodAttribute(null)]
+        public void OutputPriData()
+        {
+            Console.WriteLine(priData);
+        }
+
+        [TestMethodAttribute(["asdf"])]
+        public void OutputTest(string str)
+        {
+            Console.WriteLine(str);
+        }
+
+        [TestMethodAttribute([1234])]
+        public void OutputTest(int i)
+        {
+            Console.WriteLine(i);
+        }
+    }
+    #endregion
 
     #region 10 避免添加相同地址的内容
     class A
@@ -424,4 +577,19 @@ namespace ConsoleApp
     {
         public delegate void Print(string str);
     }
+
+    //override
+    #region Override
+
+    class Override
+    {
+        public int OverridePro { get; set; }
+    }
+
+    class OverideChild : Override
+    {
+        public int OverridePro { get; set; }
+    }
+    #endregion
+
 }

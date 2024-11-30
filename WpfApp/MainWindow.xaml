@@ -12,22 +12,24 @@
     mc:Ignorable="d">
 
     <Window.Resources>
-        <ControlTemplate x:Key="rect" TargetType="{x:Type CheckBox}">
-            <StackPanel>
-                <Rectangle
-                    Name="breakRectangle"
-                    Width="20"
-                    Height="20"
-                    Stroke="Red"
-                    StrokeThickness="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="White" />
-                    </Rectangle.Fill>
-                </Rectangle>
-                <ContentPresenter />
-            </StackPanel>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/TestToAddDict.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="rect" TargetType="{x:Type CheckBox}">
+                <StackPanel>
+                    <Rectangle
+                        x:Name="breakRectangle"
+                        Width="20"
+                        Height="20"
+                        Fill="White"
+                        Stroke="Red"
+                        StrokeThickness="2" />
+                    <ContentPresenter />
+                </StackPanel>
 
-        </ControlTemplate>
+            </ControlTemplate>
+        </ResourceDictionary>
     </Window.Resources>
 
 
@@ -80,6 +82,12 @@
             <StackPanel>
                 <StackPanel>
                     <Button Click="PicCreateClick" Content="生成" />
+                </StackPanel>
+                <StackPanel>
+                    <Button Click="ThreadClick" Content="Thread多线程" />
+                </StackPanel>
+                <StackPanel>
+                    <Button Click="TaskClick" Content="Task多线程" />
                 </StackPanel>
                 <Image x:Name="UserImage" />
             </StackPanel>
