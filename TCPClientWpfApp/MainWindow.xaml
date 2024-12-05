@@ -57,7 +57,7 @@
 
             </Grid.RowDefinitions>
 
-            <GroupBox Header="SendMessage" Grid.Row="0">
+            <GroupBox Grid.Row="0" Header="SendMessage">
                 <Grid>
                     <TextBox
                         x:Name="SendText"
@@ -67,8 +67,8 @@
                 </Grid>
             </GroupBox>
             <Button
-                Grid.Row="1"
                 x:Name="SendBtn"
+                Grid.Row="1"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Top"
                 Click="SendBtn_Click"
