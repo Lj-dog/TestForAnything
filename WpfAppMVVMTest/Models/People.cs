@@ -7,18 +7,38 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WpfAppMVVMTest.Models
 {
-    partial class People
+    public partial class People : ObservableObject
     {
-        public int ID { get; set; }
+        //(1) 1 尝试使用BindingList来使DataGrid里单元格变化后触发事件。
+        // 需要将全部属性改为可观察属性
+        [ObservableProperty]
+        private int iD;
 
-        public string? Name { get; set; }
+        [ObservableProperty]
+        private string? name;
 
-        public string? Description { get; set; }
+        [ObservableProperty]
+        private string? description;
 
-        public string? Address { get; set; }
+        [ObservableProperty]
+        private string? address;
 
-        public byte Age { get; set; }
+        [ObservableProperty]
+        private byte age;
 
-        public DateTime BirthDay { get; set; }
+        [ObservableProperty]
+        private DateTime birthDay = DateTime.Now;
+
+        //public int ID { get; set; }
+
+        //public string? Name { get; set; }
+
+        //public string? Description { get; set; }
+
+        //public string? Address { get; set; }
+
+        //public byte Age { get; set; }
+
+        //public DateTime BirthDay { get; set; } = DateTime.Now;
     }
 }

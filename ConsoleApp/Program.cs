@@ -99,6 +99,8 @@ namespace ConsoleApp
 
     internal class Program
     {
+        // 14 值改变时中断
+       static ushort interruptTest = 10;
         private static async Task Main(string[] args)
         {
             //Console.WriteLine("Hello, World!");\
@@ -255,17 +257,17 @@ namespace ConsoleApp
             #region XML
 
             ////XML 命名空间
-            XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
-            ns.Add("books", "http");
+            //XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+            //ns.Add("books", "http");
 
-            ////XML序列化
-            XmlSerializer xml1 = new XmlSerializer(school.GetType());
-            XmlSerializer xml = new XmlSerializer(typeof(School));
-            ////字符流
+            //////XML序列化
+            //XmlSerializer xml1 = new XmlSerializer(school.GetType());
+            //XmlSerializer xml = new XmlSerializer(typeof(School));
+            //////字符流
 
-            using StringWriter sw = new StringWriter();
-            xml.Serialize(sw, school, ns);
-            Console.WriteLine(sw.ToString());
+            //using StringWriter sw = new StringWriter();
+            //xml.Serialize(sw, school, ns);
+            //Console.WriteLine(sw.ToString());
 
             //////写入文件流
             //string path = "SchoolXML.xml";
@@ -373,12 +375,21 @@ namespace ConsoleApp
             //ReflectTest(typeof(Methods));
             #endregion
 
-
-
             #region 13 Lambda
             //int Method(int o) => o==42 ? 100 : 0;
 
             //Console.WriteLine($"{Method(42)}");
+            #endregion
+
+            #region 14 值改变时中断
+
+            interruptTest = 10;
+
+            ChangeInterruptValue();
+
+            var interruptClass = new InterruptValueClass();
+
+            interruptClass.ChangeInterruptValue();
             #endregion
         }
 
@@ -468,6 +479,29 @@ namespace ConsoleApp
             return false;
         }
 
+        #endregion
+
+
+        #region 14 值改变时中断
+
+        public static void ChangeInterruptValue()
+        {
+            interruptTest = 20;
+        }
+
+        public class InterruptValueClass
+        {
+            private int interrupt;
+            public InterruptValueClass()
+            {
+                interrupt = 20;
+            }
+
+            public void ChangeInterruptValue()
+            {
+                interrupt = 100;
+            }
+        }
         #endregion
     }
 
@@ -591,5 +625,6 @@ namespace ConsoleApp
         public int OverridePro { get; set; }
     }
     #endregion
+
 
 }

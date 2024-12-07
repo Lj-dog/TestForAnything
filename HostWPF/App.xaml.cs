@@ -37,15 +37,24 @@ namespace HostWPF
                     container.AddHostedService<CheckUpdateService>();
 
                     container.AddSingleton<MainWindow>(sp =>
+                    //lambda 语句块与表达式的区别
+                    new MainWindow()
                     {
-                        //lambda 语句块与表达式的区别
-                        return new MainWindow() { DataContext = sp.GetRequiredService<MainVM>() };
+                        DataContext = sp.GetRequiredService<MainVM>(),
                     });
+
+                    //container.AddSingleton<MainWindow>(sp =>
+                    //{
+                    //    //lambda 语句块与表达式的区别
+                    //    return new MainWindow() { DataContext = sp.GetRequiredService<MainVM>() };
+                    //});
 
                     container.AddSingleton<MainVM>();
 
                     container.AddSingleton<WeakReferenceMessenger>();
-                    container.AddSingleton<IMessenger, WeakReferenceMessenger>(provider => provider.GetRequiredService<WeakReferenceMessenger>());
+                    container.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>
+                        provider.GetRequiredService<WeakReferenceMessenger>()
+                    );
 
                     container.AddSingleton(_ => Current.Dispatcher);
                 })
@@ -53,8 +62,8 @@ namespace HostWPF
                 {
                     logging.ClearProviders();
                     Log.Logger = new LoggerConfiguration()
-                    .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
-                    .CreateLogger();
+                        .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
+                        .CreateLogger();
                     //logging.AddSerilog(Log.Logger);
                     logging.Services.AddSingleton(Log.Logger);
                 });

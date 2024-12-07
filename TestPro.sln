@@ -29,11 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppSwitchWindow_ect", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppMVVMTest", "WpfAppMVVMTest\WpfAppMVVMTest.csproj", "{FC47D744-7362-4775-806F-4AC4E32E7BAA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppDataGridMvvmTest", "WPF_DataGridMVVMTest\WpfAppDataGridMvvmTest.csproj", "{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfControlLibrary", "WpfControlLibrary\WpfControlLibrary.csproj", "{0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostWPF", "HostWPF\HostWPF.csproj", "{8DCF7DCA-6183-478B-A94E-71D98C1F87F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostWPF", "HostWPF\HostWPF.csproj", "{8DCF7DCA-6183-478B-A94E-71D98C1F87F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +87,6 @@ Global
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC47D744-7362-4775-806F-4AC4E32E7BAA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4643ADA-6CF3-4C7C-9E3B-6377416F7844}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
