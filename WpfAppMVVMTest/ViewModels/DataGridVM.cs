@@ -21,28 +21,28 @@ namespace WpfAppMVVMTest.ViewModels
         [ObservableProperty]
         private People selectedPeople;
 
-        //public ObservableCollection<People> Peoples { get; set; } = new();
+        public ObservableCollection<People> Peoples { get; set; } = new();
 
 
         // (1)尝试使用BindingList来使DataGrid里单元格变化后触发事件。
-        [ObservableProperty]
-        private BindingList<People> _peoples;
+        //[ObservableProperty]
+        //private BindingList<People> _peoples;
 
         public DataGridVM() {
 
             //(1)
             #region 1 尝试使用BindingList来使DataGrid里单元格变化后触发事件。
-            Peoples = new();
-            Peoples.ListChanged += Peoples_ListChanged;
+            //Peoples = new();
+            //Peoples.ListChanged += Peoples_ListChanged;
             #endregion
         }
 
         //(1)
         #region 1 尝试使用BindingList来使DataGrid里单元格变化后触发事件。
-        private void Peoples_ListChanged(object? sender, ListChangedEventArgs e)
-        {
-            MessageBox.Show("ListChangeded");
-        } 
+        //private void Peoples_ListChanged(object? sender, ListChangedEventArgs e)
+        //{
+        //    MessageBox.Show("ListChangeded");
+        //} 
         #endregion
 
         [RelayCommand]
