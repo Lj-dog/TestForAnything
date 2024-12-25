@@ -100,7 +100,8 @@ namespace ConsoleApp
     internal class Program
     {
         // 14 值改变时中断
-       static ushort interruptTest = 10;
+        static ushort interruptTest = 10;
+
         private static async Task Main(string[] args)
         {
             //Console.WriteLine("Hello, World!");\
@@ -391,6 +392,27 @@ namespace ConsoleApp
 
             interruptClass.ChangeInterruptValue();
             #endregion
+
+            #region 15 查看调用堆栈找到调用函数的地方
+
+            //while (true)
+            //{
+            //    int a = int.Parse(Console.ReadLine());
+
+            //    if (a == 1)
+            //        CheckFun();
+            //    else if (a == 2)
+            //        CheckFun();
+            //    else if (a == 3)
+            //        CheckFun();
+
+            //    CheckFun();
+            //    CheckFun();
+            //    CheckFun();
+
+            //}
+
+            #endregion
         }
 
         //(1)函数形参跳过默认参数给定
@@ -492,6 +514,7 @@ namespace ConsoleApp
         public class InterruptValueClass
         {
             private int interrupt;
+
             public InterruptValueClass()
             {
                 interrupt = 20;
@@ -503,6 +526,12 @@ namespace ConsoleApp
             }
         }
         #endregion
+
+        //(15)  查看调用堆栈找到调用函数的地方
+        public static void CheckFun()
+        {
+            Console.WriteLine(DateTime.Now);
+        }
     }
 
     #region 12 反射与特性
@@ -625,6 +654,4 @@ namespace ConsoleApp
         public int OverridePro { get; set; }
     }
     #endregion
-
-
 }

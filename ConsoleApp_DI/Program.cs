@@ -4,16 +4,22 @@
     {
         static void Main(string[] args)
         {
+            #region 刘铁锰 抽象类与开闭原则
             Vehicle vehicle = new RaceCar();
-            vehicle.Run();
+            vehicle.Run(); 
+            #endregion
         }
     }
 
-    #region 刘铁锰 抽象类与接口
+    #region 刘铁锰 抽象类与开闭原则
     interface IVehicle
     {
         void Stop();
         void Fill();
+
+        /// <summary>
+        /// Run
+        /// </summary>
         void Run();
     }
 
@@ -50,6 +56,9 @@
 
     class RaceCar : Vehicle
     {
+        /// <summary>
+        /// RaceCarRun
+        /// </summary>
         public override void Run()
         {
             Console.WriteLine("Race car is running...");
