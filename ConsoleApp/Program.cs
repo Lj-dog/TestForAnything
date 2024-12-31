@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -376,21 +377,48 @@ namespace ConsoleApp
             //ReflectTest(typeof(Methods));
             #endregion
 
-            #region 13 Lambda
-            //int Method(int o) => o==42 ? 100 : 0;
+            #region 13 Lambda 与 表达式成员
 
-            //Console.WriteLine($"{Method(42)}");
+            //            其次是 =>，这个特性叫表达式体成员，expression - bodied member，用法有三种：
+            //            1、代替只有get的属性：
+            //            int Property { get { return 42; } }
+            //            int Property { get => 42; }
+            //            int Property => 42;
+            //            这样逐步简化得来
+            //            2、返回void的成员
+            //            void Method() { Console.WriteLine(); }
+            //            void Method() => Console.WriteLine();
+            //            3、返回非void的成员
+            //            int Method() { return _field >= 42 ? 100 : 0; }
+            //            int Method() => field >= 42 ? 100 : 0;
+            //            通过借用lambda语法来达成简化的目的
+
+            int Method_1(int o) => o == 42 ? 100 : 0;
+
+            Console.WriteLine($"{Method_1(42)}");
+
+
+            Func<int,int> Method_2 = o => o == 42 ? 100 : 0; //lambda表达式
+            Console.WriteLine($"{Method_2(41)}");
+
+            var Method_3 = (int o =2) =>  //lambad语句块
+            {
+                return o == 42 ? 100 : 0;
+            };
+
+            Console.WriteLine($"{Method_3(42)}");
+
             #endregion
 
-            #region 14 值改变时中断
+            #region 14 值改变时中断(失败，C#不可)
 
-            interruptTest = 10;
+            //interruptTest = 10;
 
-            ChangeInterruptValue();
+            //ChangeInterruptValue();
 
-            var interruptClass = new InterruptValueClass();
+            //var interruptClass = new InterruptValueClass();
 
-            interruptClass.ChangeInterruptValue();
+            //interruptClass.ChangeInterruptValue();
             #endregion
 
             #region 15 查看调用堆栈找到调用函数的地方
@@ -532,6 +560,33 @@ namespace ConsoleApp
         {
             Console.WriteLine(DateTime.Now);
         }
+
+        #region 16 new 其他用法
+
+        //override
+        #region Override
+
+        class Override
+        {
+            public int OverridePro { get; set; }
+        }
+
+        class OverideChild : Override
+        {
+            public new int OverridePro { get; set; }
+        }
+        #endregion
+
+        //约束类型不能为抽象类。当与其他约束一起使用时，new() 约束必须最后指定：
+        class ItemFactory<T>
+            where T : IComparable, new()
+        {
+            public T GetNewItem()
+            {
+                return new T();
+            }
+        }
+        #endregion
     }
 
     #region 12 反射与特性
@@ -640,18 +695,4 @@ namespace ConsoleApp
     {
         public delegate void Print(string str);
     }
-
-    //override
-    #region Override
-
-    class Override
-    {
-        public int OverridePro { get; set; }
-    }
-
-    class OverideChild : Override
-    {
-        public int OverridePro { get; set; }
-    }
-    #endregion
 }
