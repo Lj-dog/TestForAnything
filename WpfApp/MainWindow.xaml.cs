@@ -332,6 +332,37 @@ namespace WpfApp
         {
 
         }
+
+
+        #region 多语言
+        private string language;
+        private List<ResourceDictionary> languages = new()
+        {
+            new ResourceDictionary()
+            {
+                Source = new Uri("/LanguagesLibrary;component/Languages/en-US.xaml",UriKind.RelativeOrAbsolute)
+            }
+            ,
+                new ResourceDictionary()
+            {
+                Source = new Uri("/LanguagesLibrary;component/Languages/zh-CN.xaml",UriKind.RelativeOrAbsolute)
+            }
+        };
+   
+        private void SwitchClick(object sender, RoutedEventArgs e)
+        {
+            if (language == "zh_CN")
+            {
+                this.Resources = languages[0];
+                language = "en_US";
+            }
+            else
+            {
+                this.Resources = languages[1];
+                language = "zh_CN";
+            }
+        } 
+        #endregion
     }
 
     public class Student

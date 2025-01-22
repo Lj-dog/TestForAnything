@@ -103,6 +103,27 @@ namespace ConsoleApp
         // 14 值改变时中断
         static ushort interruptTest = 10;
 
+        #region 16 enum 成员类型设置为byte
+        [Flags]
+        enum MyEnum
+        {
+            MY0 = 0x00,
+            MY1 = 0x01,
+            MY2 = 0x02,
+            MY3 = 0x04,
+            MY5 = 0x08,
+            MY6 = 0x10,
+            MY11 = MY1 | MY2,
+            MY101 = MY1 | MY5,
+            MY111 = MY3 | MY6,
+        }
+
+        static MyEnum ReturnEnum(byte a)
+        {
+            return (MyEnum)a;
+        }
+        #endregion
+
         private static async Task Main(string[] args)
         {
             //Console.WriteLine("Hello, World!");\
@@ -393,20 +414,20 @@ namespace ConsoleApp
             //            int Method() => field >= 42 ? 100 : 0;
             //            通过借用lambda语法来达成简化的目的
 
-            int Method_1(int o) => o == 42 ? 100 : 0;
+            //int Method_1(int o) => o == 42 ? 100 : 0;
 
-            Console.WriteLine($"{Method_1(42)}");
+            //Console.WriteLine($"{Method_1(42)}");
 
 
-            Func<int,int> Method_2 = o => o == 42 ? 100 : 0; //lambda表达式
-            Console.WriteLine($"{Method_2(41)}");
+            //Func<int,int> Method_2 = o => o == 42 ? 100 : 0; //lambda表达式
+            //Console.WriteLine($"{Method_2(41)}");
 
-            var Method_3 = (int o =2) =>  //lambad语句块
-            {
-                return o == 42 ? 100 : 0;
-            };
+            //var Method_3 = (int o =2) =>  //lambad语句块
+            //{
+            //    return o == 42 ? 100 : 0;
+            //};
 
-            Console.WriteLine($"{Method_3(42)}");
+            //Console.WriteLine($"{Method_3(42)}");
 
             #endregion
 
@@ -441,6 +462,62 @@ namespace ConsoleApp
             //}
 
             #endregion
+
+            #region 16 enum 成员类型设置为byte
+            Console.WriteLine(MyEnum.MY101);
+            if ((MyEnum)0x01 == MyEnum.MY1)
+                Console.WriteLine(true);
+            if ((MyEnum.MY2 & MyEnum.MY5) == MyEnum.MY0)
+                Console.WriteLine(true);
+            if ((ReturnEnum(0x09) & MyEnum.MY5) == MyEnum.MY0)
+                Console.WriteLine(true);
+            else
+                Console.WriteLine(false);
+            #endregion
+
+            #region 17 object与数组转换
+            //int[] ints = { 3, 4, 5 };
+            //object obj = Array.ConvertAll(ints, s => (object)s);
+
+            //Console.WriteLine(obj.ToString());
+            //object[] objarry = (object[])obj;
+            //foreach (object o in objarry)
+            //{
+            //    Console.WriteLine(o.ToString());
+            //}
+
+            //object[] objs = { "1", 2 };
+
+            //foreach (object item in objs)
+            //{
+            //    string str = item.ToString();
+            //    Console.WriteLine(str);
+            //}
+            #endregion
+
+            #region 18 迭代器
+            //var numbers = ProduceEvenNumbers(5);
+            //Console.WriteLine("Caller: about to iterate.");
+            //foreach (int i in numbers)
+            //{
+            //    Console.WriteLine($"Caller: {i}");
+            //}
+
+            //// Output:
+            //// Caller: about to iterate.
+            //// Iterator: start.
+            //// Iterator: about to yield 0
+            //// Caller: 0
+            //// Iterator: yielded 0
+            //// Iterator: about to yield 2
+            //// Caller: 2
+            //// Iterator: yielded 2
+            //// Iterator: about to yield 4
+            //// Caller: 4
+            //// Iterator: yielded 4
+            //// Iterator: end. 
+            #endregion
+
         }
 
         //(1)函数形参跳过默认参数给定
@@ -585,6 +662,20 @@ namespace ConsoleApp
             {
                 return new T();
             }
+        }
+        #endregion
+
+        #region 18 迭代器
+        private static IEnumerable<int> ProduceEvenNumbers(int upto)
+        {
+            Console.WriteLine("Iterator: start.");
+            for (int i = 0; i <= upto; i += 2)
+            {
+                Console.WriteLine($"Iterator: about to yield {i}");
+                yield return i;
+                Console.WriteLine($"Iterator: yielded {i}");
+            }
+            Console.WriteLine("Iterator: end.");
         }
         #endregion
     }
