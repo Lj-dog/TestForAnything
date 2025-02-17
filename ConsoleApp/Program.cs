@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
@@ -98,7 +100,7 @@ namespace ConsoleApp
 
     #endregion JSON XAML
 
-    internal class Program
+    public class Program
     {
         // 14 值改变时中断
         static ushort interruptTest = 10;
@@ -464,15 +466,15 @@ namespace ConsoleApp
             #endregion
 
             #region 16 enum 成员类型设置为byte
-            Console.WriteLine(MyEnum.MY101);
-            if ((MyEnum)0x01 == MyEnum.MY1)
-                Console.WriteLine(true);
-            if ((MyEnum.MY2 & MyEnum.MY5) == MyEnum.MY0)
-                Console.WriteLine(true);
-            if ((ReturnEnum(0x09) & MyEnum.MY5) == MyEnum.MY0)
-                Console.WriteLine(true);
-            else
-                Console.WriteLine(false);
+            //Console.WriteLine(MyEnum.MY101);
+            //if ((MyEnum)0x01 == MyEnum.MY1)
+            //    Console.WriteLine(true);
+            //if ((MyEnum.MY2 & MyEnum.MY5) == MyEnum.MY0)
+            //    Console.WriteLine(true);
+            //if ((ReturnEnum(0x09) & MyEnum.MY5) == MyEnum.MY0)
+            //    Console.WriteLine(true);
+            //else
+            //    Console.WriteLine(false);
             #endregion
 
             #region 17 object与数组转换
@@ -495,7 +497,7 @@ namespace ConsoleApp
             //}
             #endregion
 
-            #region 18 迭代器
+            #region 18 迭代器,迭代时删除
             //var numbers = ProduceEvenNumbers(5);
             //Console.WriteLine("Caller: about to iterate.");
             //foreach (int i in numbers)
@@ -515,9 +517,67 @@ namespace ConsoleApp
             //// Iterator: about to yield 4
             //// Caller: 4
             //// Iterator: yielded 4
-            //// Iterator: end. 
+            //// Iterator: end.
+            ///
+
+            //删除
+            //List<int> ints = new List<int>() { 1,2,3,4,5};
+            // List<int> delints=new();
+            // delints.Add(ints[1]);
+            // delints.Add(ints[2]);
+            // delints.Add(ints[3]);
+
+            // foreach (var item in delints)
+            // {
+            //     Console.WriteLine(item);
+            //     ints.Remove(item);
+            // }
+            // foreach (var item in ints)
+            // {
+            //     Console.Write(item + " ");
+            // }
+
+            ///////////////////////////////////////////////////////
+            //List<ForIterator> forIterators = new List<ForIterator>()
+            //{
+            //    new(1),
+            //    new(2),
+            //    new(3),
+            //    new(4),
+            //    new(5),
+            //};
+            //List<ForIterator> delforIterators = new();
+            //delforIterators.Add(forIterators[1]);
+            //delforIterators.Add(forIterators[2]);
+            //delforIterators.Add(forIterators[3]);
+
+            //foreach (var item in delforIterators)
+            //{
+            //    Console.WriteLine(item);
+            //    forIterators.Remove(item);
+            //}
+            //foreach (var item in forIterators)
+            //{
+            //    Console.Write(item + " ");
+            //}
             #endregion
 
+            #region 19 字符串根据不同编码格式转字节数组byte ,Ushrot数组转bytes数组
+            //byte[] ASCIIbytes = new byte[] { 0x61, 0x73, 0x64, 0x66 }; //asdf  97 115 100 102
+            //byte[] Unicodebytes = new byte[] { 0x3f, 0x96, 0xaf, 0x65, 0x82, 0x84, 0xac, 0x82 }; //阿斯蒂芬
+
+            //Console.WriteLine(StrBytesHelper.StringToBytes("asdf", Encoding.ASCII).OutputBytes());
+            //Console.WriteLine(StrBytesHelper.StringToBytes("asdf", Encoding.Unicode).OutputBytes());
+
+            //Console.WriteLine(StrBytesHelper.BytesToString(ASCIIbytes, Encoding.ASCII));
+            //Console.WriteLine(StrBytesHelper.BytesToString(Unicodebytes, Encoding.Unicode));
+
+            ushort u= 513;   //0x0201
+            ushort[] us = { 513, 1027,1541 }; //0x0201 0x0403 0x0605 
+
+            Console.WriteLine(UshortBytesHelper.UshortToBytes(u).OutputBytes());
+            Console.WriteLine(UshortBytesHelper.UshortsToBytes(us).OutputBytes());
+            #endregion
         }
 
         //(1)函数形参跳过默认参数给定
@@ -678,6 +738,8 @@ namespace ConsoleApp
             Console.WriteLine("Iterator: end.");
         }
         #endregion
+
+
     }
 
     #region 12 反射与特性
@@ -786,4 +848,63 @@ namespace ConsoleApp
     {
         public delegate void Print(string str);
     }
+
+    #region 18 迭代器
+    class ForIterator
+    {
+        private int i;
+
+        public ForIterator(int i)
+        {
+            this.i = i;
+        }
+
+        public override string ToString()
+        {
+            return i.ToString();
+        }
+    }
+    #endregion
+
+    #region 19 字符串根据不同编码格式转字节数组byte,Ushrot数组转bytes数组
+    static class StrBytesHelper
+    {
+
+        public static byte[] StringToBytes(string s, Encoding encoding)
+        {
+            return encoding.GetBytes(s);
+        }
+
+        public static string BytesToString(byte[] bytes,Encoding encoding)
+        {
+            return encoding.GetString(bytes);
+        }
+
+        public static StringBuilder OutputBytes(this byte[] bytes)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                stringBuilder.Append("0x"+b.ToString("X2") + " ");
+            }
+            stringBuilder.Append('\n');
+            return stringBuilder;
+        }
+    }
+
+    static class UshortBytesHelper
+    {
+        public static byte[] UshortToBytes(ushort s)
+        {
+            return BitConverter.GetBytes(s);
+        }
+
+        public static byte[] UshortsToBytes(ushort[] ushorts)
+        {
+            byte[] bytes = new byte[ushorts.Length*sizeof(ushort)];
+            Buffer.BlockCopy(ushorts, 0, bytes, 0, bytes.Length);
+            return bytes;
+        }
+    }
+    #endregion
 }

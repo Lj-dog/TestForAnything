@@ -5,6 +5,7 @@
     xmlns:control="clr-namespace:WpfApp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helper="clr-namespace:WpfApp.Helpers"
+    xmlns:lib="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
     xmlns:local="clr-namespace:WpfApp"
     xmlns:m="clr-namespace:WpfApp.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -44,7 +45,8 @@
             <RowDefinition Height="150" />
             <RowDefinition Height="100" />
             <RowDefinition Height="60" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
@@ -74,7 +76,10 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListBox Margin="5">
+            <ListBox Margin="5" SelectionMode="Extended">
+                <Grid>
+                    <TextBlock Text="sadf" />
+                </Grid>
                 <CheckBox x:Name="checkBoxtim" Content="Tim" />
                 <CheckBox x:Name="checkBoxTOm" Content="Tom" />
                 <CheckBox x:Name="checkBoxBruce" Content="Bruce" />
@@ -295,6 +300,34 @@
                     <CheckBox />
                 </Button>
             </control:AutoGrid>
+        </Grid>
+        <Grid Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <lib:UserControl1 Grid.Row="0" />
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <lib:MyProgressBar
+                        Width="120"
+                        Height="80"
+                        Maximum="100"
+                        Orientation="Vertical"
+                        Value="40">
+                        <lib:MyProgressBar.Resources>
+                            <ResourceDictionary Source="/WpfControlLibrary;component/ProgressBar/BatteryProgressbar.xaml" />
+
+                        </lib:MyProgressBar.Resources>
+                    </lib:MyProgressBar>
+                    <Button
+                        Width="120"
+                        Height="30"
+                        Content="Change" />
+                    <TextBox Width="120" Height="30" />
+                </StackPanel>
+            </Grid>
+
         </Grid>
     </Grid>
 

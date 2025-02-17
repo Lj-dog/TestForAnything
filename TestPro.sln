@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{25A2C4BE-EC15-4A66-BECA-9E6E8EEDE43B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4} = {0DA2DDEE-9BC4-4E9E-A9B3-14CC66D0DFE4}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csproj", "{A1094831-FE97-44FE-A2DC-F9D997EA35D4}"
 EndProject
@@ -33,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfControlLibrary", "WpfCon
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostWPF", "HostWPF\HostWPF.csproj", "{8DCF7DCA-6183-478B-A94E-71D98C1F87F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguagesLibrary", "LanguagesLibrary\LanguagesLibrary.csproj", "{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguagesLibrary", "LanguagesLibrary\LanguagesLibrary.csproj", "{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

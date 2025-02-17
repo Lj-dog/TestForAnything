@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LanguagesLibrary\LanguagesLibrary.csproj" />
+    <ProjectReference Include="..\WpfControlLibrary\WpfControlLibrary.csproj" />
   </ItemGroup>
 
 </Project>
