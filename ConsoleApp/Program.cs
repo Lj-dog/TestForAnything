@@ -562,7 +562,7 @@ namespace ConsoleApp
             //}
             #endregion
 
-            #region 19 字符串根据不同编码格式转字节数组byte ,Ushrot数组转bytes数组
+            #region 19 字符串根据不同编码格式转字节数组byte ,Ushrot数组转byte数组,byte数组转Ushort数组
             //byte[] ASCIIbytes = new byte[] { 0x61, 0x73, 0x64, 0x66 }; //asdf  97 115 100 102
             //byte[] Unicodebytes = new byte[] { 0x3f, 0x96, 0xaf, 0x65, 0x82, 0x84, 0xac, 0x82 }; //阿斯蒂芬
 
@@ -572,11 +572,17 @@ namespace ConsoleApp
             //Console.WriteLine(StrBytesHelper.BytesToString(ASCIIbytes, Encoding.ASCII));
             //Console.WriteLine(StrBytesHelper.BytesToString(Unicodebytes, Encoding.Unicode));
 
-            ushort u= 513;   //0x0201
-            ushort[] us = { 513, 1027,1541 }; //0x0201 0x0403 0x0605 
+            //ushort u= 513;   //0x0201
+            //ushort[] us = { 513, 1027,1541 }; //0x0201 0x0403 0x0605 
 
-            Console.WriteLine(UshortBytesHelper.UshortToBytes(u).OutputBytes());
-            Console.WriteLine(UshortBytesHelper.UshortsToBytes(us).OutputBytes());
+            //Console.WriteLine(UshortBytesHelper.UshortToBytes(u).OutputBytes());
+            //Console.WriteLine(UshortBytesHelper.UshortsToBytes(us).OutputBytes());
+
+            byte b = 0x11;
+            byte[] bs = { 0x11,0x22,0x33};
+
+            Console.WriteLine(BytesUshortHelper.ByteToUshort(b).ToString("X2"));
+            Console.WriteLine(BytesUshortHelper.BytesToUshorts(bs).OutputBytes());
             #endregion
         }
 
@@ -904,6 +910,40 @@ namespace ConsoleApp
             byte[] bytes = new byte[ushorts.Length*sizeof(ushort)];
             Buffer.BlockCopy(ushorts, 0, bytes, 0, bytes.Length);
             return bytes;
+        }
+    }
+
+    static class BytesUshortHelper
+    {
+
+        public static ushort ByteToUshort(byte b)
+        {
+            return (ushort)b;
+        }
+        public static ushort[] BytesToUshorts(byte[] bs)
+        {
+
+            ushort[] res = new ushort[(bs.Length + 1) / 2];
+            if (bs.Length % 2 != 0){
+                Array.Resize(ref bs, bs.Length + 1);
+            }
+
+            for (int i = 0; i < res.Length; i ++)
+            {
+                res[i] = BitConverter.ToUInt16(bs, 2 * i);
+            }
+            return res;
+        }
+
+        public static StringBuilder OutputBytes(this ushort[] us)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var b in us)
+            {
+                stringBuilder.Append("0x" + b.ToString("X2") + " ");
+            }
+            stringBuilder.Append('\n');
+            return stringBuilder;
         }
     }
     #endregion
