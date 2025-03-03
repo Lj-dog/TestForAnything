@@ -573,16 +573,30 @@ namespace ConsoleApp
             //Console.WriteLine(StrBytesHelper.BytesToString(Unicodebytes, Encoding.Unicode));
 
             //ushort u= 513;   //0x0201
-            //ushort[] us = { 513, 1027,1541 }; //0x0201 0x0403 0x0605 
+            //ushort[] us = { 513, 1027,1541 }; //0x0201 0x0403 0x0605
 
             //Console.WriteLine(UshortBytesHelper.UshortToBytes(u).OutputBytes());
             //Console.WriteLine(UshortBytesHelper.UshortsToBytes(us).OutputBytes());
 
-            byte b = 0x11;
-            byte[] bs = { 0x11,0x22,0x33};
+            //byte b = 0x11;
+            //byte[] bs = { 0x11,0x22,0x33};
 
-            Console.WriteLine(BytesUshortHelper.ByteToUshort(b).ToString("X2"));
-            Console.WriteLine(BytesUshortHelper.BytesToUshorts(bs).OutputBytes());
+            //Console.WriteLine(BytesUshortHelper.ByteToUshort(b).ToString("X2"));
+            //Console.WriteLine(BytesUshortHelper.BytesToUshorts(bs).OutputBytes());
+            #endregion
+
+            #region 20 List添加null数据占位
+            List<string?> strings = new();
+            while (strings.Count < 2)
+            {
+                strings.Add(null);
+            }
+            strings.Add("2");
+            foreach (var item in strings)
+            {
+                Console.WriteLine(item);
+                Console.WriteLine("//////////////");
+            }
             #endregion
         }
 
@@ -744,8 +758,6 @@ namespace ConsoleApp
             Console.WriteLine("Iterator: end.");
         }
         #endregion
-
-
     }
 
     #region 12 反射与特性
@@ -875,13 +887,12 @@ namespace ConsoleApp
     #region 19 字符串根据不同编码格式转字节数组byte,Ushrot数组转bytes数组
     static class StrBytesHelper
     {
-
         public static byte[] StringToBytes(string s, Encoding encoding)
         {
             return encoding.GetBytes(s);
         }
 
-        public static string BytesToString(byte[] bytes,Encoding encoding)
+        public static string BytesToString(byte[] bytes, Encoding encoding)
         {
             return encoding.GetString(bytes);
         }
@@ -891,7 +902,7 @@ namespace ConsoleApp
             StringBuilder stringBuilder = new StringBuilder();
             foreach (byte b in bytes)
             {
-                stringBuilder.Append("0x"+b.ToString("X2") + " ");
+                stringBuilder.Append("0x" + b.ToString("X2") + " ");
             }
             stringBuilder.Append('\n');
             return stringBuilder;
@@ -907,7 +918,7 @@ namespace ConsoleApp
 
         public static byte[] UshortsToBytes(ushort[] ushorts)
         {
-            byte[] bytes = new byte[ushorts.Length*sizeof(ushort)];
+            byte[] bytes = new byte[ushorts.Length * sizeof(ushort)];
             Buffer.BlockCopy(ushorts, 0, bytes, 0, bytes.Length);
             return bytes;
         }
@@ -915,20 +926,20 @@ namespace ConsoleApp
 
     static class BytesUshortHelper
     {
-
         public static ushort ByteToUshort(byte b)
         {
             return (ushort)b;
         }
+
         public static ushort[] BytesToUshorts(byte[] bs)
         {
-
             ushort[] res = new ushort[(bs.Length + 1) / 2];
-            if (bs.Length % 2 != 0){
+            if (bs.Length % 2 != 0)
+            {
                 Array.Resize(ref bs, bs.Length + 1);
             }
 
-            for (int i = 0; i < res.Length; i ++)
+            for (int i = 0; i < res.Length; i++)
             {
                 res[i] = BitConverter.ToUInt16(bs, 2 * i);
             }
