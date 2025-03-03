@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WpfAppTemplate.Converters;
 
 namespace WpfAppDictionary.MyControl
 {
@@ -14,7 +16,7 @@ namespace WpfAppDictionary.MyControl
 
 
 
-
+        //[TypeConverter(typeof(ButtonCornerTipConverter))]
         public CornerRadius MyTextBoxCornerRadius
         {
             get { return (CornerRadius)GetValue(MyTextBoxCornerRadiusProperty); }

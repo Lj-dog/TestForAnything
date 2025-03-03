@@ -41,7 +41,7 @@
                     <Style TargetType="Button">
                         <Style.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="red" />
+                                <Setter Property="Background" Value="Red" />
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -52,7 +52,7 @@
                     Background="LightYellow"
                     BorderBrush="Blue"
                     BorderThickness="5"
-                    MyTextBoxCornerRadius="5"
+                    MyTextBoxCornerRadius="19"
                     Style="{StaticResource textbox}" />
                 <ListBox
                     HorizontalContentAlignment="Stretch"

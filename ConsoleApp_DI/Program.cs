@@ -94,11 +94,15 @@ namespace ConsoleApp_DI
     #endregion
 
     #region 接口与抽象类结合解耦 士兵 猎人 开枪
+    /// <summary>
+    /// 等级
+    /// </summary>
     enum RANK
     {
         OR_1,
         OR_2,
     };
+
 
     abstract class SolidersBase
     {
@@ -112,6 +116,9 @@ namespace ConsoleApp_DI
         public abstract RANK GetRank();
     }
 
+    /// <summary>
+    /// 炊事员
+    /// </summary>
     class Cook : SolidersBase
     {
         public Cook(RANK rank)
@@ -123,6 +130,9 @@ namespace ConsoleApp_DI
         }
     }
 
+    /// <summary>
+    /// 陆军
+    /// </summary>
     class Army : SolidersBase, IShooting
     {
         public Army(RANK rank)
@@ -139,6 +149,9 @@ namespace ConsoleApp_DI
         }
     }
 
+    /// <summary>
+    /// 开枪
+    /// </summary>
     interface IShooting
     {
         public void Shooting();
