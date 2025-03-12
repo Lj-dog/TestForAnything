@@ -17,6 +17,7 @@
             <RowDefinition Height="100" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
         <DataGrid ItemsSource="{Binding Peoples, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeople}" />
@@ -27,7 +28,10 @@
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <TextBlock Margin="5,0" Text="Name:" />
-                    <TextBox Width="100" Text="{Binding People.Name}" Style="{x:Null}"/>
+                    <TextBox
+                        Width="100"
+                        Style="{x:Null}"
+                        Text="{Binding People.Name}" />
 
                     <TextBlock Margin="5,0" Text="ID:" />
                     <TextBox Width="100" Text="{Binding People.ID}" />
@@ -116,5 +120,20 @@
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
+        <Grid Grid.Row="3">
+            <Grid.DataContext>
+                <vm:RadioVM />
+            </Grid.DataContext>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="as" />
+                    <RadioButton VerticalAlignment="Center" Content="as" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="2134" />
+                    <RadioButton Content="243" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
