@@ -38,6 +38,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostWPF", "HostWPF\HostWPF.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguagesLibrary", "LanguagesLibrary\LanguagesLibrary.csproj", "{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppThread_AsyncTask", "ConsoleAppThread_AsyncTask\ConsoleAppThread_AsyncTask.csproj", "{AF976B59-E75D-4584-9BF9-894E05E92D62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C24EA20-A189-425C-BA21-FF40FC4D3DCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF976B59-E75D-4584-9BF9-894E05E92D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF976B59-E75D-4584-9BF9-894E05E92D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF976B59-E75D-4584-9BF9-894E05E92D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF976B59-E75D-4584-9BF9-894E05E92D62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
