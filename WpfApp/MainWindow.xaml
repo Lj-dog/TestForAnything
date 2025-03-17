@@ -422,17 +422,22 @@
                 </Grid.RowDefinitions>
                 <RadioButton
                     Grid.Row="0"
-                    IsChecked="{Binding IsChecked_1}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Content="asdf" />
+                    Content="asdf"
+                    IsChecked="{Binding IsChecked_1}" />
                 <RadioButton
                     Grid.Row="1"
-                    IsChecked="{Binding IsChecked_2}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Content="123" />
-                <Button Grid.Row="2" Height="20" Width="120" Content="Checked" Command="{Binding CheckedCommand}" />
+                    Content="123"
+                    IsChecked="{Binding IsChecked_2}" />
+                <Button
+                    Grid.Row="2"
+                    Width="120"
+                    Height="20"
+                    Command="{Binding CheckedCommand}"
+                    Content="Checked" />
             </Grid>
         </Grid>
     </Grid>
