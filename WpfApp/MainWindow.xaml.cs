@@ -361,8 +361,21 @@ namespace WpfApp
                 this.Resources = languages[1];
                 language = "zh_CN";
             }
-        } 
+        }
         #endregion
+
+        private void listboxMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("This is listboxMouseUp!!!");
+        }
+
+
+
+        private void BtnClick(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("This is ButtonClick!");
+
+        }
     }
 
     public class Student

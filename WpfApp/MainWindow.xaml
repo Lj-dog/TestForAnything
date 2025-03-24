@@ -12,7 +12,7 @@
     xmlns:vm="clr-namespace:WpfApp.VMS"
     Title="MainWindow"
     Width="800"
-    Height="800"
+    Height="1200"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
 
@@ -119,12 +119,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="150" />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="80" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="80" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
@@ -439,6 +440,38 @@
                     Command="{Binding CheckedCommand}"
                     Content="Checked" />
             </Grid>
+        </Grid>
+        <Grid Grid.Row="8">
+            <ListBox MouseUp="listboxMouseUp">
+                <Button Click="BtnClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border
+                                            Width="120"
+                                            Height="80"
+                                            BorderBrush="Black"
+                                            Background="Transparent"
+                                            BorderThickness="6">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontWeight="Black"
+                                                FontSize="20"
+                                                Text="Button" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+
+                </Button>
+
+            </ListBox>
         </Grid>
     </Grid>
 
