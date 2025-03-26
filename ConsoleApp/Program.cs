@@ -586,16 +586,37 @@ namespace ConsoleApp
             #endregion
 
             #region 20 List添加null数据占位
-            List<string?> strings = new();
-            while (strings.Count < 2)
+            //List<string?> strings = new();
+            //while (strings.Count < 2)
+            //{
+            //    strings.Add(null);
+            //}
+            //strings.Add("2");
+            //foreach (var item in strings)
+            //{
+            //    Console.WriteLine(item);
+            //    Console.WriteLine("//////////////");
+            //}
+            #endregion
+
+            #region 21 匿名类型使用
+            var o = new { Name ="Roger" ,Age = 20 };
+
+            Console.WriteLine(o);
+
+            List<ForAnonymousType> forAnonymousTypes = new List<ForAnonymousType>()
             {
-                strings.Add(null);
-            }
-            strings.Add("2");
-            foreach (var item in strings)
+                new(){X =10 ,Y =10 , Z = 10},
+                new(){X =20 ,Y =20 , Z = 20},
+                new(){X =30 ,Y =30 , Z = 30},
+                new(){X =40 ,Y =40 , Z = 40},
+            };
+
+            var list = forAnonymousTypes.Select(o => new { o.X, o.Y });
+
+            foreach (var item in list)
             {
                 Console.WriteLine(item);
-                Console.WriteLine("//////////////");
             }
             #endregion
         }
@@ -758,6 +779,7 @@ namespace ConsoleApp
             Console.WriteLine("Iterator: end.");
         }
         #endregion
+
     }
 
     #region 12 反射与特性
@@ -956,6 +978,17 @@ namespace ConsoleApp
             stringBuilder.Append('\n');
             return stringBuilder;
         }
+    }
+    #endregion
+
+    #region 21 匿名类型 （截取类里的部分数据）
+    class ForAnonymousType
+    {
+        public int X { get; set; }
+
+        public int Y { get; set; }
+
+        public int Z { get; set; }
     }
     #endregion
 }
