@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using System.Windows.Threading;
 using CommunityToolkit.Mvvm.Messaging;
 using HostWPF.Services;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,8 @@ namespace HostWPF
     /// </summary>
     public partial class App : Application
     {
+        public static new App Current => (App)Application.Current;
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -34,6 +37,10 @@ namespace HostWPF
             return Host.CreateDefaultBuilder(args)
                 .ConfigureServices(container =>
                 {
+                    container.AddSingleton<IWebClient, WebClient>();
+
+                    container.AddSingleton<ICatFactsService, CatFactsService>();
+
                     container.AddHostedService<CheckUpdateService>();
 
                     container.AddSingleton<MainWindow>(sp =>
@@ -49,7 +56,15 @@ namespace HostWPF
                     //    return new MainWindow() { DataContext = sp.GetRequiredService<MainVM>() };
                     //});
 
-                    container.AddSingleton<MainVM>();
+                    container.AddSingleton<MainVM>(sp =>
+                    {
+                        return new MainVM(
+                            sp.GetRequiredService<IConfiguration>(),
+                            sp.GetRequiredService<Dispatcher>(),
+                            sp.GetRequiredService<Serilog.ILogger>(),
+                            sp.GetRequiredService<ICatFactsService>()
+                        );
+                    });
 
                     container.AddSingleton<WeakReferenceMessenger>();
                     container.AddSingleton<IMessenger, WeakReferenceMessenger>(provider =>

@@ -11,7 +11,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:WpfApp.VMS"
     Title="MainWindow"
-    Width="800"
+    Width="1000"
     Height="1200"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
@@ -151,6 +151,11 @@
                     Width="100"
                     Height="30" />
                 <ToggleButton Width="100" Margin="5" />
+                <StackPanel Margin="5">
+                    <RadioButton Content="asdf" />
+                    <RadioButton Content="qwer" />
+                </StackPanel>
+
             </StackPanel>
         </Grid>
 
@@ -452,14 +457,14 @@
                                         <Border
                                             Width="120"
                                             Height="80"
-                                            BorderBrush="Black"
                                             Background="Transparent"
+                                            BorderBrush="Black"
                                             BorderThickness="6">
                                             <TextBlock
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                FontWeight="Black"
                                                 FontSize="20"
+                                                FontWeight="Black"
                                                 Text="Button" />
                                         </Border>
                                     </ControlTemplate>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 //using Microsoft.Extensions.Logging;
+
 using Serilog;
 
 namespace HostWPF.Services
@@ -14,7 +15,9 @@ namespace HostWPF.Services
 
 
         private readonly ILogger _logger;
+        //private readonly ILogger<CheckUpdateService> _logger;
         public CheckUpdateService(ILogger logger)
+        //public CheckUpdateService(ILogger<CheckUpdateService> logger)
         {
                 _logger = logger;
         }
@@ -22,7 +25,7 @@ namespace HostWPF.Services
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested) {
-             await Task.Delay(TimeSpan.FromSeconds(5),stoppingToken);
+             await Task.Delay(TimeSpan.FromSeconds(15),stoppingToken);
 
                 //_logger.LogInformation("Checking for updates...");
                 _logger.Information("Checking for updates...");

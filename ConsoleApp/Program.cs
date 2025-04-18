@@ -600,24 +600,28 @@ namespace ConsoleApp
             #endregion
 
             #region 21 匿名类型使用
-            var o = new { Name ="Roger" ,Age = 20 };
+            //var o = new { Name ="Roger" ,Age = 20 };
 
-            Console.WriteLine(o);
+            //Console.WriteLine(o);
 
-            List<ForAnonymousType> forAnonymousTypes = new List<ForAnonymousType>()
-            {
-                new(){X =10 ,Y =10 , Z = 10},
-                new(){X =20 ,Y =20 , Z = 20},
-                new(){X =30 ,Y =30 , Z = 30},
-                new(){X =40 ,Y =40 , Z = 40},
-            };
+            //List<ForAnonymousType> forAnonymousTypes = new List<ForAnonymousType>()
+            //{
+            //    new(){X =10 ,Y =10 , Z = 10},
+            //    new(){X =20 ,Y =20 , Z = 20},
+            //    new(){X =30 ,Y =30 , Z = 30},
+            //    new(){X =40 ,Y =40 , Z = 40},
+            //};
 
-            var list = forAnonymousTypes.Select(o => new { o.X, o.Y });
+            //var list = forAnonymousTypes.Select(o => new { o.X, o.Y });
 
-            foreach (var item in list)
-            {
-                Console.WriteLine(item);
-            }
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item);
+            //}
+            #endregion
+
+            #region 22 异常后是否能执行catch{}后面的代码
+            Test();
             #endregion
         }
 
@@ -780,6 +784,25 @@ namespace ConsoleApp
         }
         #endregion
 
+        #region 22 异常后是否能执行catch{}后面的代码
+        public static void Test()
+        {
+            object _lock = new object();
+            try
+            {
+                lock (_lock)
+                {
+                    Console.WriteLine("try");
+                    throw new Exception("test"); 
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("catch");
+            }
+            Console.WriteLine("AfterCatch");
+        }
+        #endregion
     }
 
     #region 12 反射与特性

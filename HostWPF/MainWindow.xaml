@@ -5,17 +5,41 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:HostWPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="MainWindow"
+    Title="{Binding Title}"
     Width="800"
     Height="450"
-    d:DataContext="{d:DesignInstance Type=local:MainVM}"
+    d:DataContext="{d:DesignInstance Type=local:MainVM,
+                                     IsDesignTimeCreatable=True}"
     mc:Ignorable="d">
-    <Grid>
+
+
+
+    <DockPanel>
         <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
             d:Text="asdf"
+            DockPanel.Dock="Top"
             FontSize="20"
             Text="{Binding LogLevel}" />
-    </Grid>
+        <Button
+            Command="{Binding GetFactsCommand}"
+            Content="Get CatFacts"
+            DockPanel.Dock="Top" />
+        <Button
+            Command="{Binding ChangeObsCollectionCommand}"
+            Content="Change ObsCol"
+            DockPanel.Dock="Top" />
+        <Grid>
+            <ListBox ItemsSource="{Binding CatFacts}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Margin="5"
+                            FontSize="20"
+                            Text="{Binding}"
+                            TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </DockPanel>
 </Window>
