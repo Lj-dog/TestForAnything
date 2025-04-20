@@ -23,6 +23,7 @@ namespace HostWPF
         private readonly Dispatcher _dispatcher;
         private readonly ILogger logger;
         private readonly ICatFactsService catFactsService;
+        private readonly IMessageBoxService messageBoxService;
 
         public string? LogLevel { get; set; }
 
@@ -41,11 +42,12 @@ namespace HostWPF
             
         }
 
-        public MainVM(IConfiguration configuration, Dispatcher dispatcher,ILogger logger,ICatFactsService catFactsService)
+        public MainVM(IConfiguration configuration, Dispatcher dispatcher,ILogger logger,ICatFactsService catFactsService,IMessageBoxService messageBoxService)
         {
             _dispatcher = dispatcher;
             this.logger = logger;
             this.catFactsService = catFactsService;
+            this.messageBoxService = messageBoxService;
             LogLevel = configuration["Logging:LogLevel:Microsoft"];
             Version = configuration["Logging:LogLevel:Default"];
             this.logger.Information("MainVM Loaded,LogLevel: {LogLevel},Version: {Version}", LogLevel,Version);
@@ -57,12 +59,26 @@ namespace HostWPF
         }
 
         [RelayCommand]
-        async Task GetFacts()
+        async Task GetFacts(string text)
         {
-           var  facts = await catFactsService.GetCatFactsAsync(5);
-            foreach (var item in facts)
+            if (int.TryParse(text,out int limit))
             {
-                CatFacts.Add(item);
+                if (limit>0)
+                {
+                    var facts = await catFactsService.GetCatFactsAsync(limit);
+                    foreach (var item in facts)
+                    {
+                        CatFacts.Add(item);
+                    }  
+                }
+                else
+                {
+                    messageBoxService.ShowMessage("Limit should over zero");
+                }
+            }
+            else
+            {
+                messageBoxService.ShowMessage("Worng limit input");
             }
         }
 

@@ -41,9 +41,11 @@ namespace HostWPF
 
                     container.AddSingleton<ICatFactsService, CatFactsService>();
 
+                    container.AddSingleton<IMessageBoxService,ShowMessageBoxService>();
+
                     container.AddHostedService<CheckUpdateService>();
 
-                    container.AddSingleton<MainWindow>(sp =>
+                    container.AddTransient<MainWindow>(sp =>
                     //lambda 语句块与表达式的区别
                     new MainWindow()
                     {
@@ -56,13 +58,14 @@ namespace HostWPF
                     //    return new MainWindow() { DataContext = sp.GetRequiredService<MainVM>() };
                     //});
 
-                    container.AddSingleton<MainVM>(sp =>
+                    container.AddTransient<MainVM>(sp =>
                     {
                         return new MainVM(
                             sp.GetRequiredService<IConfiguration>(),
                             sp.GetRequiredService<Dispatcher>(),
                             sp.GetRequiredService<Serilog.ILogger>(),
-                            sp.GetRequiredService<ICatFactsService>()
+                            sp.GetRequiredService<ICatFactsService>(),
+                            sp.GetRequiredService<IMessageBoxService>()
                         );
                     });
 

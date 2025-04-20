@@ -20,10 +20,11 @@
             DockPanel.Dock="Top"
             FontSize="20"
             Text="{Binding LogLevel}" />
-        <Button
-            Command="{Binding GetFactsCommand}"
-            Content="Get CatFacts"
-            DockPanel.Dock="Top" />
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="Limit:" />
+            <TextBox x:Name="limt" Width="100" Margin="5" />
+            <Button Command="{Binding GetFactsCommand}" CommandParameter="{Binding ElementName=limt, Path=Text}" Content="Get CatFacts" />
+        </StackPanel>
         <Button
             Command="{Binding ChangeObsCollectionCommand}"
             Content="Change ObsCol"
