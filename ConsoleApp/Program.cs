@@ -623,6 +623,10 @@ namespace ConsoleApp
             #region 22 异常后是否能执行catch{}后面的代码
             Test();
             #endregion
+
+            #region 23 探究C# Interface多继承是否会造成菱形继承
+
+            #endregion
         }
 
         //(1)函数形参跳过默认参数给定
@@ -1012,6 +1016,23 @@ namespace ConsoleApp
         public int Y { get; set; }
 
         public int Z { get; set; }
+    }
+    #endregion
+
+    #region 23 探究C# Interface多继承是否会造成菱形继承
+    interface IA
+    {
+        int MA { get; set; }
+    }
+
+    interface IB:IA
+    {
+        int MB { get; set; }
+    }
+
+    interface IC:IA
+    {
+        int MC {  get; set; } 
     }
     #endregion
 }
