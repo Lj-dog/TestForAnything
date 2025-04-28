@@ -107,7 +107,7 @@ namespace ConsoleApp
 
         #region 16 enum 成员类型设置为byte
         [Flags]
-        enum MyEnum
+        enum MyEnum:ulong
         {
             MY0 = 0x00,
             MY1 = 0x01,
@@ -118,6 +118,11 @@ namespace ConsoleApp
             MY11 = MY1 | MY2,
             MY101 = MY1 | MY5,
             MY111 = MY3 | MY6,
+            MY512 = 512,
+            MY1024 = 1024,
+            MY524288 = 524288,
+            MY2147483648 = 2147483648,
+            MY4294967296 = 4294967296,
         }
 
         static MyEnum ReturnEnum(byte a)
@@ -465,7 +470,7 @@ namespace ConsoleApp
 
             #endregion
 
-            #region 16 enum 成员类型设置为byte
+            #region 16 enum 成员类型设置为byte ,测试枚举值是否能超过16位
             //Console.WriteLine(MyEnum.MY101);
             //if ((MyEnum)0x01 == MyEnum.MY1)
             //    Console.WriteLine(true);
@@ -475,6 +480,7 @@ namespace ConsoleApp
             //    Console.WriteLine(true);
             //else
             //    Console.WriteLine(false);
+            Console.WriteLine((ulong)MyEnum.MY4294967296);
             #endregion
 
             #region 17 object与数组转换
@@ -621,7 +627,7 @@ namespace ConsoleApp
             #endregion
 
             #region 22 异常后是否能执行catch{}后面的代码
-            Test();
+            //Test();
             #endregion
 
             #region 23 探究C# Interface多继承是否会造成菱形继承
