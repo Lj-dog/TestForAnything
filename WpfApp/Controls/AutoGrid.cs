@@ -88,27 +88,35 @@ namespace WpfApp.Controls
 
             Grid grid = (Grid)d;
 
-            grid.RowDefinitions.Clear();
-
+            //grid.RowDefinitions.Clear();
+            var count = grid.RowDefinitions.Count;
+       
             int heightProperty = (int)d.GetValue(RowDefinitionHeightProperty);
 
-            for (int i = 0; i < (int)e.NewValue; i++)
-            {
+            var increment = (int)e.NewValue - count;
+            if (increment > 0)
+                for (int i = 0; i < increment; i++)
+                {
 
-                RowDefinition rowDefinition = new RowDefinition();
-                if (heightProperty < 0)
-                {
-                    rowDefinition.Height = new GridLength(0, GridUnitType.Auto);
+                    RowDefinition rowDefinition = new RowDefinition();
+                    if (heightProperty < 0)
+                    {
+                        rowDefinition.Height = new GridLength(0, GridUnitType.Auto);
+                    }
+                    else if (heightProperty > 0)
+                    {
+                        rowDefinition.Height = new GridLength(heightProperty, GridUnitType.Pixel);
+                    }
+                    else if (heightProperty == 0)
+                    {
+                        rowDefinition.Height = new GridLength(1, GridUnitType.Star);
+                    }
+                    grid.RowDefinitions.Add(rowDefinition);
                 }
-                else if (heightProperty > 0)
-                {
-                    rowDefinition.Height = new GridLength(heightProperty, GridUnitType.Pixel);
-                }
-                else if (heightProperty == 0)
-                {
-                    rowDefinition.Height = new GridLength(1, GridUnitType.Star);
-                }
-                grid.RowDefinitions.Add(rowDefinition);
+            else if(increment < 0 && count > 0)
+            {
+                increment = -increment;
+                grid.RowDefinitions.RemoveRange(count - increment, increment);
             }
         }
 
@@ -124,11 +132,14 @@ namespace WpfApp.Controls
 
             Grid grid = (Grid)d;
 
-            grid.ColumnDefinitions.Clear();
+            //grid.ColumnDefinitions.Clear();
+            var count = grid.ColumnDefinitions.Count;
 
             int widthProperty = (int)d.GetValue(ColumnDefinitionWidthProperty);
 
-            for (int i = 0; i < (int)e.NewValue; i++)
+            var increment = (int)e.NewValue - count;
+            if (increment > 0)
+                for (int i = 0; i < increment; i++)
             {
 
                 ColumnDefinition columnDefinition = new ColumnDefinition();
@@ -145,6 +156,11 @@ namespace WpfApp.Controls
                     columnDefinition.Width = new GridLength(1, GridUnitType.Star);
                 }
                 grid.ColumnDefinitions.Add(columnDefinition);
+            }
+            else if (increment < 0 && count > 0)
+            {
+                increment = -increment;
+                grid.ColumnDefinitions.RemoveRange(count - increment, increment);
             }
         }
 

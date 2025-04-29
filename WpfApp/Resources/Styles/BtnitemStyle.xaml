@@ -11,6 +11,7 @@
             Margin="3"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Background="Red" />
+            Background="Red"
+            Command="{Binding SelectedCommand}" />
     </DataTemplate>
 </ResourceDictionary>
