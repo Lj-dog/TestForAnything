@@ -51,7 +51,7 @@
             </Style>
             <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#0000FF" />
             <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da" />
-            <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#3D26A0DA" />
+            <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#000" />
             <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA" />
             <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA" />
             <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA" />
@@ -224,19 +224,19 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <ItemsControl x:Name="ItemsCon" ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
 
-                <ItemsControl.Resources>
-
-                    <Style TargetType="{x:Type ItemsControl}">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Setter Property="SelectionMode" Value="Extended" />
                         <Setter Property="ItemsPanel">
                             <Setter.Value>
                                 <ItemsPanelTemplate>
                                     <control:AutoGrid
-                                        ColumnDefinitionWidth="0"
+                                        ColumnDefinitionWidth="-1"
                                         GridColumnCount="{Binding Gridcols, UpdateSourceTrigger=PropertyChanged}"
                                         GridRowCount="{Binding Gridrows, UpdateSourceTrigger=PropertyChanged}"
-                                        RowDefinitionHeight="0" />
+                                        RowDefinitionHeight="-1" />
                                 </ItemsPanelTemplate>
                             </Setter.Value>
                         </Setter>
@@ -254,11 +254,12 @@
                                 <Style>
                                     <Setter Property="Grid.Row" Value="{Binding Row, Mode=OneWay}" />
                                     <Setter Property="Grid.Column" Value="{Binding Col, Mode=OneWay}" />
+
                                 </Style>
                             </Setter.Value>
                         </Setter>
                     </Style>
-                </ItemsControl.Resources>
+                </ListBox.Resources>
                 <!--<Button
                     Grid.Row="0"
                     Width="200"
@@ -269,7 +270,7 @@
                     Width="120"
                     Height="20"
                     Background="Red" />-->
-            </ItemsControl>
+            </ListBox>
 
             <StackPanel
                 Grid.Row="1"
