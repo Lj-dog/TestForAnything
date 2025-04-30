@@ -1096,9 +1096,9 @@ namespace ConsoleApp
         public string Name { get; set; }
         public List<string> List { get; set; } = new();
 
-        public static T DeepCopyXML<T>(T obj)
+        public static T? DeepCopyXML<T>(T obj)
         {
-            object retval;
+            object? retval;
             using (MemoryStream ms = new())
             {
                 XmlSerializer xml = new(typeof(T));
@@ -1107,10 +1107,10 @@ namespace ConsoleApp
                 retval = xml.Deserialize(ms);
                 ms.Close();
             }
-            return (T)retval;
+            return (T?)retval;
         }
 
-        public static T DeepCopyJson<T>(T obj)
+        public static T? DeepCopyJson<T>(T obj)
         {
             string json = JsonSerializer.Serialize(obj);
             return JsonSerializer.Deserialize<T>(json);

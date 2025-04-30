@@ -4,6 +4,7 @@
         <Setter Property="BorderBrush" Value="Green" />
         <Setter Property="BorderThickness" Value="5" />
     </Style>
+    <!--  不覆盖默认样式下增加其他样式  -->
     <Style
         x:Key="btn2"
         BasedOn="{StaticResource {x:Type Button}}"
