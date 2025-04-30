@@ -480,7 +480,9 @@ namespace ConsoleApp
             //    Console.WriteLine(true);
             //else
             //    Console.WriteLine(false);
-            Console.WriteLine((ulong)MyEnum.MY4294967296);
+
+
+            //Console.WriteLine((ulong)MyEnum.MY4294967296);
             #endregion
 
             #region 17 object与数组转换
@@ -632,6 +634,49 @@ namespace ConsoleApp
 
             #region 23 探究C# Interface多继承是否会造成菱形继承
 
+            #endregion
+
+            #region 24 深拷贝
+            DeepCopy original = new DeepCopy()
+            {
+                ID = 1,
+                Name = "Tom",
+                List = new List<string>() { "1", "2", "3" },
+            };
+
+            Console.WriteLine("Original: ");
+            Console.WriteLine($"ID: {original.ID}");
+            Console.WriteLine($"Name: {original.Name}");
+            Console.WriteLine($"List: {string.Join(", ", original.List)}");
+            Console.WriteLine("-------------------------------------------------");
+
+            //深拷贝
+            DeepCopy deepCopyXML  = DeepCopy.DeepCopyXML(original);
+            deepCopyXML.ID = 2;
+            deepCopyXML.Name = "Jerry";
+            deepCopyXML.List[0] = "4";
+            Console.WriteLine("XMLCopy: ");
+            Console.WriteLine($"ID: {deepCopyXML.ID}");
+            Console.WriteLine($"Name: {deepCopyXML.Name}");
+            Console.WriteLine($"List: {string.Join(", ", deepCopyXML.List)}");
+            Console.WriteLine("-------------------------------------------------");
+
+            DeepCopy deepCopyJson = DeepCopy.DeepCopyJson(original);
+            deepCopyJson.ID = 3;
+            deepCopyJson.Name = "Jack";
+            deepCopyJson.List[0] = "5";
+            Console.WriteLine("JsonCopy: ");
+            Console.WriteLine($"ID: {deepCopyJson.ID}");
+            Console.WriteLine($"Name: {deepCopyJson.Name}");
+            Console.WriteLine($"List: {string.Join(", ", deepCopyJson.List)}");
+            Console.WriteLine("-------------------------------------------------");
+
+            //原始对象
+            Console.WriteLine("Original: ");
+            Console.WriteLine($"ID: {original.ID}");
+            Console.WriteLine($"Name: {original.Name}");
+            Console.WriteLine($"List: {string.Join(", ", original.List)}");
+            Console.WriteLine("-------------------------------------------------");
             #endregion
         }
 
@@ -813,6 +858,8 @@ namespace ConsoleApp
             Console.WriteLine("AfterCatch");
         }
         #endregion
+
+
     }
 
     #region 12 反射与特性
@@ -1040,5 +1087,36 @@ namespace ConsoleApp
     {
         int MC {  get; set; } 
     }
+    #endregion
+
+    #region 24 深拷贝
+  public  class DeepCopy
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public List<string> List { get; set; } = new();
+
+        public static T DeepCopyXML<T>(T obj)
+        {
+            object retval;
+            using (MemoryStream ms = new())
+            {
+                XmlSerializer xml = new(typeof(T));
+                xml.Serialize(ms, obj);
+                ms.Seek(0, SeekOrigin.Begin);
+                retval = xml.Deserialize(ms);
+                ms.Close();
+            }
+            return (T)retval;
+        }
+
+        public static T DeepCopyJson<T>(T obj)
+        {
+            string json = JsonSerializer.Serialize(obj);
+            return JsonSerializer.Deserialize<T>(json);
+        }
+    }
+
+   
     #endregion
 }
