@@ -28,8 +28,8 @@ namespace ConsoleAppTemp
             //  else
             //      Console.WriteLine("false");
             #endregion
-            Dictionary
             #region 异常Data属性的使用
+
             Console.WriteLine("\nException with some extra information...");
             RunTest(false);
             Console.WriteLine("\nException with all extra information...");
