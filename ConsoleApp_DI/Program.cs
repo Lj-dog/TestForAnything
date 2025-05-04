@@ -15,6 +15,10 @@ namespace ConsoleApp_DI
             //raceCar.Run();
             #endregion
 
+            #region 刘铁猛 DI
+
+            #endregion
+
             #region 接口与抽象类结合解耦 士兵 猎人 开枪
             SolidersBase solider1 = new Cook(RANK.OR_1);
             SolidersBase solider2 = new Army(RANK.OR_2);

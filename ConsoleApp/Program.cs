@@ -339,25 +339,29 @@ namespace ConsoleApp
 
             #endregion 7
 
-            #region 8 -LINQ 惰性处理特性
+            #region 8 -LINQ 惰性处理特性 ,Dictionary可以通过索引器添加不存在的键值对
 
             //LINQ 惰性处理特性
-            //Dictionary<string, string> Strs = new Dictionary<string, string>();
-            //Strs.Add("Ini", "1");
-            //Strs.Add("Inied", "2");
-            //Strs.Add("Re", "3");
-            //Strs.Add("Reed", "3");
-            //Strs.Add("TC_1", "4");
-            //Strs.Add("TC_2", "5");
-            //Strs.Add("Dir_1", "6");
-            //Strs.Add("Dir_2", "7");
-            //Strs.Add("SendI", "8");
-            //Strs.Add("Sen", "9");
-            //Strs.Add("Sta", "2");
-            //Strs.Add("Arr_1", "2");
-            //Strs.Add("Arr_2", "3");
-            //Strs.Add("Vir_1", "3");
-            //Strs.Add("Vir_2", "5");
+            Dictionary<string, string> Strs = new Dictionary<string, string>();
+
+            //Dictionary可以通过索引器添加不存在的键值对
+            Strs["Ini"] = "1";
+            Strs["Inied"] = "2";
+            Strs.Add("Re", "3");
+            Strs.Add("Reed", "3");
+            Strs.Add("TC_1", "4");
+            Strs.Add("TC_2", "5");
+            Strs.Add("Dir_1", "6");
+            Strs.Add("Dir_2", "7");
+            Strs.Add("SendI", "8");
+            Strs.Add("Sen", "9");
+            Strs.Add("Sta", "2");
+            Strs.Add("Arr_1", "2");
+            Strs.Add("Arr_2", "3");
+            Strs.Add("Vir_1", "3");
+            Strs.Add("Vir_2", "5");
+
+
 
             //var DirllList = Strs.Keys.Where(key => key.StartsWith("Dir_"));
             //foreach (var item in DirllList)
