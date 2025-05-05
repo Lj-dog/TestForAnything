@@ -26,5 +26,17 @@ namespace WpfApp_Navigation
             var NavigationWin = new NavigationViewWin();
             NavigationWin.Show();
         }
+
+        private void FrameWinOpen(object sender, RoutedEventArgs e)
+        {
+            var frameWin = new FrameWin();
+            frameWin.Show();
+        }
+
+        private void ContentWinOpen(object sender, RoutedEventArgs e)
+        {
+            var contentWin = new ContentWin();
+            contentWin.Show();
+        }
     }
 }

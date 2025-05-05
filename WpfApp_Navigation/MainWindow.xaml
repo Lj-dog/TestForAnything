@@ -24,7 +24,7 @@
             </Style>
         </Grid.Resources>
         <Button Grid.Column="0" Content="NavigationWin"  Click="NavigationWinOpen" />
-        <Button Grid.Column="1" Content="NavigationWin" />
-        <Button Grid.Column="2" Content="NavigationWin" />
+        <Button Grid.Column="1" Content="FrameWin" Click="FrameWinOpen" />
+        <Button Grid.Column="2" Content="ContentWin" Click="ContentWinOpen" />
     </Grid>
 </Window>

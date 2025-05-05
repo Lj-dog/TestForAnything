@@ -8,5 +8,5 @@
     Title="Window1"
     Width="800"
     Height="450"
-    Source="/NavigationWinPages/Page1.xaml"
-    mc:Ignorable="d" />
+    Source="/Pages/Page1.xaml"
+    mc:Ignorable="d" ShowsNavigationUI="False" />
