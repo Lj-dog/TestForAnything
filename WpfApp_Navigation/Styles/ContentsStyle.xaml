@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:m="clr-namespace:WpfApp_Navigation.Models">
-    <DataTemplate  DataType="{x:Type m:ContentA}">
+    <DataTemplate DataType="{x:Type m:ContentA}">
         <Grid Background="Green">
             <TextBlock
                 HorizontalAlignment="Center"
@@ -11,7 +11,7 @@
                 Text="ContentA" />
         </Grid>
     </DataTemplate>
-    <DataTemplate  DataType="{x:Type m:ContentB}">
+    <DataTemplate DataType="{x:Type m:ContentB}">
         <Grid Background="Red">
             <TextBlock
                 HorizontalAlignment="Center"
