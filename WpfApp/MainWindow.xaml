@@ -224,7 +224,10 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
-            <ListBox ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
+            <ListBox
+                d:DataContext="{d:DesignInstance Type=vm:ItemsGridVM}"
+                d:ItemsSource="{Binding Items}"
+                ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
 
                 <ListBox.Resources>
                     <Style TargetType="{x:Type ListBox}">
@@ -480,6 +483,7 @@
 
 
                 </Button>
+                <DatePicker />
 
             </ListBox>
         </Grid>
