@@ -51,13 +51,17 @@ namespace WpfApp.VMS
                 Items.Remove(item);
             }
 
-            var maxRow = Items.Select(o => o.Row).Max();
-            var maxCol = Items.Select(o=> o.Col).Max();
+            var maxRow = 0;
+            var maxCol = 0;
+            if (Items.Count > 0)
+            {
+                maxRow = Items.Select(o => o.Row).Max();
+                maxCol = Items.Select(o => o.Col).Max();
+            }
             Gridrows = maxRow + 1;
             Gridcols = maxCol + 1;
             SelectedItems.Clear();
         }
-
 
         public ItemsGridVM()
         {
@@ -68,15 +72,19 @@ namespace WpfApp.VMS
             //        SelectedItems.Add(m);
             //});
         }
+
         protected override void OnActivated()
         {
-            WeakReferenceMessenger.Default.Register<ItemsGridVM, BtnItem>(this, (s, m) =>
-            {
-                if (SelectedItems.Contains(m))
-                    SelectedItems.Remove(m);
-                else
-                    SelectedItems.Add(m);
-            });
+            WeakReferenceMessenger.Default.Register<ItemsGridVM, BtnItem>(
+                this,
+                (s, m) =>
+                {
+                    if (SelectedItems.Contains(m))
+                        SelectedItems.Remove(m);
+                    else
+                        SelectedItems.Add(m);
+                }
+            );
         }
 
         protected override void OnDeactivated()

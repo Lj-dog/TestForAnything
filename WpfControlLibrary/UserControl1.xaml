@@ -21,8 +21,8 @@
     <Grid Background="LightCyan">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
+            <RowDefinition Height="20" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="asdf" />
         <Image Grid.Row="0" Source="/WpfControlLibrary;component/Resources/Images/鼠头鸭.jpg" />
@@ -31,16 +31,16 @@
             <TextBlock Style="{StaticResource AddDictTest}" Text="asdf" />
             <ProgressBar
                 Width="120"
-                Height="60"
+                Height="10"
                 Maximum="100"
                 Value="60" />
         </Grid>
         <local:MyProgressBar
             Grid.Row="2"
             Width="120"
-            Height="80"
+            Height="20"
             Maximum="100"
             Orientation="Vertical"
-            Value="20" />
+            Value="30" />
     </Grid>
 </UserControl>

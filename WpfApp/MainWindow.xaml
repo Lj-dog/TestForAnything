@@ -12,7 +12,7 @@
     xmlns:vm="clr-namespace:WpfApp.VMS"
     Title="MainWindow"
     Width="1000"
-    Height="1200"
+    Height="900"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
 
@@ -119,13 +119,13 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
-            <RowDefinition Height="250" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="100" />
-            <RowDefinition Height="80" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
@@ -228,7 +228,6 @@
                 d:DataContext="{d:DesignInstance Type=vm:ItemsGridVM}"
                 d:ItemsSource="{Binding Items}"
                 ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
-
                 <ListBox.Resources>
                     <Style TargetType="{x:Type ListBox}">
                         <Setter Property="SelectionMode" Value="Extended" />
@@ -257,7 +256,6 @@
                                 <Style>
                                     <Setter Property="Grid.Row" Value="{Binding Row, Mode=OneWay}" />
                                     <Setter Property="Grid.Column" Value="{Binding Col, Mode=OneWay}" />
-
                                 </Style>
                             </Setter.Value>
                         </Setter>
@@ -325,24 +323,14 @@
                             <Setter.Value>
                                 <ControlTemplate>
                                     <Border Background="{TemplateBinding ListBox.Background}" CornerRadius="15">
-
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*" />
-
                                             </Grid.RowDefinitions>
-
                                             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-
                                                 <ItemsPresenter />
-
-
-
-
                                             </ScrollViewer>
-
                                         </Grid>
-
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -399,14 +387,14 @@
         <Grid Grid.Row="6">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <lib:UserControl1 Grid.Row="0" />
             <Grid Grid.Row="1">
                 <StackPanel>
                     <lib:MyProgressBar
                         Width="120"
-                        Height="80"
+                        Height="30"
                         Maximum="100"
                         Orientation="Vertical"
                         Value="40">
@@ -417,7 +405,7 @@
                     </lib:MyProgressBar>
                     <Button
                         Width="120"
-                        Height="30"
+                        Height="20"
                         Content="Change" />
                     <TextBox Width="120" Height="30" />
                 </StackPanel>
