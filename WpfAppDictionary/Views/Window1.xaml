@@ -26,7 +26,7 @@
                 Width="120"
                 Height="50"
                 Content="Btn3"
-                Style="{StaticResource btn3}" />
+                Style="{StaticResource btn1}" />
 
         </StackPanel>
     </Grid>

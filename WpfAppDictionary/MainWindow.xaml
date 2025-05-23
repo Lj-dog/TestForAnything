@@ -28,13 +28,14 @@
                     <Button
                         Width="250"
                         Height="80"
-                        Click="Button_Click"
+                        Click="Button_Click_Student"
                         Content="{Binding Student}" />
                 </Viewbox>
                 <Viewbox>
                     <Button
                         Width="250"
                         Height="80"
+                        Click="Button_Click_Teacher"
                         Content="{Binding Teacher}" />
                 </Viewbox>
                 <Button Width="120" Height="50">
