@@ -228,7 +228,7 @@ namespace ConsoleAppTemp
                     var token = new CancellationTokenSource();
                     while (true)
                     {
-                        workFlow.Working(num, IsSendSuccess, token.Token);
+                      await workFlow.Working(num, IsSendSuccess, token.Token);
                     }
                 }
                 catch (Exception)
@@ -244,7 +244,7 @@ namespace ConsoleAppTemp
         //在另一个外部库
         public class WorkFlow
         {
-            public async void Working(byte machineNum, Func<byte, string, Task<bool>> isSendSuccess,CancellationToken token)
+            public async Task Working(byte machineNum, Func<byte, string, Task<bool>> isSendSuccess,CancellationToken token)
             {
                 //其他操作 异步
                 //

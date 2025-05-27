@@ -24,7 +24,7 @@ namespace WpfAppBehavior_AP_DP.Controls
                 typeof(CornerRadius),
                 typeof(CornerButton),
                 new PropertyMetadata(
-                    new CornerRadius(),
+                    new CornerRadius(1),
                     propertyChangedCallback: ButtonRaidusChangedCallback,
                     coerceValueCallback: ButtonRaidusCoerceValueCallback
                 ),
