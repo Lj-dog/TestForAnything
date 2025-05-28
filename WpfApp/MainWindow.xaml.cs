@@ -83,6 +83,7 @@ namespace WpfApp
             DependencyObject level2 = VisualTreeHelper.GetParent(level1);
             DependencyObject level3 = VisualTreeHelper.GetParent(level2);
             MessageBox.Show(level1.GetType().ToString());
+            e.Handled = false;
         }
 
         delegate void DrawArrowFun(

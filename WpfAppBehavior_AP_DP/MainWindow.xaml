@@ -16,13 +16,27 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type c:CornerButton}">
-                            <Border Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding ButtonCornerRadius}">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding ButtonCornerRadius}">
                                 <ContentPresenter />
                             </Border>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
             </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="ButtonCornerRadius" Value="8">
+                    <Setter Property="BorderThickness" Value="8" />
+                    <Setter Property="BorderBrush" Value="Blue" />
+                </Trigger>
+                <Trigger Property="ButtonCornerRadius" Value="10">
+                    <Setter Property="BorderThickness" Value="10" />
+                    <Setter Property="BorderBrush" Value="Yellow" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
     </Window.Resources>
     <Grid>
@@ -33,6 +47,7 @@
                 Height="60"
                 Background="Purple"
                 ButtonCornerRadius="6" />
+
             <StackPanel
                 Margin="0,10"
                 HorizontalAlignment="Center"
