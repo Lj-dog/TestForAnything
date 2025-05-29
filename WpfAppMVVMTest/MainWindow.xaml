@@ -126,15 +126,15 @@
             </Grid.DataContext>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="as" />
+                    <Button Content="Check1" Command="{Binding Changedchecked1Command}" />
                     <RadioButton
                         VerticalAlignment="Center"
-                        Content="as"
+                        Content="Check1"
                         IsChecked="{Binding Checked1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="2134" />
-                    <RadioButton Content="243" IsChecked="{Binding Checked2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <Button Content="Check2" Command="{Binding Changedchecked2Command}" />
+                    <RadioButton Content="Check2" IsChecked="{Binding Checked2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </StackPanel>
         </Grid>
