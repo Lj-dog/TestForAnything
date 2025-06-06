@@ -7,10 +7,11 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Text.Json;
+using  TextJson=System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
 using System.Xml.Serialization;
+using NewtonsoftJson=Newtonsoft.Json;
 
 namespace ConsoleApp
 {
@@ -107,7 +108,7 @@ namespace ConsoleApp
 
         #region 16 enum 成员类型设置为byte
         [Flags]
-        enum MyEnum:ulong
+        enum MyEnum : ulong
         {
             MY0 = 0x00,
             MY1 = 0x01,
@@ -641,46 +642,96 @@ namespace ConsoleApp
             #endregion
 
             #region 24 深拷贝
-            DeepCopy original = new DeepCopy()
+            //DeepCopy original = new DeepCopy()
+            //{
+            //    ID = 1,
+            //    Name = "Tom",
+            //    List = new List<string>() { "1", "2", "3" },
+            //};
+
+            //Console.WriteLine("Original: ");
+            //Console.WriteLine($"ID: {original.ID}");
+            //Console.WriteLine($"Name: {original.Name}");
+            //Console.WriteLine($"List: {string.Join(", ", original.List)}");
+            //Console.WriteLine("-------------------------------------------------");
+
+            ////深拷贝
+            //DeepCopy deepCopyXML = DeepCopy.DeepCopyXML(original);
+            //deepCopyXML.ID = 2;
+            //deepCopyXML.Name = "Jerry";
+            //deepCopyXML.List[0] = "4";
+            //Console.WriteLine("XMLCopy: ");
+            //Console.WriteLine($"ID: {deepCopyXML.ID}");
+            //Console.WriteLine($"Name: {deepCopyXML.Name}");
+            //Console.WriteLine($"List: {string.Join(", ", deepCopyXML.List)}");
+            //Console.WriteLine("-------------------------------------------------");
+
+            //DeepCopy deepCopyJson = DeepCopy.DeepCopyJson(original);
+            //deepCopyJson.ID = 3;
+            //deepCopyJson.Name = "Jack";
+            //deepCopyJson.List[0] = "5";
+            //Console.WriteLine("JsonCopy: ");
+            //Console.WriteLine($"ID: {deepCopyJson.ID}");
+            //Console.WriteLine($"Name: {deepCopyJson.Name}");
+            //Console.WriteLine($"List: {string.Join(", ", deepCopyJson.List)}");
+            //Console.WriteLine("-------------------------------------------------");
+
+            ////原始对象
+            //Console.WriteLine("Original: ");
+            //Console.WriteLine($"ID: {original.ID}");
+            //Console.WriteLine($"Name: {original.Name}");
+            //Console.WriteLine($"List: {string.Join(", ", original.List)}");
+            //Console.WriteLine("-------------------------------------------------");
+            #endregion
+
+            #region 25 探究复杂序列化 如序列化，反序列化父类类型的子类对象；序列化，反序列化List (使用NewtonsoftJson)
+
+            //序列化
+            List<ParentClass> parentClasses = new List<ParentClass>()
             {
-                ID = 1,
-                Name = "Tom",
-                List = new List<string>() { "1", "2", "3" },
+                new SonClass()
+                {
+                    Id = 1,
+                    SonName = "Tom",
+                    SonAge = 10
+                },
+                new SonClass()
+                {
+                    Id = 2,
+                    SonName = "Jerry",
+                    SonAge = 12
+                },
+                new DaughterClass("Lisa"),
             };
 
-            Console.WriteLine("Original: ");
-            Console.WriteLine($"ID: {original.ID}");
-            Console.WriteLine($"Name: {original.Name}");
-            Console.WriteLine($"List: {string.Join(", ", original.List)}");
-            Console.WriteLine("-------------------------------------------------");
+            var setting = new NewtonsoftJson.JsonSerializerSettings()
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                TypeNameHandling = NewtonsoftJson.TypeNameHandling.All, //自动处理类型信息
+                PreserveReferencesHandling = NewtonsoftJson.PreserveReferencesHandling.Objects, //保留对象引用
+            };
 
-            //深拷贝
-            DeepCopy deepCopyXML  = DeepCopy.DeepCopyXML(original);
-            deepCopyXML.ID = 2;
-            deepCopyXML.Name = "Jerry";
-            deepCopyXML.List[0] = "4";
-            Console.WriteLine("XMLCopy: ");
-            Console.WriteLine($"ID: {deepCopyXML.ID}");
-            Console.WriteLine($"Name: {deepCopyXML.Name}");
-            Console.WriteLine($"List: {string.Join(", ", deepCopyXML.List)}");
-            Console.WriteLine("-------------------------------------------------");
+            string json = NewtonsoftJson.JsonConvert.SerializeObject(parentClasses, setting);
+            Console.WriteLine(json);
 
-            DeepCopy deepCopyJson = DeepCopy.DeepCopyJson(original);
-            deepCopyJson.ID = 3;
-            deepCopyJson.Name = "Jack";
-            deepCopyJson.List[0] = "5";
-            Console.WriteLine("JsonCopy: ");
-            Console.WriteLine($"ID: {deepCopyJson.ID}");
-            Console.WriteLine($"Name: {deepCopyJson.Name}");
-            Console.WriteLine($"List: {string.Join(", ", deepCopyJson.List)}");
-            Console.WriteLine("-------------------------------------------------");
+            //反序列化
+            List<ParentClass>? deserializedList = NewtonsoftJson.JsonConvert.DeserializeObject<List<ParentClass>>(json, setting);
 
-            //原始对象
-            Console.WriteLine("Original: ");
-            Console.WriteLine($"ID: {original.ID}");
-            Console.WriteLine($"Name: {original.Name}");
-            Console.WriteLine($"List: {string.Join(", ", original.List)}");
-            Console.WriteLine("-------------------------------------------------");
+            foreach (var item in deserializedList)
+            {
+                if (item is SonClass son)
+                {
+                    Console.WriteLine(son.Id);
+                    Console.WriteLine(son.SonName);
+                    Console.WriteLine(son.SonAge);
+                }
+
+                if (item is DaughterClass daughter)
+                {
+                    Console.WriteLine(daughter.Id);
+                    Console.WriteLine(daughter.DaughterName);
+                }
+            }
             #endregion
         }
 
@@ -852,7 +903,7 @@ namespace ConsoleApp
                 lock (_lock)
                 {
                     Console.WriteLine("try");
-                    throw new Exception("test"); 
+                    throw new Exception("test");
                 }
             }
             catch (Exception)
@@ -862,8 +913,6 @@ namespace ConsoleApp
             Console.WriteLine("AfterCatch");
         }
         #endregion
-
-
     }
 
     #region 12 反射与特性
@@ -1082,19 +1131,19 @@ namespace ConsoleApp
         int MA { get; set; }
     }
 
-    interface IB:IA
+    interface IB : IA
     {
         int MB { get; set; }
     }
 
-    interface IC:IA
+    interface IC : IA
     {
-        int MC {  get; set; } 
+        int MC { get; set; }
     }
     #endregion
 
     #region 24 深拷贝
-  public  class DeepCopy
+    public class DeepCopy
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -1116,11 +1165,35 @@ namespace ConsoleApp
 
         public static T? DeepCopyJson<T>(T obj)
         {
-            string json = JsonSerializer.Serialize(obj);
-            return JsonSerializer.Deserialize<T>(json);
+            string json = TextJson.JsonSerializer.Serialize(obj);
+            return TextJson.JsonSerializer.Deserialize<T>(json);
         }
     }
 
-   
+    #endregion
+
+    #region 25 探究复杂序列化 如序列化，反序列化父类类型的子类对象；是否会调用构造函数
+    class ParentClass
+    {
+        public int Id { get; set; }
+    }
+
+    class SonClass : ParentClass
+    {
+        public string SonName { get; set; }
+      
+        public int SonAge { get; set; }
+    }
+
+    class DaughterClass : ParentClass
+    {
+        public string DaughterName { get; set; }
+
+        public DaughterClass(string name)
+        {
+            DaughterName = name;
+            Console.WriteLine($"DaughterClass Constructor called with name: {name}"); //构造函数会被调用
+        }
+    }
     #endregion
 }
