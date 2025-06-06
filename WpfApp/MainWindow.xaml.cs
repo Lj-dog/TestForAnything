@@ -365,10 +365,7 @@ namespace WpfApp
         }
         #endregion
 
-        private void listboxMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("This is listboxMouseUp!!!");
-        }
+
 
 
 
@@ -376,6 +373,34 @@ namespace WpfApp
         {
             MessageBox.Show("This is ButtonClick!");
 
+        }
+
+        private void BtnInListBoxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("This is BtnInListBoxDoubleClick!");
+        }
+
+        private void ListboxDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DependencyObject originalSource = e.OriginalSource as DependencyObject;
+
+            var btn = FindControlHelper.FindChild<Button>(originalSource) as Button;
+
+            //var listboxitem = FindControlHelper.FindParent<ListBoxItem>(originalSource) as ListBoxItem;
+
+            //if (listboxitem == null)
+            //    return;
+            //var datacontext = listboxitem.DataContext as Student;
+            if (btn == null)
+                return;
+           
+            var mouseEventArgs = new MouseButtonEventArgs
+                 (Mouse.PrimaryDevice, Environment.TickCount, MouseButton.Left)
+            {
+                RoutedEvent = Button.MouseDoubleClickEvent,
+                Source = btn
+            };
+            btn.RaiseEvent(mouseEventArgs);
         }
     }
 
