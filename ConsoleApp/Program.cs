@@ -490,6 +490,13 @@ namespace ConsoleApp
             //Console.WriteLine((ulong)MyEnum.MY4294967296);
             #endregion
 
+            #region 16 new 其他用法
+            Override overrideChild = new OverrideChild();
+
+            overrideChild.OverrideMethod();
+
+            #endregion
+
             #region 17 object与数组转换
             //int[] ints = { 3, 4, 5 };
             //object obj = Array.ConvertAll(ints, s => (object)s);
@@ -686,52 +693,52 @@ namespace ConsoleApp
 
             #region 25 探究复杂序列化 如序列化，反序列化父类类型的子类对象；序列化，反序列化List (使用NewtonsoftJson)
 
-            //序列化
-            List<ParentClass> parentClasses = new List<ParentClass>()
-            {
-                new SonClass()
-                {
-                    Id = 1,
-                    SonName = "Tom",
-                    SonAge = 10
-                },
-                new SonClass()
-                {
-                    Id = 2,
-                    SonName = "Jerry",
-                    SonAge = 12
-                },
-                new DaughterClass("Lisa"),
-            };
+            ////序列化
+            //List<ParentClass> parentClasses = new List<ParentClass>()
+            //{
+            //    new SonClass()
+            //    {
+            //        Id = 1,
+            //        SonName = "Tom",
+            //        SonAge = 10
+            //    },
+            //    new SonClass()
+            //    {
+            //        Id = 2,
+            //        SonName = "Jerry",
+            //        SonAge = 12
+            //    },
+            //    new DaughterClass("Lisa"),
+            //};
 
-            var setting = new NewtonsoftJson.JsonSerializerSettings()
-            {
-                Formatting = Newtonsoft.Json.Formatting.Indented,
-                TypeNameHandling = NewtonsoftJson.TypeNameHandling.All, //自动处理类型信息
-                PreserveReferencesHandling = NewtonsoftJson.PreserveReferencesHandling.Objects, //保留对象引用
-            };
+            //var setting = new NewtonsoftJson.JsonSerializerSettings()
+            //{
+            //    Formatting = Newtonsoft.Json.Formatting.Indented,
+            //    TypeNameHandling = NewtonsoftJson.TypeNameHandling.All, //自动处理类型信息
+            //    PreserveReferencesHandling = NewtonsoftJson.PreserveReferencesHandling.Objects, //保留对象引用
+            //};
 
-            string json = NewtonsoftJson.JsonConvert.SerializeObject(parentClasses, setting);
-            Console.WriteLine(json);
+            //string json = NewtonsoftJson.JsonConvert.SerializeObject(parentClasses, setting);
+            //Console.WriteLine(json);
 
-            //反序列化
-            List<ParentClass>? deserializedList = NewtonsoftJson.JsonConvert.DeserializeObject<List<ParentClass>>(json, setting);
+            ////反序列化
+            //List<ParentClass>? deserializedList = NewtonsoftJson.JsonConvert.DeserializeObject<List<ParentClass>>(json, setting);
 
-            foreach (var item in deserializedList)
-            {
-                if (item is SonClass son)
-                {
-                    Console.WriteLine(son.Id);
-                    Console.WriteLine(son.SonName);
-                    Console.WriteLine(son.SonAge);
-                }
+            //foreach (var item in deserializedList)
+            //{
+            //    if (item is SonClass son)
+            //    {
+            //        Console.WriteLine(son.Id);
+            //        Console.WriteLine(son.SonName);
+            //        Console.WriteLine(son.SonAge);
+            //    }
 
-                if (item is DaughterClass daughter)
-                {
-                    Console.WriteLine(daughter.Id);
-                    Console.WriteLine(daughter.DaughterName);
-                }
-            }
+            //    if (item is DaughterClass daughter)
+            //    {
+            //        Console.WriteLine(daughter.Id);
+            //        Console.WriteLine(daughter.DaughterName);
+            //    }
+            //}
             #endregion
         }
 
@@ -861,11 +868,26 @@ namespace ConsoleApp
         class Override
         {
             public int OverridePro { get; set; }
+
+            public void OverrideMethod()
+            {
+                Console.WriteLine("OverrideMethod");
+            }
         }
 
-        class OverideChild : Override
+        class OverrideChild : Override
         {
             public new int OverridePro { get; set; }
+
+            //public void OverrideMethod()
+            //{
+            //    Console.WriteLine("OverrideChild OverrideMethod");
+            //}
+
+            public new void OverrideMethod()
+            {
+                Console.WriteLine("OverrideChild OverrideMethod");
+            }
         }
         #endregion
 
