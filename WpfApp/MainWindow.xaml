@@ -163,24 +163,24 @@
 
         <Grid Grid.Row="1">
 
-                <ListBox
-                    Margin="5"
-                    ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}"
-                    SelectionMode="Extended">
-                    <Border Width="120" Background="Red">
-                        <TextBlock Text="sadf" />
-                    </Border>
-                    <CheckBox x:Name="checkBoxtim" Content="Tim" />
-                    <CheckBox x:Name="checkBoxTOm" Content="Tom" />
-                    <CheckBox x:Name="checkBoxBruce" Content="Bruce" />
-                    <Button x:Name="buttonMess" Content="Mess" />
-                    <Button x:Name="buttonOwen" Content="Owen" />
-                    <Button
-                        x:Name="buttonVIctor"
-                        Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
-                        Click="buttonVictore_Click"
-                        Content="Victor" />
-                </ListBox>
+            <ListBox
+                Margin="5"
+                ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}"
+                SelectionMode="Extended">
+                <Border Width="120" Background="Red">
+                    <TextBlock Text="sadf" />
+                </Border>
+                <CheckBox x:Name="checkBoxtim" Content="Tim" />
+                <CheckBox x:Name="checkBoxTOm" Content="Tom" />
+                <CheckBox x:Name="checkBoxBruce" Content="Bruce" />
+                <Button x:Name="buttonMess" Content="Mess" />
+                <Button x:Name="buttonOwen" Content="Owen" />
+                <Button
+                    x:Name="buttonVIctor"
+                    Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
+                    Click="buttonVictore_Click"
+                    Content="Victor" />
+            </ListBox>
 
         </Grid>
 
@@ -448,7 +448,7 @@
             </Grid>
         </Grid>
         <Grid Grid.Row="8">
-            <ListBox  MouseDoubleClick="ListboxDoubleClick">
+            <ListBox MouseDoubleClick="ListboxDoubleClick">
                 <Button Click="BtnClick">
                     <Button.Style>
                         <Style TargetType="Button">
@@ -456,18 +456,17 @@
                                 <Setter.Value>
                                     <ControlTemplate>
                                         <Border
-                                 Width="120"
-                                 Height="20"
-                                 Background="Transparent"
-                                 BorderBrush="Black"
-                                 BorderThickness="2">
+                                            Width="120"
+                                            Height="20"
+                                            Background="Transparent"
+                                            BorderBrush="Black"
+                                            BorderThickness="2">
                                             <TextBlock
-                                     HorizontalAlignment="Center"
-                                     VerticalAlignment="Center"
-                                     FontSize="10"
-                                     FontWeight="Black"
-                                     Text="Button" 
-                                     />
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="10"
+                                                FontWeight="Black"
+                                                Text="Button" />
                                         </Border>
                                     </ControlTemplate>
                                 </Setter.Value>
@@ -478,8 +477,13 @@
 
                 </Button>
                 <DatePicker />
-                <TextBlock Text="Try Select Need Double Click item"/>
-                <Button Background="Red" MouseDoubleClick="BtnInListBoxDoubleClick" IsHitTestVisible="False" Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}" Height="20" />
+                <TextBlock Text="Try Select Need Double Click item" />
+                <Button
+                    Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
+                    Height="20"
+                    Background="Red"
+                    IsHitTestVisible="False"
+                    MouseDoubleClick="BtnInListBoxDoubleClick" />
             </ListBox>
         </Grid>
     </Grid>

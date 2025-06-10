@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:hc="https://handyorg.github.io/handycontrol"
     xmlns:local="clr-namespace:WpfAppMVVMTest"
+    Startup="Application_Startup"
     StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

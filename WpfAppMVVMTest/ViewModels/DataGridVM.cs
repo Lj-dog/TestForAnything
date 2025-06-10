@@ -13,7 +13,7 @@ using WpfAppMVVMTest.Models;
 
 namespace WpfAppMVVMTest.ViewModels
 {
-  public  partial class DataGridVM : ObservableObject
+    public partial class DataGridVM : ObservableObject
     {
         [ObservableProperty]
         private People people = new();
@@ -23,13 +23,12 @@ namespace WpfAppMVVMTest.ViewModels
 
         public ObservableCollection<People> Peoples { get; set; } = new();
 
-
         // (1)尝试使用BindingList来使DataGrid里单元格变化后触发事件。
         //[ObservableProperty]
         //private BindingList<People> _peoples;
 
-        public DataGridVM() {
-
+        public DataGridVM()
+        {
             //(1)
             #region 1 尝试使用BindingList来使DataGrid里单元格变化后触发事件。
             //Peoples = new();
@@ -42,7 +41,7 @@ namespace WpfAppMVVMTest.ViewModels
         //private void Peoples_ListChanged(object? sender, ListChangedEventArgs e)
         //{
         //    MessageBox.Show("ListChangeded");
-        //} 
+        //}
         #endregion
 
         [RelayCommand]
@@ -64,12 +63,15 @@ namespace WpfAppMVVMTest.ViewModels
         [RelayCommand]
         private void BtnRemove(IList selectedPeoples)
         {
-            List<People> deletePeoples  = selectedPeoples.OfType<People>().ToList();
-            foreach (var item in deletePeoples)
+            if (selectedPeoples != null && selectedPeoples.Count > 0)
             {
-                if (item is People people)
+                List<People> deletePeoples = selectedPeoples.OfType<People>().ToList();
+                foreach (var item in deletePeoples)
                 {
-                    Peoples.Remove(people);
+                    if (item is People people)
+                    {
+                        Peoples.Remove(people);
+                    }
                 }
             }
         }

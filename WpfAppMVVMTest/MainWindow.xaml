@@ -9,18 +9,25 @@
     xmlns:vm="clr-namespace:WpfAppMVVMTest.ViewModels"
     Title="MainWindow"
     Width="800"
-    Height="450"
+    Height="800"
     d:DataContext="{d:DesignInstance Type=vm:DataGridVM}"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <CollectionViewSource x:Key="view" Filter="CollectionViewSource_Filter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="auto" />
 
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding Peoples, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedPeople}" />
+        <DataGrid
+            x:Name="dataGrid"
+            ItemsSource="{Binding Peoples, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding SelectedPeople}" />
         <Grid Grid.Row="1">
             <StackPanel>
                 <StackPanel
@@ -69,11 +76,6 @@
                         Command="{Binding BtnRemoveCommand}"
                         CommandParameter="{Binding ElementName=dataGrid, Path=SelectedItems}"
                         Content="Del" />
-                </StackPanel>
-                <StackPanel
-                    Height="auto"
-                    HorizontalAlignment="Center"
-                    Orientation="Horizontal">
                     <Button
                         Width="auto"
                         Margin="5,0"
@@ -85,6 +87,7 @@
                         Command="{Binding BtnRemoveCommand}"
                         Content="Disable Description Edit" />
                 </StackPanel>
+
             </StackPanel>
         </Grid>
         <DockPanel Grid.Row="2">
@@ -97,26 +100,27 @@
                 Margin="5"
                 DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
-                <Button Content="New Employee" />
+                <Button Content="New Employee" Click="NewEmployee_Click" />
                 <hc:TextBox
                     x:Name="filterTextBox"
                     Width="200"
                     Margin="5,0,0,0"
                     hc:InfoElement.Placeholder="Filter data by name"
-                    InputMethod.IsInputMethodEnabled="False" />
+                    InputMethod.IsInputMethodEnabled="False"
+                    TextChanged="filterTextBox_TextChanged" />
             </StackPanel>
             <DataGrid
-                x:Name="dataGrid"
+                x:Name="employeeDataGrid"
                 d:ItemsSource="{d:SampleData ItemCount=10}"
                 AutoGenerateColumns="False"
-                CanUserDeleteRows="True">
+                CanUserDeleteRows="True"
+                ItemsSource="{Binding Source={StaticResource view}}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" />
-                    <DataGridTextColumn Header="FirstName" />
-                    <DataGridTextColumn Header="LastName" />
-                    <DataGridTextColumn Header="Birthday" />
-                    <DataGridTextColumn Header="Salary" />
-
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" />
+                    <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" />
+                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
@@ -126,14 +130,14 @@
             </Grid.DataContext>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Check1" Command="{Binding Changedchecked1Command}" />
+                    <Button Command="{Binding Changedchecked1Command}" Content="Check1" />
                     <RadioButton
                         VerticalAlignment="Center"
                         Content="Check1"
                         IsChecked="{Binding Checked1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Check2" Command="{Binding Changedchecked2Command}" />
+                    <Button Command="{Binding Changedchecked2Command}" Content="Check2" />
                     <RadioButton Content="Check2" IsChecked="{Binding Checked2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
             </StackPanel>
