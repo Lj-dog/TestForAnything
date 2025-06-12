@@ -11,8 +11,8 @@
     Width="800"
     Height="800"
     d:DataContext="{d:DesignInstance Type=vm:DataGridVM}"
-    mc:Ignorable="d"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.Resources>
         <CollectionViewSource x:Key="view" Filter="CollectionViewSource_Filter" />
     </Window.Resources>
@@ -100,7 +100,7 @@
                 Margin="5"
                 DockPanel.Dock="Bottom"
                 Orientation="Horizontal">
-                <Button Content="New Employee" Click="NewEmployee_Click" />
+                <Button Click="NewEmployee_Click" Content="New Employee" />
                 <hc:TextBox
                     x:Name="filterTextBox"
                     Width="200"
@@ -116,11 +116,11 @@
                 CanUserDeleteRows="True"
                 ItemsSource="{Binding Source={StaticResource view}}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" />
-                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" />
-                    <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" />
-                    <DataGridTextColumn Header="Salary" Binding="{Binding Salary}" />
+                    <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
+                    <DataGridTextColumn Binding="{Binding FirstName}" Header="FirstName" />
+                    <DataGridTextColumn Binding="{Binding LastName}" Header="LastName" />
+                    <DataGridTextColumn Binding="{Binding Birthday}" Header="Birthday" />
+                    <DataGridTextColumn Binding="{Binding Salary}" Header="Salary" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

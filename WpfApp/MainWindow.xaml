@@ -157,7 +157,17 @@
                     <RadioButton Content="asdf" />
                     <RadioButton Content="qwer" />
                 </StackPanel>
-
+                <Border>
+                    <!--<Button Click="buttonhaveRadio_Click"  >-->
+                    <Button MouseLeftButtonUp="buttonhaveRadio_Click">
+                        <StackPanel>
+                            <RadioButton Content="Button Radio" MouseLeftButtonUp="RadioInButton_Click" />
+                            <RadioButton Content="Button Radio" MouseLeftButtonUp="RadioInButton_Click" />
+                            <!--<RadioButton Content="Button Radio" />
+                            <RadioButton Content="Button Radio" />-->
+                        </StackPanel>
+                    </Button>
+                </Border>
             </StackPanel>
         </Grid>
 

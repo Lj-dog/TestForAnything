@@ -402,6 +402,29 @@ namespace WpfApp
             };
             btn.RaiseEvent(mouseEventArgs);
         }
+
+        private void buttonhaveRadio_Click(object sender, RoutedEventArgs e)
+        {
+            //if (e.OriginalSource is RadioButton)
+            //{
+            //    return;
+            //}
+            MessageBox.Show("buttonhaveRadio_Click");
+        }
+
+
+
+        private void RadioInButton_Click(object sender, MouseButtonEventArgs e)
+        {
+            var radiobutton = (RadioButton)sender;
+            e.Handled = true;
+            radiobutton.IsChecked = !radiobutton.IsChecked;
+        }
+
+        private void buttonhaveRadio_Click(object sender, MouseButtonEventArgs e)
+        {
+
+        }
     }
 
     public class Student
