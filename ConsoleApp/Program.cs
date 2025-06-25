@@ -491,9 +491,9 @@ namespace ConsoleApp
             #endregion
 
             #region 16 new 其他用法
-            Override overrideChild = new OverrideChild();
+            //Override overrideChild = new OverrideChild();
 
-            overrideChild.OverrideMethod();
+            //overrideChild.OverrideMethod();
 
             #endregion
 
@@ -739,6 +739,19 @@ namespace ConsoleApp
             //        Console.WriteLine(daughter.DaughterName);
             //    }
             //}
+            #endregion
+
+            #region 26 反序列化加了回车的字符串 不会失败
+            // 使用 6 JSON XML序列化/反序列化 的对象school
+            string jsonstr = NewtonsoftJson.JsonConvert.SerializeObject(school, NewtonsoftJson.Formatting.Indented);
+            jsonstr = jsonstr + "\n";
+            //Console.Write(jsonstr);
+
+            var deserializedSchool = NewtonsoftJson.JsonConvert.DeserializeObject<School>(jsonstr);
+
+            Console.WriteLine(deserializedSchool.SchoolName);
+            Console.WriteLine(deserializedSchool.Grades);
+            Console.ReadLine();
             #endregion
         }
 
