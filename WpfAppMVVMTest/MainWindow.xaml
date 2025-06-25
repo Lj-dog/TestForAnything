@@ -136,17 +136,19 @@
             <Grid.DataContext>
                 <vm:RadioVM />
             </Grid.DataContext>
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding Changedchecked1Command}" Content="Check1" />
-                    <RadioButton
-                        VerticalAlignment="Center"
-                        Content="Check1"
-                        IsChecked="{Binding Checked1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button Command="{Binding Changedchecked2Command}" Content="Check2" />
-                    <RadioButton Content="Check2" IsChecked="{Binding Checked2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding Changedchecked1Command}" Content="Check1" />
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Content="Check1"
+                            IsChecked="{Binding Checked1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Command="{Binding Changedchecked2Command}" Content="Check2" />
+                        <RadioButton Content="Check2" IsChecked="{Binding Checked2, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>

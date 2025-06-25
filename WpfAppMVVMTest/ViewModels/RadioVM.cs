@@ -20,16 +20,28 @@ namespace WpfAppMVVMTest.ViewModels
         [ObservableProperty]
         ObservableCollection<bool> checkList;
 
+        public RadioVM()
+        {
+            CheckList = new() { 
+              Checked1,
+              Checked2,
+            };
+           
+        }
+
         [RelayCommand]
         private void Changedchecked1()
         {
-            Checked1 = !Checked1;
+            //Checked1 = !Checked1;
+            CheckList[0] = !CheckList[0];
         }
 
         [RelayCommand]
         private void Changedchecked2()
         {
-            Checked2 = !Checked2;
+            //Checked2 = !Checked2;
+            CheckList[1] = !CheckList[1];
+
         }
     }
 }

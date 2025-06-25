@@ -38,11 +38,32 @@ namespace ConsoleAppTemp
             //Console.WriteLine("\nException with all extra information...");
             //RunTest(true);
             #endregion
-            Machine machine1 = new(1, "machine1");
-            Machine machine2 = new(2, "machine2");
+            //Machine machine1 = new(1, "machine1");
+            //Machine machine2 = new(2, "machine2");
 
-            machine1.Run();
-            machine2.Run();
+            //machine1.Run();
+            //machine2.Run();
+
+            #region FileStream,StreamWrite 覆盖还是追加写入
+            string str1 = "aaa";
+            using (var fs = new FileStream("ConsoleAppTemp.json",FileMode.Append,FileAccess.Write,FileShare.Write))
+            {
+                using (var sw = new StreamWriter(fs,Encoding.UTF8))
+                {
+                    sw.WriteLine(str1);
+                }
+            }
+
+            string str2 = "bbb";
+            using (var fs = new FileStream("ConsoleAppTemp.json", FileMode.OpenOrCreate, FileAccess.Write,FileShare.Write))
+            {
+                using (var sw = new StreamWriter(fs, Encoding.UTF8))
+                {
+                    sw.Write(str2);
+                }
+            }
+            #endregion
+
         }
 
         #region 异常Data属性的使用
