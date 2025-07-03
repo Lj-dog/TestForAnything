@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using WpfApp.Helpers;
+using WpfApp.Views;
 
 namespace WpfApp
 {
@@ -314,26 +315,6 @@ namespace WpfApp
         }
 
 
-        /// <summary>
-        /// 使用Thread
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ThreadClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// 使用Task
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TaskClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
 
         #region 多语言
         private string language;
@@ -424,6 +405,12 @@ namespace WpfApp
         private void buttonhaveRadio_Click(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void OpenTaskTestWinClick(object sender, RoutedEventArgs e)
+        {
+            var taskwin = new TaskTestWin();
+            taskwin.ShowDialog();
         }
     }
 

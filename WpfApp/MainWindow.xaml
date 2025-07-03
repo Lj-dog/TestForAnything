@@ -121,13 +121,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="180" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="60" />
             <RowDefinition Height="100" />
             <RowDefinition Height="60" />
             <RowDefinition Height="200" />
             <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
@@ -200,13 +201,10 @@
                 <StackPanel>
                     <Button Click="PicCreateClick" Content="生成" />
                 </StackPanel>
-                <StackPanel>
-                    <Button Click="ThreadClick" Content="Thread多线程" />
-                </StackPanel>
-                <StackPanel>
-                    <Button Click="TaskClick" Content="Task多线程" />
-                </StackPanel>
-                <Image x:Name="UserImage" />
+                <Image
+                    x:Name="UserImage"
+                    Width="auto"
+                    Height="auto" />
             </StackPanel>
             <!--#endregion-->
         </Grid>
@@ -496,6 +494,15 @@
                     MouseDoubleClick="BtnInListBoxDoubleClick" />
             </ListBox>
         </Grid>
+        <Grid Grid.Row="9">
+            <StackPanel>
+                <Button
+                    Width="120"
+                    Click="OpenTaskTestWinClick"
+                    Content="OpenTaskTestWin" />
+            </StackPanel>
+        </Grid>
+        <Grid />
     </Grid>
 
 
