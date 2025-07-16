@@ -10,15 +10,23 @@ namespace DevicesFactory.Protocols
 {
     public abstract class Protocol
     {
+        public abstract override int GetHashCode();
 
+        public abstract override bool Equals(object? obj);
     }
 
-    public class TCPClientSetting: Protocol
+    public class TCPClientSetting : Protocol
     {
         public override int GetHashCode()
         {
-            return HashCode.Combine(IP,Port);
+            return HashCode.Combine(IP, Port);
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is TCPClientSetting setting && IP == setting.IP && Port == setting.Port;
+        }
+
         public string IP { get; set; }
 
         public int Port { get; set; }
@@ -30,15 +38,39 @@ namespace DevicesFactory.Protocols
         {
             return Port.GetHashCode();
         }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is TCPServerSetting setting && Port == setting.Port;
+        }
+
         public int Port { get; set; }
     }
 
     public class SerialPortSetting : Protocol
     {
+        public SerialPortSetting()
+        {
+            PortsName = SerialPort.GetPortNames().ToList();
+            if (PortsName.Count > 0)
+            {
+                PortName = PortsName.First();
+            }
+        }
+
+        public override int GetHashCode()
+        {
+            return PortName.GetHashCode();
+        }
+
+        public override bool Equals(object? obj)
+        {
+            return (obj is SerialPortSetting setting && PortName == setting.PortName);
+        }
+
         public string PortName { get; set; }
 
         public List<string> PortsName { get; }
-
 
         public int BaudRate { get; set; }
 
@@ -60,16 +92,26 @@ namespace DevicesFactory.Protocols
     /// <summary>
     /// 第三方库通讯类配置
     /// </summary>
-    public class OtherClientSetting: Protocol
+    public class OtherClientSetting : Protocol
     {
         public string IP { get; set; }
+
+        public override bool Equals(object? obj)
+        {
+            return obj is OtherClientSetting setting && IP == setting.IP;
+        }
+
+        public override int GetHashCode()
+        {
+            return IP.GetHashCode();
+        }
     }
 
     /// <summary>
     /// 第三方库通讯类
     /// </summary>
-    public class OtherClient {
-
+    public class OtherClient
+    {
         private int port = 502;
 
         private string ip = "127.0.0.1";
@@ -77,10 +119,11 @@ namespace DevicesFactory.Protocols
         private TcpClient tCPClient;
 
         private NetworkStream stream;
+
         public OtherClient(string ip)
         {
             tCPClient = new TcpClient();
-             this.ip = ip;
+            this.ip = ip;
         }
 
         public void Connect()
@@ -94,7 +137,5 @@ namespace DevicesFactory.Protocols
             var buffer = UTF8Encoding.UTF8.GetBytes(message);
             stream.Write(buffer);
         }
-
-
     }
 }

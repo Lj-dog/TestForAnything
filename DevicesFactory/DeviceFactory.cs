@@ -1,21 +1,22 @@
 ﻿using System.Collections.Concurrent;
+using System.Diagnostics.CodeAnalysis;
 using System.IO.Ports;
 using System.Net.Sockets;
 using System.Security.AccessControl;
-using DevicesFactory.Devices;
+using DevicesFactory.IDevices;
 using DevicesFactory.Protocols;
 
 namespace DevicesFactory
 {
 
-    interface ICreateComunicationChannel
+   public interface ICreateComunicationChannels
     {
-
+        public void CreateComunicationChannels();
     }
 
     public class DeviceFactory
     {
-        public static DeviceFactory Instance { get; private set; } = new DeviceFactory();
+        public  static  DeviceFactory Instance { get; private set; } = new DeviceFactory();
 
         /// <summary>
         /// 保存设备连接
@@ -30,13 +31,26 @@ namespace DevicesFactory
 
         private DeviceFactory() { }
 
+        public void CreateDevicesChannel(List<ICreateComunicationChannels> devices)
+        {
+            foreach (var device in devices)
+            {
+                device.CreateComunicationChannels();
+            }
+        }
+
         public void CreateChannel<T>(T protocol) where T : Protocol,new()
         { 
             
         }
 
+        public void CreateChannel(Type type)
+        {
 
-        public void CreateDevice(Device device)
+        }
+
+        #region 第一次尝试多设备多通讯实现
+        public void CreateDevice(Devices.Device device)
         {
             if (device is DeviceA deviceA)
             {
@@ -64,7 +78,7 @@ namespace DevicesFactory
                         RtsEnable = serialPortSetting.RtsEnable,
                     });
                 }
-                else if( deviceA .Protocol is OtherClientSetting setting)
+                else if (deviceA.Protocol is OtherClientSetting setting)
                 {
                     //...
                 }
@@ -75,7 +89,7 @@ namespace DevicesFactory
             }
         }
 
-        public void Connect(Device device)
+        public void Connect(Devices.Device device)
         {
             if (device is ICommunicate communicateDevice)
             {
@@ -83,7 +97,7 @@ namespace DevicesFactory
             }
         }
 
-        public void Disconnect(Device device)
+        public void Disconnect(Devices.Device device)
         {
             if (device is ICommunicate communicateDevice)
             {
@@ -91,12 +105,13 @@ namespace DevicesFactory
             }
         }
 
-        public void Send(Device device, string message)
+        public void Send(Devices.Device device, string message)
         {
             if (device is ICommunicate communicateDevice)
             {
                 communicateDevice.Send(message);
             }
-        }
+        } 
+        #endregion
     }
 }
