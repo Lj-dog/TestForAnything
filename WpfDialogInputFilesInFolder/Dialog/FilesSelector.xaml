@@ -1,0 +1,92 @@
+﻿<Window
+    x:Class="FilesSelectorTest.FilesSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:FilesSelectorTest"
+    mc:Ignorable="d"
+    Title="FilesSelector"
+    Height="450"
+    Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Background="Transparent"
+                BorderThickness="0.5"
+                Click="Button_GoHome">
+                <Button.Content>
+                    <Path Data="M10,20V14H14V20H19V12H22L12,3L2,12H5V20H10Z" Fill="Black" />
+                </Button.Content>
+            </Button>
+
+            <TextBox
+                Grid.Column="1"
+                Text="{Binding CurrentDisplayDirectory}"
+                VerticalContentAlignment="Center"
+                FontSize="12"
+                KeyDown="TextBox_KeyDown" />
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button
+                    Background="Transparent"
+                    BorderThickness="0.5"
+                    Click="Button_GoToParent">
+                    <Button.Content>
+                        <Path Fill="Black" Data="M13,18H11V10L7.5,13.5L6.08,12.08L12,6.16L17.92,12.08L16.5,13.5L13,10V18M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
+                    </Button.Content>
+                </Button>
+                <Button
+                    Content="跳转"
+                    Padding="8 4"
+                    FontSize="12"
+                    Click="Button_GoTo" />
+            </StackPanel>
+        </Grid>
+
+        <ListView
+            Name="listView"
+            Grid.Row="1"
+            ItemsSource="{Binding CurrentPaths}"
+            SelectionMode="Multiple"
+            SelectionChanged="FilesSelector_SelectionChanged">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="1">
+                <Button
+                    Content="确定"
+                    Click="Button_OK"
+                    FontSize="14"
+                    Padding="8 4" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
