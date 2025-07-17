@@ -20,5 +20,8 @@
         <StackPanel>
             <Button Click="FilesDialog" Content="OpenFileDialog " />
         </StackPanel>
+        <StackPanel>
+            <Button Click="FileFolderDialog" Content="OpenFileFolderDialog " />
+        </StackPanel>
     </StackPanel>
 </Window>

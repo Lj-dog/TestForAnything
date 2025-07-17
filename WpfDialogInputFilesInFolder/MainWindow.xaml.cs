@@ -1,4 +1,5 @@
-﻿using FilesSelectorTest;
+﻿using dnGREP;
+using FilesSelectorTest;
 using Microsoft.Win32;
 using System.Text;
 using System.Windows;
@@ -26,7 +27,7 @@ namespace WpfDialogInputFilesInFolder
 
         private void inputFiles(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog? filediolog = new OpenFileDialog()
+            var filediolog = new Microsoft.Win32.OpenFileDialog()
             {
                 Title = "Select Files",
                 Filter =   "CS (*.cs)|*.cs|"+"All files (*.*)|*.*",
@@ -75,6 +76,13 @@ namespace WpfDialogInputFilesInFolder
             if (dialog.ShowDialog() == false)
                 return;
             showFiles.ItemsSource = dialog.GetFiles();
+        }
+
+        private void FileFolderDialog(object sender, RoutedEventArgs e)
+        {
+            var dialog = new FileFolderDialog();
+         
+            dialog.ShowDialog();
         }
     }
 }

@@ -104,7 +104,7 @@ namespace FilesSelectorTest
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "访问失败");
+                System.Windows.MessageBox.Show(ex.Message, "访问失败");
                 return;
             }
 
@@ -143,7 +143,7 @@ namespace FilesSelectorTest
         // 双击进入目录
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var listViewItem = (ListViewItem)e.Source;
+            var listViewItem = (System.Windows.Controls.ListViewItem)e.Source;
             var content = (string)listViewItem.Content;
             if (!System.IO.Path.IsPathRooted(content))
             {
@@ -190,7 +190,7 @@ namespace FilesSelectorTest
         }
 
         // 回车跳转
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

@@ -69,7 +69,7 @@ namespace WpfDialogInputFilesInFolder.Dialog
             GetFilesInDir(files,selectpath.Text);
             if (files.Count == 0)
             {
-                MessageBox.Show("No files found in the selected folder.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                System.Windows.MessageBox.Show("No files found in the selected folder.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 return files.ToArray();
             }
             return files.ToArray();

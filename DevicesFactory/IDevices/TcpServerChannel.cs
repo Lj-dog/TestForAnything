@@ -35,42 +35,42 @@ public class TcpServerChannel:ICommunicate<TCPServerSetting>
         throw new NotImplementedException();
     }
 
-    public byte[] ReceiveBytes()
+    public byte[] ReceiveBytes(string? targetName)
     {
         throw new NotImplementedException();
     }
 
-    public Task<byte[]> ReceiveBytesAsync()
+    public Task<byte[]> ReceiveBytesAsync(string? targetName)
     {
         throw new NotImplementedException();
     }
 
-    public string ReceiveString()
+    public string ReceiveString(string? targetName)
     {
         throw new NotImplementedException();
     }
 
-    public Task<string> ReceiveStringAsync()
+    public Task<string> ReceiveStringAsync(string? targetName)
     {
         throw new NotImplementedException();
     }
 
-    public void Send(string message)
+    public void Send(string? targetName, string message)
     {
         throw new NotImplementedException();
     }
 
-    public void Send(byte[] data)
+    public void Send(string? targetName, byte[] data)
     {
         throw new NotImplementedException();
     }
 
-    public Task SendAsync(string message)
+    public Task SendAsync(string? targetName, string message)
     {
         throw new NotImplementedException();
     }
 
-    public Task SendAsync(byte[] data)
+    public Task SendAsync(string? targetName, byte[] data)
     {
         throw new NotImplementedException();
     }
