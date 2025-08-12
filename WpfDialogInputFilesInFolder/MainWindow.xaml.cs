@@ -51,7 +51,7 @@ namespace WpfDialogInputFilesInFolder
             var dialog = new FilesSelector()
             {
                 Title = "Select Files",
-                Filter = new string[] { ".cs", ".txt", ".xml" },
+                //Filter = new string[] { ".cs", ".txt", ".xml" },
             };
             dialog.ShowDialog();
             if (dialog.DialogResult == false)

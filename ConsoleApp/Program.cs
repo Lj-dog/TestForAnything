@@ -742,16 +742,21 @@ namespace ConsoleApp
             #endregion
 
             #region 26 反序列化加了回车的字符串 不会失败
-            // 使用 6 JSON XML序列化/反序列化 的对象school
-            string jsonstr = NewtonsoftJson.JsonConvert.SerializeObject(school, NewtonsoftJson.Formatting.Indented);
-            jsonstr = jsonstr + "\n";
-            //Console.Write(jsonstr);
+            //// 使用 6 JSON XML序列化/反序列化 的对象school
+            //string jsonstr = NewtonsoftJson.JsonConvert.SerializeObject(school, NewtonsoftJson.Formatting.Indented);
+            //jsonstr = jsonstr + "\n";
+            ////Console.Write(jsonstr);
 
-            var deserializedSchool = NewtonsoftJson.JsonConvert.DeserializeObject<School>(jsonstr);
+            //var deserializedSchool = NewtonsoftJson.JsonConvert.DeserializeObject<School>(jsonstr);
 
-            Console.WriteLine(deserializedSchool.SchoolName);
-            Console.WriteLine(deserializedSchool.Grades);
-            Console.ReadLine();
+            //Console.WriteLine(deserializedSchool.SchoolName);
+            //Console.WriteLine(deserializedSchool.Grades);
+            //Console.ReadLine();
+            #endregion
+            #region 八进制转十进制
+            int Oct = 40;
+            int Dec = Convert.ToInt32(Oct.ToString(),8);
+            Console.WriteLine(Dec);
             #endregion
         }
 

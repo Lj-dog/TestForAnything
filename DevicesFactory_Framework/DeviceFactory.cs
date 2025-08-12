@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Ports;
 using System.Net.Sockets;
@@ -11,7 +13,7 @@ namespace DevicesFactory
 
    public interface ICreateComunicationChannels
     {
-        public void CreateComunicationChannels();
+         void CreateComunicationChannels();
     }
 
     public class DeviceFactory
@@ -21,13 +23,13 @@ namespace DevicesFactory
         /// <summary>
         /// 保存设备连接
         /// </summary>
-        private static ConcurrentDictionary<int , TcpClient> tcpClients = new();
+        private static ConcurrentDictionary<int , TcpClient> tcpClients = new ConcurrentDictionary<int, TcpClient>();
 
-        private static ConcurrentDictionary<SerialPortSetting, SerialPort> serialPorts = new();
+        private static ConcurrentDictionary<SerialPortSetting, SerialPort> serialPorts = new ConcurrentDictionary<SerialPortSetting, SerialPort>();
 
-        private static ConcurrentDictionary<OtherClientSetting, OtherClient> otherClients = new();
+        private static ConcurrentDictionary<OtherClientSetting, OtherClient> otherClients = new ConcurrentDictionary<OtherClientSetting, OtherClient>();
 
-        private static ConcurrentDictionary<TCPServerSetting, TcpListener> tcpListeners = new();
+        private static ConcurrentDictionary<TCPServerSetting, TcpListener> tcpListeners = new ConcurrentDictionary<TCPServerSetting, TcpListener>();
 
         private DeviceFactory() { }
 
@@ -39,7 +41,7 @@ namespace DevicesFactory
             }
         }
 
-        public void CreateChannel<T>(T protocol) where T : Protocol,new()
+        public void CreateChannel<T>(T protocol) where T : ProtocolSetting,new()
         { 
             
         }
@@ -54,16 +56,16 @@ namespace DevicesFactory
         //{
         //    if (device is DeviceA deviceA)
         //    {
-        //        if (deviceA.Protocol is TCPClientSetting clientSetting)
+        //        if (deviceA.ProtocolSetting is TCPClientSetting clientSetting)
         //        {
         //            deviceA.Client = tcpClients.GetOrAdd(clientSetting.GetHashCode(), new TcpClient());
         //        }
-        //        else if (deviceA.Protocol is TCPServerSetting serverSetting)
+        //        else if (deviceA.ProtocolSetting is TCPServerSetting serverSetting)
         //        {
         //            deviceA.Server = tcpListeners.GetOrAdd(serverSetting, new TcpListener(System.Net.IPAddress.Any, serverSetting.Port));
 
         //        }
-        //        else if (deviceA.Protocol is SerialPortSetting serialPortSetting)
+        //        else if (deviceA.ProtocolSetting is SerialPortSetting serialPortSetting)
         //        {
 
         //            deviceA.Serial = serialPorts.GetOrAdd(serialPortSetting, new SerialPort(
@@ -78,7 +80,7 @@ namespace DevicesFactory
         //                RtsEnable = serialPortSetting.RtsEnable,
         //            });
         //        }
-        //        else if (deviceA.Protocol is OtherClientSetting setting)
+        //        else if (deviceA.ProtocolSetting is OtherClientSetting setting)
         //        {
         //            //...
         //        }

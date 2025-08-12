@@ -8,8 +8,8 @@
     Title="SelectFilesAndFilesInFolder"
     Width="800"
     Height="450"
-    mc:Ignorable="d"
-    Loaded="filesSelectWinLoaded">
+    Loaded="filesSelectWinLoaded"
+    mc:Ignorable="d">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <StackPanel
             HorizontalAlignment="Center"
@@ -21,7 +21,10 @@
                 Height="60" />
             <Button Click="selectPath" Content="..." />
         </StackPanel>
-        <ComboBox x:Name="Filters" SelectedItem="{Binding SelectedFilter, Mode=OneWayToSource}" SelectedIndex="0" />
+        <ComboBox
+            x:Name="Filters"
+            SelectedIndex="0"
+            SelectedItem="{Binding SelectedFilter, Mode=OneWayToSource}" />
         <Button Click="Okbtn" Content="OK" />
     </StackPanel>
 </Window>

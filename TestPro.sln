@@ -54,6 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{37853A33-C30
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDialogInputFilesInFolder", "WpfDialogInputFilesInFolder\WpfDialogInputFilesInFolder.csproj", "{0938013F-8B15-46AE-8E55-894C7887FD0E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevicesFactory_Framework", "DevicesFactory_Framework\DevicesFactory_Framework.csproj", "{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -144,6 +146,10 @@ Global
 		{0938013F-8B15-46AE-8E55-894C7887FD0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0938013F-8B15-46AE-8E55-894C7887FD0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0938013F-8B15-46AE-8E55-894C7887FD0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -162,6 +168,7 @@ Global
 		{B29522BC-4A98-4F26-AA63-668DEFCFFEB8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{4B7D17E4-E9BD-477C-B399-FFCF8C3D1E81} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{0938013F-8B15-46AE-8E55-894C7887FD0E} = {37853A33-C307-4DA1-9D70-74D42185D54D}
+		{CC4DB8F5-5B3D-4698-BEAC-E87B058FA8B8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6FA8D600-C956-4E76-ABE5-CA6C1830D064}

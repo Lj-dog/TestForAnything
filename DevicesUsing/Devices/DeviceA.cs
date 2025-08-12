@@ -1,49 +1,68 @@
-﻿using DevicesFactory.Devices;
-using DevicesFactory.IDevices;
-using System;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using DevicesFactory.IDevices;
 
 namespace DevicesUsing.Devices
 {
-    internal class DeviceA : TcpClientChannel, TcpServerChannel
+    class DeviceA : Device, IDevices
     {
-        TcpClient TcpClientChannel.Client { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        NetworkStream TcpClientChannel.Stream { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        TcpListener TcpServerChannel.Server { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        TcpClientChannel TcpClientChannel;
 
-        ConcurrentDictionary<TcpClient, NetworkStream> TcpServerChannel.Clinets => throw new NotImplementedException();
+        TcpServerChannel TcpServerChannel;
 
-        void TcpClientChannel.ICommunicate.Connect()
+        public bool IsRuning { get; set; }
+
+        public bool IsErrored { get; set; }
+
+        public DeviceA(string name)
+            : base(name) { }
+
+        public override void CreateComunicationChannels()
+        {
+            if (TcpClientChannel.Protocol != null)
+                TcpClientChannel.Connect();
+            if (TcpServerChannel.Protocol != null)
+                TcpServerChannel.Connect();
+        }
+
+        public void GetState()
+        {
+            if (TcpClientChannel.Protocol != null)
+            {
+                IsErrored = TcpClientChannel.ReceiveBytes() == new byte[] { 0x00 };
+                IsRuning = TcpClientChannel.ReceiveBytes() == new byte[] { 0x01 };
+            }
+
+            if (TcpServerChannel.Protocol != null)
+            {
+                IsErrored = TcpClientChannel.ReceiveBytes() == new byte[] { 0x00 };
+                IsRuning = TcpClientChannel.ReceiveBytes() == new byte[] { 0x01 };
+            }
+        }
+
+        public string ReceiveCommand()
         {
             throw new NotImplementedException();
         }
 
-        void ICommunicate.Disconnect()
+        public void SendCommand(string command)
         {
-            throw new NotImplementedException();
+            if (TcpClientChannel.Protocol != null)
+            {
+                TcpClientChannel.Send(null, command);
+            }
+            if (TcpServerChannel.Protocol != null)
+            {
+                TcpServerChannel.Send(null, command);
+            }
         }
 
-        byte[] ICommunicate.ReceiveBytes()
-        {
-            throw new NotImplementedException();
-        }
-
-        string ICommunicate.ReceiveString()
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICommunicate.Send(string message)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICommunicate.Send(byte[] data)
+        public Task SendCommandAsync(string command)
         {
             throw new NotImplementedException();
         }
