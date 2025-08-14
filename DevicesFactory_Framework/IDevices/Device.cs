@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using DevicesFactory.Protocols;
+using DevicesFactory_Framework.IDevices.Models;
 
 namespace DevicesFactory.IDevices
 {
@@ -43,6 +44,8 @@ namespace DevicesFactory.IDevices
 
     public interface ICommunicate
     {
+        event Action<ResultMessage> MessageReceived;
+
         void Connect();
 
         Task ConnectAsync();

@@ -9,7 +9,7 @@ using DevicesFactory.IDevices;
 
 namespace DevicesUsing.Devices
 {
-    class DeviceA : Device, IDevices
+    class DeviceA : Device
     {
         TcpClientChannel TcpClientChannel;
 
@@ -30,39 +30,24 @@ namespace DevicesUsing.Devices
                 TcpServerChannel.Connect();
         }
 
-        public void GetState()
-        {
-            if (TcpClientChannel.Protocol != null)
-            {
-                IsErrored = TcpClientChannel.ReceiveBytes() == new byte[] { 0x00 };
-                IsRuning = TcpClientChannel.ReceiveBytes() == new byte[] { 0x01 };
-            }
 
-            if (TcpServerChannel.Protocol != null)
-            {
-                IsErrored = TcpClientChannel.ReceiveBytes() == new byte[] { 0x00 };
-                IsRuning = TcpClientChannel.ReceiveBytes() == new byte[] { 0x01 };
-            }
-        }
 
-        public string ReceiveCommand()
+        public override void GetState()
         {
             throw new NotImplementedException();
         }
 
-        public void SendCommand(string command)
+        public override void SendCommand(string command)
         {
-            if (TcpClientChannel.Protocol != null)
-            {
-                TcpClientChannel.Send(null, command);
-            }
-            if (TcpServerChannel.Protocol != null)
-            {
-                TcpServerChannel.Send(null, command);
-            }
+            throw new NotImplementedException();
         }
 
-        public Task SendCommandAsync(string command)
+        public override Task SendCommandAsync(string command)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ReceiveCommand()
         {
             throw new NotImplementedException();
         }

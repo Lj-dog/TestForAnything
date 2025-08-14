@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DeviceFactory.cs" />
     <Compile Include="IDevices\Device.cs" />
+    <Compile Include="IDevices\Models\ResultMessage.cs" />
     <Compile Include="IDevices\TcpClientChannel.cs" />
     <Compile Include="IDevices\TcpServerChannel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

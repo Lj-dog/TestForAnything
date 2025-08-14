@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using DevicesFactory.Protocols;
+using DevicesFactory_Framework.IDevices.Models;
 
 namespace DevicesFactory.IDevices
 {
@@ -15,95 +17,52 @@ namespace DevicesFactory.IDevices
 
         protected NetworkStream Stream { get; set; }
 
+        private CancellationTokenSource readCTS;
+
+        public event Action<ResultMessage> MessageReceived;
+
         public void Connect()
         {
+            if (ChannelClient.Connected)
+                return;
+            readCTS = new CancellationTokenSource();
             ChannelClient.Connect(Protocol.IP, Protocol.Port);
             Stream = ChannelClient.GetStream();
+            byte[] bufferbytes = new byte[1024];
+            while (!readCTS.IsCancellationRequested)
+            {
+                int datalength = Stream.Read(bufferbytes, 0, bufferbytes.Length);
+                if (datalength == 0) break;
+                MessageReceived.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
+            }
         }
 
         public async Task ConnectAsync()
         {
+            if (ChannelClient.Connected)
+                return;
             await ChannelClient.ConnectAsync(Protocol.IP, Protocol.Port);
             Stream = ChannelClient.GetStream();
+            byte[] bufferbytes = new byte[1024];
+            try
+            {
+                while (true)
+                {
+                    int datalength = await Stream.ReadAsync(bufferbytes, 0, bufferbytes.Length, readCTS.Token);
+                    if (datalength == 0) break;
+                    MessageReceived.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
+                }
+            }
+            catch (OperationCanceledException e)
+            {
+                Console.WriteLine(e);             
+            }
         }
 
         public void Disconnect()
         {
+            readCTS.Cancel();
             ChannelClient.Close();
-        }
-
-        public byte[] ReceiveBytes(string targetName)
-        {
-            byte[] buffer = new byte[1024];
-            if (
-                ChannelClient.Client.Connected
-                && ChannelClient.Client.RemoteEndPoint?.ToString() == targetName
-            )
-            {
-                int bytesRead = Stream.Read(buffer, 0, buffer.Length);
-                return buffer.Take(bytesRead).ToArray();
-            }
-            return Array.Empty<byte>();
-        }
-
-        public byte[] ReceiveBytes()
-        {
-            byte[] buffer = new byte[1024];
-            if (ChannelClient.Client.Connected)
-            {
-                int bytesRead = Stream.Read(buffer, 0, buffer.Length);
-                return buffer.Take(bytesRead).ToArray();
-            }
-            return Array.Empty<byte>();
-        }
-
-        public async Task<byte[]> ReceiveBytesAsync(string targetName)
-        {
-            byte[] buffer = new byte[1024];
-            if (
-                ChannelClient.Client.Connected
-                && ChannelClient.Client.RemoteEndPoint?.ToString() == targetName
-            )
-            {
-                int bytesRead = await Stream.ReadAsync(buffer, 0, buffer.Length);
-                return buffer.Take(bytesRead).ToArray();
-            }
-            return Array.Empty<byte>();
-        }
-
-        public async Task<byte[]> ReceiveBytesAsync()
-        {
-            byte[] buffer = new byte[1024];
-            if (ChannelClient.Client.Connected)
-            {
-                int bytesRead = await Stream.ReadAsync(buffer, 0, buffer.Length);
-                return buffer.Take(bytesRead).ToArray();
-            }
-            return Array.Empty<byte>();
-        }
-
-        public string ReceiveString(string targetName)
-        {
-            byte[] data = ReceiveBytes(targetName);
-            return Encoding.UTF8.GetString(data);
-        }
-
-        public string ReceiveString()
-        {
-            byte[] data = ReceiveBytes();
-            return Encoding.UTF8.GetString(data);
-        }
-
-        public async Task<string> ReceiveStringAsync(string targetName)
-        {
-            byte[] data = await ReceiveBytesAsync(targetName);
-            return Encoding.UTF8.GetString(data);
-        }
-
-        public async Task<string> ReceiveStringAsync()
-        {
-            byte[] data = await ReceiveBytesAsync();
-            return Encoding.UTF8.GetString(data);
         }
 
         public void Send(string targetName, string message)

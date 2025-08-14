@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DevicesFactory.Protocols;
+using DevicesFactory_Framework.IDevices.Models;
 
 namespace DevicesFactory.IDevices
 {
@@ -19,26 +20,39 @@ namespace DevicesFactory.IDevices
         protected Dictionary<string, TcpClient> ChannelClinets { get; } =
             new Dictionary<string, TcpClient>();
 
-        private CancellationTokenSource _listenCTS;
+        private CancellationTokenSource listenCTS;
+
+        public event Action<ResultMessage> MessageReceived;
+
+        private async Task Handle(TcpClient client)
+        {
+            var stream = client.GetStream();
+            byte[] buffer = new byte[1024];
+            while(true)
+            {
+
+            }
+        }
 
         public void Connect()
         {
-            _listenCTS = new CancellationTokenSource();
+            listenCTS = new CancellationTokenSource();
             Server?.Start(Protocol.Port);
 
-            while (!_listenCTS.Token.IsCancellationRequested)
+            while (!listenCTS.Token.IsCancellationRequested)
             {
                 var client = Server.AcceptTcpClient();
                 ChannelClinets.Add(client.Client.RemoteEndPoint.ToString(), client);
+                _= Handle(client);
             }
         }
 
         public async Task ConnectAsync()
         {
-            _listenCTS = new CancellationTokenSource();
+            listenCTS = new CancellationTokenSource();
             Server?.Start(Protocol.Port);
 
-            while (!_listenCTS.Token.IsCancellationRequested)
+            while (!listenCTS.Token.IsCancellationRequested)
             {
                 var client = await Server.AcceptTcpClientAsync();
                 ChannelClinets.Add(client.Client.RemoteEndPoint.ToString(), client);
@@ -47,7 +61,7 @@ namespace DevicesFactory.IDevices
 
         public void Disconnect()
         {
-            _listenCTS?.Cancel();
+            listenCTS?.Cancel();
             Server.Stop();
         }
 
