@@ -1,11 +1,14 @@
-﻿using DevicesFactory;
+﻿using System.Threading.Tasks;
+using DevicesFactory;
 using DevicesFactory.Protocols;
+using DevicesUsing.Devices;
+using Microsoft.VisualBasic;
 
 namespace DevicesUsing
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
 
@@ -36,7 +39,6 @@ namespace DevicesUsing
             //        Port = 123
             //    }
             //};
-
 
             ////Create a A类设备c
             //var deviceA_c = new DeviceA("deviceA_c")
@@ -85,7 +87,45 @@ namespace DevicesUsing
             //}
 
             #endregion
-            Console.ReadLine();
+            #region 尝试ReadLine后是否能WriteLine
+            //Task.Run(() =>
+            //{
+            //    for (int i = 0; i < 3000; i++)
+            //    {
+            //        Console.WriteLine(i);
+            //    }
+            //    ;
+            //});
+            //Console.ReadLine();
+            //Console.WriteLine("任务已启动");
+            //Console.ReadLine();
+            #endregion
+
+            DeviceA device1 = new("A1");
+            device1.TcpClientChannel = new DevicesFactory.IDevices.TcpClientChannel();
+            device1.TcpClientChannel.Protocol = new TCPClientSetting()
+            {
+                IP = "127.0.0.1",
+                Port = 502,
+            };
+
+            DeviceA device2 = new DeviceA("A2");
+            device2.TcpServerChannel = new DevicesFactory.IDevices.TcpServerChannel();
+            device2.TcpServerChannel.Protocol = new TCPServerSetting() { Port = 802 };
+
+            //DeviceA device3 = new DeviceA("A3");
+            //device3.TcpServerChannel = new DevicesFactory.IDevices.TcpServerChannel();
+            //device3.TcpServerChannel.Protocol = new TCPServerSetting() { Port = 802 };
+
+            device1.CreateComunicationChannels();
+            device2.CreateComunicationChannels();
+            //device3.CreateComunicationChannels();
+
+            while (Console.ReadLine() != string.Empty)
+            {
+                device1.GetState();
+                device2.GetState();
+            }
         }
     }
 }

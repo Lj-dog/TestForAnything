@@ -11,11 +11,10 @@ namespace DevicesUsing.Devices
 {
     class DeviceA : Device
     {
-        TcpClientChannel TcpClientChannel;
+        public TcpClientChannel TcpClientChannel;
 
-        TcpServerChannel TcpServerChannel;
+        public TcpServerChannel TcpServerChannel;
 
-        public bool IsRuning { get; set; }
 
         public bool IsErrored { get; set; }
 
@@ -24,17 +23,37 @@ namespace DevicesUsing.Devices
 
         public override void CreateComunicationChannels()
         {
-            if (TcpClientChannel.Protocol != null)
-                TcpClientChannel.Connect();
-            if (TcpServerChannel.Protocol != null)
-                TcpServerChannel.Connect();
+            if (TcpClientChannel != null && TcpClientChannel.Protocol != null)
+            {
+                TcpClientChannel.MessageReceived += (m) =>
+                {
+                    var Command = Encoding.UTF8.GetString(m.ReceiveData);
+                    Console.WriteLine($"{m.Target} : {DeviceName}:"+ Command);
+                    if (Command.Contains("Error"))
+                    {
+                        IsErrored = true;
+                    }
+                };
+                TcpClientChannel.ConnectAsync();
+            }
+            if (TcpServerChannel != null && TcpServerChannel.Protocol != null)
+            {
+                TcpServerChannel.MessageReceived += (m) =>
+                {
+                    var Command = Encoding.UTF8.GetString(m.ReceiveData);
+                    Console.WriteLine($"{m.Target} : {DeviceName}:" + Command);
+                    if (Command.Contains("Error"))
+                    {
+                        IsErrored = true;
+                    }
+                };
+                TcpServerChannel.ConnectAsync();
+            }
         }
-
-
 
         public override void GetState()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"{DeviceName} is {(IsErrored ? "Errored" : "Normal")}");
         }
 
         public override void SendCommand(string command)
@@ -47,9 +66,14 @@ namespace DevicesUsing.Devices
             throw new NotImplementedException();
         }
 
-        public override string ReceiveCommand()
+        public override Task LongJobTask()
         {
             throw new NotImplementedException();
         }
+
+        //public override string ReceiveCommand()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -30,7 +30,9 @@ namespace DevicesFactory.IDevices
 
         public abstract Task SendCommandAsync(string command);
 
-        public abstract string ReceiveCommand();
+        //public abstract string ReceiveCommand();
+
+        public abstract Task LongJobTask();
 
         public abstract void CreateComunicationChannels();
     }

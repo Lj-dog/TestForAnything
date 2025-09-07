@@ -13,7 +13,7 @@ namespace DevicesFactory.IDevices
     public class TcpClientChannel : IChannel<TCPClientSetting>
     {
         public TCPClientSetting Protocol { get; set; }
-        protected TcpClient ChannelClient { get; set; }
+        protected TcpClient ChannelClient { get; set; } = new TcpClient();
 
         protected NetworkStream Stream { get; set; }
 
@@ -33,7 +33,7 @@ namespace DevicesFactory.IDevices
             {
                 int datalength = Stream.Read(bufferbytes, 0, bufferbytes.Length);
                 if (datalength == 0) break;
-                MessageReceived.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
+                MessageReceived?.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
             }
         }
 
@@ -42,6 +42,7 @@ namespace DevicesFactory.IDevices
             if (ChannelClient.Connected)
                 return;
             await ChannelClient.ConnectAsync(Protocol.IP, Protocol.Port);
+            readCTS = new CancellationTokenSource();
             Stream = ChannelClient.GetStream();
             byte[] bufferbytes = new byte[1024];
             try
@@ -50,7 +51,7 @@ namespace DevicesFactory.IDevices
                 {
                     int datalength = await Stream.ReadAsync(bufferbytes, 0, bufferbytes.Length, readCTS.Token);
                     if (datalength == 0) break;
-                    MessageReceived.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
+                    MessageReceived?.Invoke(new ResultMessage(ChannelClient.Client.RemoteEndPoint?.ToString(), bufferbytes.Take(datalength).ToArray()));
                 }
             }
             catch (OperationCanceledException e)
