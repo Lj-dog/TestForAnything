@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp_Navigation.VMs;
 
 namespace WpfApp_Navigation.NavigationWinPages
 {
@@ -23,6 +24,7 @@ namespace WpfApp_Navigation.NavigationWinPages
         public Page1()
         {
             InitializeComponent();
+            this.DataContext = new Page1VM();
         }
 
 
@@ -42,6 +44,11 @@ namespace WpfApp_Navigation.NavigationWinPages
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Page1_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Focus();
         }
     }
 }
