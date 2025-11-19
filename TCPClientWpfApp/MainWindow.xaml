@@ -5,58 +5,85 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:TCPClientWpfApp"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm ="clr-namespace:TCPClientWpfApp.ViewModels"
+    xmlns:vm="clr-namespace:TCPClientWpfApp.ViewModels"
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d"
-    d:DataContext="{d:DesignInstance Type=vm:MainViewModel}">
+    d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+    mc:Ignorable="d">
     <Grid>
-        <TextBox
-            x:Name="IPTextBox"
-            Width="120"
-            Margin="85,33,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding IP}"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="PortTextBox"
-            Width="120"
-            Margin="241,33,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Text="{Binding Port}"
-            TextWrapping="Wrap" />
-        <Button
-            x:Name="Connect"
-            Margin="124,70,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="Connect_Click"
-            Content="Connect" />
-        <Button
-            x:Name="Disconnect"
-            Margin="241,70,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="Disconnect_Click"
-            Content="Disconnect" />
-        <GroupBox Margin="85,106,139,200" Header="SendMessage">
-            <Grid>
-                <TextBox x:Name="SendText" Text="TextBox" TextWrapping="Wrap" AcceptsReturn="True" />
-            </Grid>
-        </GroupBox>
-        <GroupBox Margin="85,261,151,29" Header="ReceiveMessage">
-            <Grid>
-                <TextBox x:Name="RevText" Text="TextBox" TextWrapping="Wrap" />
-            </Grid>
-        </GroupBox>
-        <Button
-            x:Name="SendBtn"
-            Margin="711,182,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Content="Send" Click="SendBtn_Click" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="IP:" />
+                <TextBox
+                    x:Name="IPTextBox"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="{Binding IP}"
+                    TextWrapping="Wrap" />
+                <TextBlock Text="Port:" />
+
+                <TextBox
+                    x:Name="PortTextBox"
+                    Width="120"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Text="{Binding Port}"
+                    TextWrapping="Wrap" />
+                <Button
+                    x:Name="Connect"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="Connect_Click"
+                    Content="Connect" />
+                <Button
+                    x:Name="Disconnect"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Click="Disconnect_Click"
+                    Content="Disconnect" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+
+            </Grid.RowDefinitions>
+
+            <GroupBox Grid.Row="0" Header="SendMessage">
+                <Grid>
+                    <TextBox
+                        x:Name="SendText"
+                        AcceptsReturn="True"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </GroupBox>
+            <Button
+                x:Name="SendBtn"
+                Grid.Row="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Top"
+                Click="SendBtn_Click"
+                Content="Send" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <GroupBox Header="ReceiveMessage">
+                <Grid>
+                    <TextBox
+                        x:Name="RevText"
+                        Text="TextBox"
+                        TextWrapping="Wrap" />
+                </Grid>
+            </GroupBox>
+        </Grid>
+
     </Grid>
 </Window>

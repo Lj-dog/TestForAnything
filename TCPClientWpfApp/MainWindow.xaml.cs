@@ -1,5 +1,7 @@
 ﻿using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -30,7 +32,7 @@ namespace TCPClientWpfApp
             this.DataContext = new MainViewModel();
         }
 
-        private void Connect_Click(object sender, RoutedEventArgs e)
+        private async void Connect_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -43,34 +45,36 @@ namespace TCPClientWpfApp
                 }
                 CTSource = new CancellationTokenSource();
                 token = CTSource.Token;
+                byte[] buffer = new byte[1024];
+                int len = 0;
 
-                Task.Run(() =>
+                while (true)
                 {
-                    try
+
+                    len = await networkStream.ReadAsync(buffer, 0, buffer.Length,token);
+                    if (len == 0)
                     {
-                        while (true)
+                        break;
+                    }
+                    var message = Encoding.ASCII.GetString(buffer, 0, len);
+                    Application.Current.Dispatcher.Invoke(
+                        new Action(() =>
                         {
-                            token.ThrowIfCancellationRequested();
-                            byte[] buffer = new byte[1024];
-                            int len = networkStream.Read(buffer, 0, buffer.Length);
-                            var message = Encoding.ASCII.GetString(buffer, 0, len);
-                            Application.Current.Dispatcher.Invoke(new Action(() =>
-                            {
-                                this.RevText.Text += message + "\n";
-                            }));
-                        }
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show(" Error!!!");
-                    }
-                }, token);
+                            this.RevText.Text += message + "\n";
+                        })
+                    );
+                    //Task.Delay(int.MaxValue, token);
+                }
             }
             catch (TaskCanceledException ee)
             {
                 MessageBox.Show("停止接受");
             }
-            catch (Exception)
+            catch(OperationCanceledException oe)
+            {
+                MessageBox.Show("停止接受");
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show("Connect Error!!!");
             }

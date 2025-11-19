@@ -1,0 +1,25 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:m="clr-namespace:WpfApp.Models">
+    <DataTemplate DataType="{x:Type m:BtnItem}">
+        <Button
+            Grid.Row="{Binding Row}"
+            Grid.Column="{Binding Col}"
+            Width="60"
+            Height="20"
+            Margin="3"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="Red"
+            Command="{Binding SelectedCommand}"
+            IsHitTestVisible="True">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding DClickCommand}" CommandParameter="{Binding}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+    </DataTemplate>
+</ResourceDictionary>

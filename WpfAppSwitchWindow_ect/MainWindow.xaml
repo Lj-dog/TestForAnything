@@ -15,21 +15,37 @@
             VerticalAlignment="Top"
             Orientation="Horizontal">
             <TextBlock Margin="5,0" Text="切换选项" />
-            <ComboBox Width="100" Margin="5,0" x:Name="ComBox" SelectionChanged="ComBoxSelectChange" />
+            <ComboBox
+                x:Name="ComBox"
+                Width="100"
+                Margin="5,0"
+                SelectionChanged="ComBoxSelectChange" />
             <StackPanel Orientation="Horizontal">
                 <StackPanel x:Name="StackPanel_One" Orientation="Horizontal">
                     <TextBlock Text="One:" />
-                    <TextBox Width="100 " Text="OneTxt" x:Name="TBoxOne_1"/>
+                    <TextBox
+                        x:Name="TBoxOne_1"
+                        Width="100 "
+                        Text="OneTxt" />
                     <TextBlock Text="One:" />
-                    <TextBox Width="100 " Text="OneTxt" x:Name="TBoxOne_2" />
+                    <TextBox
+                        x:Name="TBoxOne_2"
+                        Width="100 "
+                        Text="OneTxt" />
                     <Button Click="BtnOneClick" Content="OneBtn" />
 
                 </StackPanel>
                 <StackPanel x:Name="StackPanel_Two" Orientation="Horizontal">
                     <TextBlock Text="Two:" />
-                    <TextBox Width="100 " Text="TwoTxt" x:Name="TBoxTwo_1"/>
+                    <TextBox
+                        x:Name="TBoxTwo_1"
+                        Width="100 "
+                        Text="TwoTxt" />
                     <TextBlock Text="Two:" />
-                    <TextBox Width="100 " Text="TwoTxt" x:Name="TBoxTwo_2"/>
+                    <TextBox
+                        x:Name="TBoxTwo_2"
+                        Width="100 "
+                        Text="TwoTxt" />
                     <Button Click="BtnTwoClick" Content="TowBtn" />
                 </StackPanel>
             </StackPanel>

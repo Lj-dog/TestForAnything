@@ -24,10 +24,16 @@ namespace WpfAppDictionary
             this.DataContext = new MainViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_Student(object sender, RoutedEventArgs e)
         {
             Window2 window2 = new Window2();
             window2.Show();
+        }
+
+        private void Button_Click_Teacher(object sender, RoutedEventArgs e)
+        {
+            Window1 window1 = new Window1();
+            window1.Show();
         }
     }
 }

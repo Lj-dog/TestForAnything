@@ -2,47 +2,135 @@
     x:Class="WpfApp.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:b="clr-namespace:WpfApp.Behaviors"
+    xmlns:control="clr-namespace:WpfApp.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="clr-namespace:WpfApp.Helpers"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:lib="clr-namespace:WpfControlLibrary;assembly=WpfControlLibrary"
     xmlns:local="clr-namespace:WpfApp"
+    xmlns:m="clr-namespace:WpfApp.Models"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:WpfApp.VMS"
     Title="MainWindow"
-    Width="800"
-    Height="450"
+    Width="1000"
+    Height="950"
     Loaded="Window_Loaded"
     mc:Ignorable="d">
 
     <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/TestToAddDict.xaml" />
+                <ResourceDictionary Source="/LanguagesLibrary;component/Languages/zh-CN.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="rect" TargetType="{x:Type CheckBox}">
+                <StackPanel>
+                    <Rectangle
+                        x:Name="breakRectangle"
+                        Width="20"
+                        Height="20"
+                        Fill="White"
+                        Stroke="Red"
+                        StrokeThickness="2" />
+                    <ContentPresenter />
+                </StackPanel>
 
-
-
-        <ControlTemplate x:Key="rect" TargetType="{x:Type CheckBox}">
-            <StackPanel>
-                <Rectangle
-                    Name="breakRectangle"
-                    Width="20"
-                    Height="20"
-                    Stroke="Red"
-                    StrokeThickness="2">
-                    <Rectangle.Fill>
-                        <SolidColorBrush Color="White" />
-                    </Rectangle.Fill>
-
-                </Rectangle>
-                <ContentPresenter />
-            </StackPanel>
-
-        </ControlTemplate>
-
-
-
-
-
+            </ControlTemplate>
+            <Style x:Key="FocusVisual">
+                <Setter Property="Control.Template">
+                    <Setter.Value>
+                        <ControlTemplate>
+                            <Rectangle
+                                Margin="2"
+                                SnapsToDevicePixels="true"
+                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                StrokeDashArray="1 2"
+                                StrokeThickness="1" />
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <SolidColorBrush x:Key="Item.MouseOver.Background" Color="#0000FF" />
+            <SolidColorBrush x:Key="Item.MouseOver.Border" Color="#a826A0Da" />
+            <SolidColorBrush x:Key="Item.SelectedActive.Background" Color="#000" />
+            <SolidColorBrush x:Key="Item.SelectedActive.Border" Color="#FF26A0DA" />
+            <SolidColorBrush x:Key="Item.SelectedInactive.Background" Color="#3DDADADA" />
+            <SolidColorBrush x:Key="Item.SelectedInactive.Border" Color="#FFDADADA" />
+            <Style x:Key="ListBoxItemContainerStyle1" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Grid>
+                                <Border
+                                    x:Name="Bd"
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="true">
+                                    <ContentPresenter
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="IsMouseOver" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.MouseOver.Background}" />
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.MouseOver.Border}" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="False" />
+                                        <Condition Property="IsSelected" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.SelectedInactive.Background}" />
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.SelectedInactive.Border}" />
+                                </MultiTrigger>
+                                <MultiTrigger>
+                                    <MultiTrigger.Conditions>
+                                        <Condition Property="Selector.IsSelectionActive" Value="True" />
+                                        <Condition Property="IsSelected" Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter TargetName="Bd" Property="Background" Value="{StaticResource Item.SelectedActive.Background}" />
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource Item.SelectedActive.Border}" />
+                                </MultiTrigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="Bd" Property="TextElement.Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </Window.Resources>
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="100" />
+            <RowDefinition Height="60" />
+            <RowDefinition Height="200" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
 
@@ -65,11 +153,34 @@
                     x:Name="thirdTxtBox"
                     Width="100"
                     Height="30" />
+                <ToggleButton Width="100" Margin="5" />
+                <StackPanel Margin="5">
+                    <RadioButton Content="asdf" />
+                    <RadioButton Content="qwer" />
+                </StackPanel>
+                <Border>
+                    <!--<Button Click="buttonhaveRadio_Click"  >-->
+                    <Button MouseLeftButtonUp="buttonhaveRadio_Click">
+                        <StackPanel>
+                            <RadioButton Content="Button Radio" MouseLeftButtonUp="RadioInButton_Click" />
+                            <RadioButton Content="Button Radio" MouseLeftButtonUp="RadioInButton_Click" />
+                            <!--<RadioButton Content="Button Radio" />
+                            <RadioButton Content="Button Radio" />-->
+                        </StackPanel>
+                    </Button>
+                </Border>
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListBox Margin="5">
+
+            <ListBox
+                Margin="5"
+                ItemContainerStyle="{DynamicResource ListBoxItemContainerStyle1}"
+                SelectionMode="Extended">
+                <Border Width="120" Background="Red">
+                    <TextBlock Text="sadf" />
+                </Border>
                 <CheckBox x:Name="checkBoxtim" Content="Tim" />
                 <CheckBox x:Name="checkBoxTOm" Content="Tom" />
                 <CheckBox x:Name="checkBoxBruce" Content="Bruce" />
@@ -77,10 +188,321 @@
                 <Button x:Name="buttonOwen" Content="Owen" />
                 <Button
                     x:Name="buttonVIctor"
+                    Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
                     Click="buttonVictore_Click"
                     Content="Victor" />
             </ListBox>
+
         </Grid>
+
+        <Grid Grid.Row="2">
+            <!--#region NewRegion-->
+            <StackPanel>
+                <StackPanel>
+                    <Button Click="PicCreateClick" Content="生成" />
+                </StackPanel>
+                <Image
+                    x:Name="UserImage"
+                    Width="auto"
+                    Height="auto" />
+            </StackPanel>
+            <!--#endregion-->
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock
+                    Width="120"
+                    Height="auto"
+                    Text="{DynamicResource Message}" />
+                <Label
+                    Width="120"
+                    Height="auto"
+                    Content="{DynamicResource Message}" />
+                <Button
+                    Width="120"
+                    Height="20"
+                    Click="SwitchClick"
+                    Content="{DynamicResource Switch}" />
+            </StackPanel>
+
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.Resources>
+                <ResourceDictionary Source="/Resources/Styles/BtnitemStyle.xaml" />
+            </Grid.Resources>
+            <Grid.DataContext>
+                <vm:ItemsGridVM />
+            </Grid.DataContext>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <ListBox
+                d:DataContext="{d:DesignInstance Type=vm:ItemsGridVM}"
+                d:ItemsSource="{Binding Items}"
+                ItemsSource="{Binding Items, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox.Resources>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Setter Property="SelectionMode" Value="Extended" />
+                        <Setter Property="ItemsPanel">
+                            <Setter.Value>
+                                <ItemsPanelTemplate>
+                                    <control:AutoGrid
+                                        ColumnDefinitionWidth="-1"
+                                        GridColumnCount="{Binding Gridcols, UpdateSourceTrigger=PropertyChanged}"
+                                        GridRowCount="{Binding Gridrows, UpdateSourceTrigger=PropertyChanged}"
+                                        RowDefinitionHeight="-1" />
+                                </ItemsPanelTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                        <ItemsPresenter />
+                                    </ScrollViewer>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="ItemContainerStyle">
+                            <Setter.Value>
+                                <Style>
+                                    <Setter Property="Grid.Row" Value="{Binding Row, Mode=OneWay}" />
+                                    <Setter Property="Grid.Column" Value="{Binding Col, Mode=OneWay}" />
+                                </Style>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+                <!--<Button
+                    Grid.Row="0"
+                    Width="200"
+                    Height="10"
+                    Background="Blue" />
+                <Button
+                    Grid.Row="1"
+                    Width="120"
+                    Height="20"
+                    Background="Red" />-->
+            </ListBox>
+
+            <StackPanel
+                Grid.Row="1"
+                HorizontalAlignment="Right"
+                FlowDirection="LeftToRight"
+                Orientation="Horizontal">
+                <TextBlock Text="Row:" />
+                <TextBox
+                    Width="120"
+                    Margin="15,0"
+                    Text="{Binding ItemRow}" />
+                <TextBlock Text="Col:" />
+                <TextBox
+                    Width="120"
+                    Margin="15,0"
+                    Text="{Binding ItemCol}" />
+                <Button Command="{Binding AdditemCommand}" Content="AddButtonInGrid" />
+                <Button
+                    Margin="10,0"
+                    Command="{Binding DelitemCommand}"
+                    Content="DelButtonInGrid" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <ListBox
+                Grid.Column="0"
+                Width="100"
+                Background="Red">
+                <ListBox.Resources>
+                    <Style TargetType="ListBox">
+                        <Setter Property="ItemsPanel">
+                            <Setter.Value>
+                                <ItemsPanelTemplate>
+                                    <StackPanel
+                                        x:Name="stack"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        IsItemsHost="True"
+                                        Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Border Background="{TemplateBinding ListBox.Background}" CornerRadius="15">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                                <ItemsPresenter />
+                                            </ScrollViewer>
+                                        </Grid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+
+                <Button Content="123" />
+                <Button Content="123" />
+                <Button Content="123" />
+                <Button Content="123" />
+                <Button Content="123" />
+                <Button Content="123" />
+            </ListBox>
+            <Grid
+                Grid.Column="1"
+                helper:GridLayout.Colums="auto;auto"
+                helper:GridLayout.Rows="auto;auto">
+                <Button
+                    Width="60"
+                    Height="60"
+                    Margin="3"
+                    helper:GridLayout.Cell="0 0"
+                    Background="Blue"
+                    Content="asdf" />
+                <Button
+                    Width="80"
+                    Height="30"
+                    helper:GridLayout.Cell="0 1"
+                    Background="Red"
+                    Content="123" />
+            </Grid>
+            <control:AutoGrid
+                Grid.Column="2"
+                ColumnDefinitionWidth="-1"
+                GridColumnCount="2"
+                RowDefinitionHeight="-1">
+                <Button
+                    Grid.Column="0"
+                    Width="60"
+                    Height="60"
+                    Margin="3"
+                    Background="Blue"
+                    Content="asdf" />
+                <Button
+                    Grid.Column="1"
+                    Width="80"
+                    Height="30"
+                    Background="Red">
+                    <CheckBox />
+                </Button>
+            </control:AutoGrid>
+        </Grid>
+        <Grid Grid.Row="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <lib:UserControl1 Grid.Row="0" />
+            <Grid Grid.Row="1">
+                <StackPanel>
+                    <lib:MyProgressBar
+                        Width="120"
+                        Height="30"
+                        Maximum="100"
+                        Orientation="Vertical"
+                        Value="40">
+                        <lib:MyProgressBar.Resources>
+                            <ResourceDictionary Source="/WpfControlLibrary;component/ProgressBar/BatteryProgressbar.xaml" />
+
+                        </lib:MyProgressBar.Resources>
+                    </lib:MyProgressBar>
+                    <Button
+                        Width="120"
+                        Height="20"
+                        Content="Change" />
+                    <TextBox Width="120" Height="30" />
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="7">
+            <Grid>
+                <Grid.DataContext>
+                    <vm:RadiosVM />
+                </Grid.DataContext>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <RadioButton
+                    Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="asdf"
+                    IsChecked="{Binding IsChecked_1}" />
+                <RadioButton
+                    Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Content="123"
+                    IsChecked="{Binding IsChecked_2}" />
+                <Button
+                    Grid.Row="2"
+                    Width="120"
+                    Height="20"
+                    Command="{Binding CheckedCommand}"
+                    Content="Checked" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="8">
+            <ListBox MouseDoubleClick="ListboxDoubleClick">
+                <Button Click="BtnClick">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Border
+                                            Width="120"
+                                            Height="20"
+                                            Background="Transparent"
+                                            BorderBrush="Black"
+                                            BorderThickness="2">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontSize="10"
+                                                FontWeight="Black"
+                                                Text="Button" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </Button.Style>
+
+
+                </Button>
+                <DatePicker />
+                <TextBlock Text="Try Select Need Double Click item" />
+                <Button
+                    Width="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=ActualWidth}"
+                    Height="20"
+                    Background="Red"
+                    IsHitTestVisible="False"
+                    MouseDoubleClick="BtnInListBoxDoubleClick" />
+            </ListBox>
+        </Grid>
+        <Grid Grid.Row="9">
+            <StackPanel>
+                <Button
+                    Width="120"
+                    Click="OpenTaskTestWinClick"
+                    Content="OpenTaskTestWin" />
+            </StackPanel>
+        </Grid>
+        <Grid />
     </Grid>
 
 

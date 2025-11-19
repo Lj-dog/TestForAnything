@@ -8,7 +8,8 @@
     Title="MainWindow"
     Width="800"
     Height="450"
-    mc:Ignorable="d" Loaded="TCPServerWindow_Loaded">
+    Loaded="TCPServerWindow_Loaded"
+    mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />

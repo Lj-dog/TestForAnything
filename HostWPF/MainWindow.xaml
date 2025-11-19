@@ -1,0 +1,46 @@
+﻿<Window
+    x:Class="HostWPF.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HostWPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="{Binding Title}"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type=local:MainVM,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+
+
+
+    <DockPanel>
+        <TextBlock
+            d:Text="asdf"
+            DockPanel.Dock="Top"
+            FontSize="20"
+            Text="{Binding LogLevel}" />
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="Limit:" />
+            <TextBox x:Name="limt" Width="100" Margin="5" />
+            <Button Command="{Binding GetFactsCommand}" CommandParameter="{Binding ElementName=limt, Path=Text}" Content="Get CatFacts" />
+        </StackPanel>
+        <Button
+            Command="{Binding ChangeObsCollectionCommand}"
+            Content="Change ObsCol"
+            DockPanel.Dock="Top" />
+        <Grid>
+            <ListBox ItemsSource="{Binding CatFacts}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock
+                            Margin="5"
+                            FontSize="20"
+                            Text="{Binding}"
+                            TextWrapping="Wrap" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+    </DockPanel>
+</Window>

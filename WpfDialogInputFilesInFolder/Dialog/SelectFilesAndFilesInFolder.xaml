@@ -1,0 +1,30 @@
+﻿<Window
+    x:Class="WpfDialogInputFilesInFolder.Dialog.SelectFilesAndFilesInFolder"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfDialogInputFilesInFolder.Dialog"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="SelectFilesAndFilesInFolder"
+    Width="800"
+    Height="450"
+    Loaded="filesSelectWinLoaded"
+    mc:Ignorable="d">
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBox
+                x:Name="selectpath"
+                Width="520"
+                Height="60" />
+            <Button Click="selectPath" Content="..." />
+        </StackPanel>
+        <ComboBox
+            x:Name="Filters"
+            SelectedIndex="0"
+            SelectedItem="{Binding SelectedFilter, Mode=OneWayToSource}" />
+        <Button Click="Okbtn" Content="OK" />
+    </StackPanel>
+</Window>

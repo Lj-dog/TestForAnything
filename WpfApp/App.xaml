@@ -4,5 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:WpfApp"
     StartupUri="MainWindow.xaml">
-    <Application.Resources />
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="/LanguagesLibrary;component/Languages/en-US.xaml"/>
+                <ResourceDictionary Source="/LanguagesLibrary;component/Languages/zh-CN.xaml"/>-->
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+
 </Application>
