@@ -1,0 +1,44 @@
+﻿<Window
+    x:Class="NotifyIcon_托盘图标.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NotifyIcon_托盘图标"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type=local:MainVM}"
+    mc:Ignorable="d">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid>
+        <UniformGrid
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Columns="1">
+            <CheckBox
+                VerticalAlignment="Center"
+                Content="开机最小化到托盘"
+                IsChecked="{Binding MinInIconWhenStart}" />
+            <GroupBox Header="关闭时行为">
+                <UniformGrid Columns="1">
+                    <RadioButton VerticalAlignment="Center" Content="每次询问" IsChecked="{Binding AskIsMinInIconWhenClose}" />
+                    <GroupBox>
+                        <GroupBox.Header>
+                            <RadioButton Content="默认" />
+                        </GroupBox.Header>
+                        <StackPanel>
+                            <RadioButton Content="关闭时行为" IsChecked="{x:Null}" />
+                            <RadioButton Content="关闭时行为" IsChecked="{x:Null}" />
+                        </StackPanel>
+                    </GroupBox>
+                </UniformGrid>
+
+            </GroupBox>
+
+
+        </UniformGrid>
+    </Grid>
+</Window>
