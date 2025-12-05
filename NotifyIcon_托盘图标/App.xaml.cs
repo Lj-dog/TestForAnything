@@ -2,6 +2,9 @@
 using NotifyIcon_托盘图标.Utils;
 using System.Configuration;
 using System.Data;
+using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace NotifyIcon_托盘图标
@@ -18,7 +21,25 @@ namespace NotifyIcon_托盘图标
         {
             services = new ServiceCollection();
             services.AddSingleton<MainWindow>();
-            services.AddTransient<MainVM>();
+            services.AddTransient<MainVM>((provider) => {
+
+                try
+                {
+                    using (FileStream fs = new FileStream(MainVM.configJsonFile, FileMode.Open))
+                    {
+                        using(StreamReader sr = new(fs))
+                        {
+                            var str = sr.ReadToEnd();
+                            return JsonSerializer.Deserialize<MainVM>(str)??new MainVM();
+                        }
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+
+                    return new MainVM();
+                }
+            });
             services.AddAppNotifyIcon(this);
             //services.AddSingleton<AppNotifyIcon>( privider => AppNotifyIcon.Instance );
             provider = services.BuildServiceProvider();
