@@ -1,0 +1,3 @@
+[submodule "WPF_DataGridMVVMTest"]
+	path = WPF_DataGridMVVMTest
+	url = https://github.com/Lj-dog/WPF_DataGridMVVMTest.git

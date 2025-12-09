@@ -1,0 +1,38 @@
+﻿<Window
+    x:Class="WpfAppDictionary.Views.Window2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:My="clr-namespace:WpfAppDictionary.MyControl"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfAppDictionary.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Window2"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+      
+    </Window.Resources>
+    <Grid>
+        <StackPanel>
+            <My:MyButton
+                Width="100"
+                Background="Red"
+                Content="btn1"
+                MyButtonCornerRadius="3"
+                Style="{StaticResource btn1}" />
+            <My:MyButton
+                Width="120"
+                Height="30"
+                Style="{StaticResource btn2}">
+                <Button.Content>
+                    <CheckBox Content="Checkbox"/>
+                </Button.Content>
+            </My:MyButton>
+            <Button
+                Width="120"
+                Height="30"
+                Content="btn3" />
+        </StackPanel>
+    </Grid>
+</Window>

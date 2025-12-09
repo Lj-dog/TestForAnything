@@ -1,0 +1,54 @@
+﻿<Window
+    x:Class="WpfAppSwitchWindow_ect.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfAppSwitchWindow_ect"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel
+            Height="30"
+            VerticalAlignment="Top"
+            Orientation="Horizontal">
+            <TextBlock Margin="5,0" Text="切换选项" />
+            <ComboBox
+                x:Name="ComBox"
+                Width="100"
+                Margin="5,0"
+                SelectionChanged="ComBoxSelectChange" />
+            <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="StackPanel_One" Orientation="Horizontal">
+                    <TextBlock Text="One:" />
+                    <TextBox
+                        x:Name="TBoxOne_1"
+                        Width="100 "
+                        Text="OneTxt" />
+                    <TextBlock Text="One:" />
+                    <TextBox
+                        x:Name="TBoxOne_2"
+                        Width="100 "
+                        Text="OneTxt" />
+                    <Button Click="BtnOneClick" Content="OneBtn" />
+
+                </StackPanel>
+                <StackPanel x:Name="StackPanel_Two" Orientation="Horizontal">
+                    <TextBlock Text="Two:" />
+                    <TextBox
+                        x:Name="TBoxTwo_1"
+                        Width="100 "
+                        Text="TwoTxt" />
+                    <TextBlock Text="Two:" />
+                    <TextBox
+                        x:Name="TBoxTwo_2"
+                        Width="100 "
+                        Text="TwoTxt" />
+                    <Button Click="BtnTwoClick" Content="TowBtn" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
