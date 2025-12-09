@@ -6,6 +6,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using NotifyIcon_托盘图标;
 using NotifyIcon_托盘图标.Utils;
 using Forms = System.Windows.Forms;
@@ -65,6 +66,13 @@ namespace NotifyIcon_托盘图标.Utils
             icon.Dispose();
         }
 
+        public void ShowIconBalloon(string Title,string Text ,int timeout)
+        {
+            icon.BalloonTipTitle = Title;
+            icon.BalloonTipText = Text;
+            icon.ShowBalloonTip(timeout);
+        }
+
         public static AppNotifyIcon Instance => instance.Value;
     }
 }
@@ -81,5 +89,12 @@ namespace Microsoft.Extensions.DependencyInjection
                 AppNotifyIcon.Instance.Close(e);
             };
         }
+
+        public static void HideWinInIcon(this Window window)
+        {
+            window.Hide();
+            AppNotifyIcon.Instance.ShowIconBalloon("最小化到托盘","后台运行中。。。", 1000);
+        }
     }
+
 }

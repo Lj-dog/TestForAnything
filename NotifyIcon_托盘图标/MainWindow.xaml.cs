@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Extensions.DependencyInjection;
 using NotifyIcon_托盘图标.Utils;
 
 namespace NotifyIcon_托盘图标
@@ -68,7 +69,7 @@ namespace NotifyIcon_托盘图标
                 if (res == MessageBoxResult.No)
                 {
                     e.Cancel = true;
-                    this.Hide();
+                    this.HideWinInIcon();
                 }
                 if (res == MessageBoxResult.Cancel)
                     e.Cancel = true;
@@ -78,7 +79,7 @@ namespace NotifyIcon_托盘图标
                 if (vm.IsMinimize)
                 {
                     e.Cancel = true;
-                    this.Hide();
+                    this.HideWinInIcon();
                 }
                 else
                     return;
@@ -91,7 +92,7 @@ namespace NotifyIcon_托盘图标
             {
                 if (vm.MinInIconWhenStart)
                 {
-                    this.Hide();
+                    this.HideWinInIcon();
                 }
             }
         }
