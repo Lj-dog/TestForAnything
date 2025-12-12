@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows;
-using System.Windows.Media.Animation;
 using NotifyIcon_托盘图标;
 using NotifyIcon_托盘图标.Utils;
 using Forms = System.Windows.Forms;
@@ -26,8 +19,9 @@ namespace NotifyIcon_托盘图标.Utils
             UriKind.RelativeOrAbsolute
         );
 
+        //鼠标双击图标事件
         public event Forms.MouseEventHandler? DoubleClickEvent;
-
+        //点击菜单退出事件
         public event EventHandler? ExitClick;
 
         private AppNotifyIcon()
@@ -44,7 +38,7 @@ namespace NotifyIcon_托盘图标.Utils
             icon.BalloonTipTitle = "已启动";
             icon.BalloonTipText = "运行中。。。";
 
-            //0
+            //添加右键菜单
             Forms.ContextMenuStrip cms = new Forms.ContextMenuStrip();
             icon.ContextMenuStrip = cms;
             Forms.ToolStripMenuItem exitMenuItem = new Forms.ToolStripMenuItem("退出");
@@ -54,6 +48,7 @@ namespace NotifyIcon_托盘图标.Utils
             };
             cms.Items.Add(exitMenuItem);
 
+            //鼠标双击事件
             icon.MouseDoubleClick += (sender, e) =>
             {
                 DoubleClickEvent?.Invoke(sender, e);

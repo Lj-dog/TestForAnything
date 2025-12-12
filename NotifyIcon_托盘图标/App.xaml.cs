@@ -1,10 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NotifyIcon_托盘图标.Utils;
-using System.Configuration;
-using System.Data;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace NotifyIcon_托盘图标
@@ -24,7 +20,7 @@ namespace NotifyIcon_托盘图标
             services.AddTransient<MainVM>((provider) => {
 
                 try
-                {
+                {  //加载配置
                     using (FileStream fs = new FileStream(MainVM.configJsonFile, FileMode.Open))
                     {
                         using(StreamReader sr = new(fs))
