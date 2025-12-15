@@ -27,6 +27,7 @@ namespace NotifyIcon_托盘图标
 
         private readonly MainVM vm;
 
+        //图标右键强制退出标志
         private bool forceExit = false;
 
         public MainWindow(IServiceProvider provider, MainVM vM, AppNotifyIcon icon)
@@ -36,6 +37,7 @@ namespace NotifyIcon_托盘图标
             this.vm = vM;
             DataContext = this.vm;
 
+            //双击激活窗体
             this.icon.DoubleClickEvent += (sender, e) =>
             {
                 this.Show();
@@ -44,6 +46,7 @@ namespace NotifyIcon_托盘图标
                 this.Activate();
             };
 
+            //退出事件
             this.icon.ExitClick += (sender, e) =>
             {
                 forceExit = true;
@@ -55,8 +58,10 @@ namespace NotifyIcon_托盘图标
 
         private void WinClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //右键强制退出
             if (forceExit)
                 return;
+            //退出时询问
             if (vm.AskIsMinInIconWhenClose)
             {
                 var res = MessageBox.Show(
@@ -76,6 +81,7 @@ namespace NotifyIcon_托盘图标
             }
             else
             {
+                //最小化到托盘
                 if (vm.IsMinimize)
                 {
                     e.Cancel = true;
@@ -90,6 +96,7 @@ namespace NotifyIcon_托盘图标
         {
             if (vm != null)
             {
+                //程序启动最小化到托盘
                 if (vm.MinInIconWhenStart)
                 {
                     this.HideWinInIcon();
@@ -99,6 +106,7 @@ namespace NotifyIcon_托盘图标
 
         private void WinClosed(object sender, EventArgs e)
         {
+            //保存配置
             using (FileStream fs = new FileStream(MainVM.configJsonFile, FileMode.Create))
             {
                 using (StreamWriter sw = new StreamWriter(fs))
