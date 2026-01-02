@@ -36,7 +36,7 @@ namespace UDP
                     666
                 );
                 #region P2P发送
-
+                Console.WriteLine("点对点收发");
                 try
                 {
                     udpClientA.Send(sendBytes_A_P2P);
@@ -44,6 +44,7 @@ namespace UDP
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
+                    Console.WriteLine();
                 }
 
                 udpClientA.Send(sendBytes_A_P2P, remoteIPEndP_IP3);
@@ -74,6 +75,8 @@ namespace UDP
                 udpClientC.Send(sendBytes_C_P2P, remoteIPEndIP_IP1);
                 Console.WriteLine();
                 Console.WriteLine("C say Hi to 192.168.153.1:666");
+
+
                 #endregion
 
                 //此网段所有IP
@@ -96,6 +99,7 @@ namespace UDP
                 Byte[] sendBytes_C_all = Encoding.ASCII.GetBytes("C say Hi to everyone?");
                 #region 广播
 
+                Console.WriteLine("广播");
 
                 udpClientA.Send(sendBytes_A_all_IP1, allIPEndPoint_IP1);
                 Console.WriteLine();
@@ -127,21 +131,54 @@ namespace UDP
 
                 IPAddress multiCastIP = IPAddress.Parse("224.0.1.0");
 
-                IPEndPoint multiCastIPEndPoint = new IPEndPoint(multiCastIP, 321);
                 #region 组播
 
+                Console.WriteLine("组播");
+
+                UdpClient multiRev_D = new UdpClient();
+
+                multiRev_D.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+                multiRev_D.Client.Bind(new IPEndPoint(IPAddress.Any,777));
+
+                multiRev_D.JoinMulticastGroup(multiCastIP);
+
+
+                UdpClient multiRev_E = new UdpClient();
+
+
+                multiRev_E.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+                multiRev_E.Client.Bind(new IPEndPoint(IPAddress.Any, 777));
+
+                multiRev_E.JoinMulticastGroup(multiCastIP);
 
                 //接受组播信息
-                udpClientA.JoinMulticastGroup(multiCastIP);
 
                 Task.Run(() =>
                 {
-                    var bytes = udpClientA.Receive(ref multiCastIPEndPoint);
+                    IPEndPoint multiRev_D_IPEndPoint = null;
+                    var bytes = multiRev_D.Receive(ref multiRev_D_IPEndPoint);
                     string msg = Encoding.UTF8.GetString(bytes);
-                    Console.WriteLine(msg);
+                    Console.WriteLine($"multiRev_D receive: {msg} receive IPEndPoint:{multiRev_D_IPEndPoint}");
+                    Console.WriteLine();
+                    multiRev_D.DropMulticastGroup(multiCastIP);
+                }); 
+
+                Task.Run(() =>
+                {
+                    IPEndPoint multiRev_E_IPEndPoint = null;
+                    var bytes = multiRev_E.Receive(ref multiRev_E_IPEndPoint);
+                    string msg = Encoding.UTF8.GetString(bytes);
+                    Console.WriteLine($"multiRev_E receive: {msg} receive IPEndPoint:{multiRev_E_IPEndPoint}");
+                    Console.WriteLine();
+                    multiRev_E.DropMulticastGroup(multiCastIP);
                 });
 
                 //发送组播信息
+
+                IPEndPoint multiCastIPEndPoint = new IPEndPoint(multiCastIP, 777);
+
                 UdpClient sendMultiUdp = new UdpClient();
 
                 sendMultiUdp.Connect(multiCastIPEndPoint);
